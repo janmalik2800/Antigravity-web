@@ -3,14 +3,6 @@ import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { z } from "zod";
 
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-// Initialize Resend client
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Validation schema
 const formSchema = z.object({
     name: z.string().min(2, "Meno je príliš krátke"),
@@ -24,6 +16,22 @@ const formSchema = z.object({
 
 export async function POST(request: Request) {
     try {
+        // Initialize clients inside the handler to avoid build-time errors
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+        const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+        const resendApiKey = process.env.RESEND_API_KEY;
+
+        if (!supabaseUrl || !supabaseKey || !resendApiKey) {
+            console.error("Missing environment variables");
+            return NextResponse.json(
+                { error: "Server configuration error" },
+                { status: 500 }
+            );
+        }
+
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        const resend = new Resend(resendApiKey);
+
         const body = await request.json();
 
         // 1. Validate data
@@ -63,8 +71,8 @@ export async function POST(request: Request) {
         // 3. Send Email via Resend
         try {
             await resend.emails.send({
-                from: "Mediconect Web <onboarding@resend.dev>", // TODO: Update with verified domain if available, otherwise use onboarding
-                to: ["info@mediconect.sk"], // Send to client
+                from: "Mediconect Web <onboarding@resend.dev>",
+                to: ["info@mediconect.sk"],
                 subject: `Nová poptávka: ${data.clinic}`,
                 html: `
                     <h1>Nová poptávka z webu</h1>
@@ -79,7 +87,6 @@ export async function POST(request: Request) {
             });
         } catch (emailError) {
             console.error("Resend Error:", emailError);
-            // Don't fail the request if email fails, but log it. Data is saved.
         }
 
         return NextResponse.json({ success: true });
