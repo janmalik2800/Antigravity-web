@@ -22,9 +22,14 @@ export async function POST(request: Request) {
         const resendApiKey = process.env.RESEND_API_KEY;
 
         if (!supabaseUrl || !supabaseKey || !resendApiKey) {
-            console.error("Missing environment variables");
+            const missing = [];
+            if (!supabaseUrl) missing.push("NEXT_PUBLIC_SUPABASE_URL");
+            if (!supabaseKey) missing.push("NEXT_PUBLIC_SUPABASE_ANON_KEY");
+            if (!resendApiKey) missing.push("RESEND_API_KEY");
+
+            console.error("Missing environment variables:", missing.join(", "));
             return NextResponse.json(
-                { error: "Server configuration error" },
+                { error: `Chyba konfigurácie servera. Chýba: ${missing.join(", ")}` },
                 { status: 500 }
             );
         }
