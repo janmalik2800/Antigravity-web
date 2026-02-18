@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0D1B2A;
+  --color-navy-light: #1B2D45;
+  --color-navy-dark: #060F18;
+  --color-teal: #4ECDC4;
+  --color-teal-dim: rgba(78, 205, 196, 0.15);
+  --color-teal-glow: rgba(78, 205, 196, 0.3);
+  --color-dark: #1F1F1F;
+  --color-dark-card: #151515;
+  --color-white: #FFFFFF;
+  --color-gray-light: #A0AEC0;
+  --color-gray-mid: #4A5568;
+  --color-glass: rgba(13, 27, 42, 0.6);
+  --color-glass-border: rgba(78, 205, 196, 0.12);
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-navy-dark);
+  color: var(--color-white);
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-navy-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-teal);
+  border-radius: 3px;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: var(--color-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-glass-border);
+}
+
+.glass-strong {
+  background: rgba(13, 27, 42, 0.95);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(78, 205, 196, 0.2);
+}
+
+/* Teal glow */
+.glow-teal {
+  box-shadow: 0 0 30px rgba(78, 205, 196, 0.15), 0 0 60px rgba(78, 205, 196, 0.05);
+}
+
+.glow-teal-strong {
+  box-shadow: 0 0 40px rgba(78, 205, 196, 0.25), 0 0 80px rgba(78, 205, 196, 0.1);
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, #4ECDC4 0%, #44b8b0 50%, #3aa39c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Background grid pattern */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(78, 205, 196, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(78, 205, 196, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Animated gradient orb */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float-delayed {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(-25px, 25px) scale(0.95);
+  }
+
+  66% {
+    transform: translate(35px, -15px) scale(1.05);
+  }
+}
+
+.animate-float-delayed {
+  animation: float-delayed 25s ease-in-out infinite;
+}
+
+/* Pulse animation for CTA */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(78, 205, 196, 0.5), 0 0 60px rgba(78, 205, 196, 0.2);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
