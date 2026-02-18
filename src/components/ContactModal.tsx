@@ -46,12 +46,38 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         }));
     };
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
+
+    const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // TODO: send data to email / Supabase / Google Sheets
-        console.log("Form submitted:", formData);
-        onClose();
-        window.location.href = "/dakujeme";
+        setIsSubmitting(true);
+        setSubmitError(null);
+
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Chyba pri odosielaní formulára");
+            }
+
+            // Success
+            onClose();
+            window.location.href = "/dakujeme";
+
+        } catch (error: any) {
+            console.error("Submission error:", error);
+            setSubmitError(error.message || "Nastala chyba. Skúste to prosím znova.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -267,13 +293,26 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                         </label>
                                     </div>
 
+                                    {submitError && (
+                                        <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-200 text-sm text-center">
+                                            {submitError}
+                                        </div>
+                                    )}
+
                                     {/* Submit */}
                                     <button
                                         type="submit"
-                                        className="w-full mt-6 py-4 bg-teal text-navy-dark font-bold text-base rounded-2xl hover:bg-teal/90 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer hover:shadow-lg hover:shadow-teal/25 uppercase tracking-wide"
+                                        disabled={isSubmitting}
+                                        className="w-full mt-6 py-4 bg-teal text-navy-dark font-bold text-base rounded-2xl hover:bg-teal/90 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer hover:shadow-lg hover:shadow-teal/25 uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        Chcem bezplatnú konzultáciu
-                                        <ArrowRight size={18} />
+                                        {isSubmitting ? (
+                                            "Odosielam..."
+                                        ) : (
+                                            <>
+                                                Chcem bezplatnú konzultáciu
+                                                <ArrowRight size={18} />
+                                            </>
+                                        )}
                                     </button>
                                 </form>
                             </div>
