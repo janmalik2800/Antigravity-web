@@ -29,7 +29,12 @@ import {
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import CaseStudyDashboard from "../components/CaseStudyDashboard";
+import GlowCard from "../components/GlowCard";
+import MagicalButton from "../components/MagicalButton";
+import TypewriterText from "../components/TypewriterText";
 
+import ServicesNebula from "../components/ServicesNebula";
+import ServicesCarousel from "../components/ServicesCarousel";
 
 const ContactModal = dynamic(() => import("../components/ContactModal"), {
     ssr: false,
@@ -149,254 +154,6 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 
-/* ─── Services Data ─── */
-const servicesData = [
-    {
-        icon: <Target size={32} />,
-        iconSmall: <Target size={20} />,
-        title: "Akvizícia a výkonnostný marketing",
-        desc: "Zabezpečujeme kontinuálny prísun nových pacientov prostredníctvom precízne cielených kampaní na platformách Google a Meta. Zameriavame sa na reálnu návratnosť investícií a kvalitu dopytov.",
-        number: "01",
-    },
-    {
-        icon: <Palette size={32} />,
-        iconSmall: <Palette size={20} />,
-        title: "Vizuálna identita a branding",
-        desc: "Vytvárame unikátny vizuálny jazyk vašej praxe. Od loga a firemnej typografie až po kompletnú identitu, ktorá vás odlíši od konkurencie a vzbudí okamžitú dôveru.",
-        number: "02",
-    },
-    {
-        icon: <Camera size={32} />,
-        iconSmall: <Camera size={20} />,
-        title: "Produkcia a vizuálny obsah",
-        desc: "Zabezpečujeme profesionálnu foto a video produkciu priamo vo vašich priestoroch. Disponujeme vlastným zázemím vrátane modelov, aby sme vytvorili reprezentatívny obsah bez zaťaženia vášho personálu.",
-        number: "03",
-    },
-    {
-        icon: <Globe size={32} />,
-        iconSmall: <Globe size={20} />,
-        title: "Webové riešenia a CRM",
-        desc: "Navrhujeme a spravujeme moderné, plne funkčné webové stránky a systémy na správu pacientov (CRM), ktoré zjednodušujú komunikáciu a automatizujú proces objednávania.",
-        number: "04",
-    },
-    {
-        icon: <Mail size={32} />,
-        iconSmall: <Mail size={20} />,
-        title: "Email marketing a práca s dátami",
-        desc: "Pomáhame vám naplno využiť potenciál vašej súčasnej databázy. Cez diskrétny a etický emailing udržiavame kontakt s vašimi pacientmi a zvyšujeme ich lojalitu k vašej ambulancii.",
-        number: "05",
-    },
-    {
-        icon: <Users size={32} />,
-        iconSmall: <Users size={20} />,
-        title: "Konzultácie a predajné procesy",
-        desc: "Poskytujeme odborné poradenstvo pri nastavovaní interných procesov a školíme váš tím tak, aby ste z vášho marketingu a autority vyťažili maximum.",
-        number: "06",
-    },
-];
-
-/* ─── Interactive Services Showcase ─── */
-function ServicesShowcase() {
-    const [active, setActive] = useState(0);
-    const [paused, setPaused] = useState(false);
-    const [progress, setProgress] = useState(0);
-    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-    const sectionRef = useRef(null);
-    const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
-    const DURATION = 3500;
-
-    useEffect(() => {
-        if (paused || !isInView) return;
-        const tick = 50;
-        let elapsed = 0;
-        intervalRef.current = setInterval(() => {
-            elapsed += tick;
-            setProgress((elapsed / DURATION) * 100);
-            if (elapsed >= DURATION) {
-                setActive((prev) => (prev + 1) % servicesData.length);
-                elapsed = 0;
-                setProgress(0);
-            }
-        }, tick);
-        return () => {
-            if (intervalRef.current) clearInterval(intervalRef.current);
-        };
-    }, [paused, active, isInView]);
-
-    const handleSelect = (index: number) => {
-        setActive(index);
-        setProgress(0);
-    };
-
-    const current = servicesData[active];
-
-    return (
-        <motion.section
-            ref={sectionRef}
-            id="sluzby"
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="py-24 lg:py-32 relative z-10"
-        >
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                <motion.div variants={fadeUp} custom={0} className="text-center mb-16">
-                    <span className="text-teal text-sm font-semibold uppercase tracking-widest">
-                        Portfólio služieb
-                    </span>
-                    <h2 className="text-3xl lg:text-5xl font-bold mt-4">
-                        Komplexné riešenia pre rast{" "}
-                        <span className="text-gradient">vašej praxe</span>
-                    </h2>
-                </motion.div>
-
-                <motion.div
-                    variants={fadeUp}
-                    custom={1}
-                    className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8"
-                    onMouseEnter={() => setPaused(true)}
-                    onMouseLeave={() => setPaused(false)}
-                >
-                    {/* Left: Navigation Tabs */}
-                    <div className="lg:col-span-5 flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
-                        {servicesData.map((service, i) => (
-                            <button
-                                key={i}
-                                onClick={() => handleSelect(i)}
-                                className={`group relative flex items-center gap-4 px-5 py-4 rounded-2xl text-left transition-all duration-300 flex-shrink-0 lg:flex-shrink cursor-pointer w-64 lg:w-full ${active === i
-                                    ? "glass-strong glow-teal border-teal/25"
-                                    : "glass hover:border-teal/15 border-transparent"
-                                    }`}
-                            >
-                                <span
-                                    className={`text-xs font-bold flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-300 ${active === i
-                                        ? "bg-teal text-navy-dark"
-                                        : "bg-white/5 text-white/30 group-hover:text-white/50"
-                                        }`}
-                                >
-                                    {service.number}
-                                </span>
-                                <div className="flex items-center gap-3 min-w-0">
-                                    <span
-                                        className={`flex-shrink-0 transition-colors duration-300 ${active === i ? "text-teal" : "text-white/30 group-hover:text-white/50"
-                                            }`}
-                                    >
-                                        {service.iconSmall}
-                                    </span>
-                                    <span
-                                        className={`text-sm font-medium truncate transition-colors duration-300 ${active === i ? "text-white" : "text-white/50 group-hover:text-white/70"
-                                            }`}
-                                    >
-                                        {service.title}
-                                    </span>
-                                </div>
-                                {active === i && (
-                                    <div className="absolute bottom-0 left-5 right-5 h-[2px] bg-white/5 rounded-full overflow-hidden">
-                                        <div
-                                            className="h-full bg-teal rounded-full transition-[width] duration-[50ms] linear"
-                                            style={{ width: `${progress}%` }}
-                                        />
-                                    </div>
-                                )}
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* Right: Active Service Content */}
-                    <div className="lg:col-span-7 relative min-h-[320px] lg:min-h-[600px]">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={active}
-                                initial={{ opacity: 0, x: 40, scale: 0.98 }}
-                                animate={{ opacity: 1, x: 0, scale: 1 }}
-                                exit={{ opacity: 0, x: -40, scale: 0.98 }}
-                                transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                                className="glass-strong rounded-3xl p-10 lg:p-14 h-full flex flex-col relative overflow-hidden text-left"
-                            >
-                                <div className="absolute -top-6 -right-4 text-[180px] font-black text-teal/[0.04] leading-none select-none pointer-events-none">
-                                    {current.number}
-                                </div>
-                                <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-teal/8 rounded-full blur-[80px]" />
-
-                                <div className="relative z-10 flex flex-col h-full">
-                                    <div className="flex-1 flex flex-col justify-center">
-                                        <motion.div
-                                            initial={{ scale: 0.5, opacity: 0 }}
-                                            animate={{ scale: 1, opacity: 1 }}
-                                            transition={{ delay: 0.1, duration: 0.4 }}
-                                            className="w-16 h-16 rounded-2xl bg-teal/10 border border-teal/20 flex items-center justify-center text-teal mb-8 glow-teal"
-                                        >
-                                            {current.icon}
-                                        </motion.div>
-                                        <motion.h3
-                                            initial={{ opacity: 0, y: 15 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.15, duration: 0.4 }}
-                                            className="text-2xl lg:text-3xl font-bold mb-5 leading-snug"
-                                        >
-                                            {current.title}
-                                        </motion.h3>
-                                        <motion.p
-                                            initial={{ opacity: 0, y: 15 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.25, duration: 0.4 }}
-                                            className="text-white/50 text-base lg:text-lg leading-relaxed max-w-xl"
-                                        >
-                                            {current.desc}
-                                        </motion.p>
-                                    </div>
-
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ delay: 0.35, duration: 0.4 }}
-                                        className="mt-6 flex items-center justify-end gap-3"
-                                    >
-                                        <button
-                                            onClick={() => {
-                                                const next = (active - 1 + servicesData.length) % servicesData.length;
-                                                handleSelect(next);
-                                            }}
-                                            className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/5 hover:border-white/20 transition-all"
-                                        >
-                                            <ChevronLeft size={16} />
-                                        </button>
-
-                                        <div className="flex gap-2 mx-2">
-                                            {servicesData.map((_, i) => (
-                                                <button
-                                                    key={i}
-                                                    onClick={() => handleSelect(i)}
-                                                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${active === i
-                                                        ? "w-6 bg-teal"
-                                                        : "w-1.5 bg-white/20 hover:bg-white/40"
-                                                        }`}
-                                                />
-                                            ))}
-                                        </div>
-
-                                        <button
-                                            onClick={() => {
-                                                const next = (active + 1) % servicesData.length;
-                                                handleSelect(next);
-                                            }}
-                                            className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/5 hover:border-white/20 transition-all"
-                                        >
-                                            <ChevronRight size={16} />
-                                        </button>
-
-                                        <span className="text-sm font-medium text-white/40 min-w-[3ch] text-right ml-2">
-                                            {active + 1}/{servicesData.length}
-                                        </span>
-                                    </motion.div>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-                </motion.div>
-            </div>
-        </motion.section>
-    );
-}
 
 /* ═══════════════════════════════════════════════ */
 /*                  MAIN PAGE                     */
@@ -461,7 +218,7 @@ export default function Home() {
                         <a href="#" className="flex items-center gap-3 group">
                             <Image
                                 src="/logo 2.png"
-                                alt="Mediconnect"
+                                alt="Mediconect"
                                 width={40}
                                 height={40}
                                 priority
@@ -811,7 +568,7 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.5 }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2"
+                    className="hidden md:block absolute bottom-10 left-1/2 -translate-x-1/2"
                 >
                     <motion.div
                         animate={{ y: [0, 8, 0] }}
@@ -901,7 +658,26 @@ export default function Home() {
             </Section>
 
             {/* ═══════════════ SERVICES (Interactive Showcase) ═══════════════ */}
-            <ServicesShowcase />
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="block lg:hidden"
+            >
+                <div id="sluzby"></div>
+                <ServicesCarousel />
+            </motion.div>
+
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="hidden lg:block py-20"
+            >
+                <div id="sluzby"></div>
+                <ServicesNebula />
+            </motion.div>
+
 
             {/* ═══════════════ CASE STUDY ═══════════════ */}
             <Section className="py-24 lg:py-32 relative z-10" id="case-study">
@@ -946,15 +722,17 @@ export default function Home() {
                             },
                         ].map((item, i) => (
                             <motion.div key={i} variants={fadeUp} custom={i} className="relative group">
-                                <div className="glass rounded-2xl p-8 h-full hover:glow-teal transition-all duration-500 hover:border-teal/25">
-                                    <div className="text-5xl font-black text-teal/15 group-hover:text-teal/30 transition-colors duration-300 mb-4">
-                                        {item.step}
+                                <GlowCard className="h-full">
+                                    <div className="glass rounded-2xl p-8 h-full transition-all duration-500">
+                                        <div className="text-5xl font-black text-teal/15 group-hover:text-teal/30 transition-colors duration-300 mb-4">
+                                            {item.step}
+                                        </div>
+                                        <h3 className="text-lg font-semibold mb-3 group-hover:text-teal transition-colors duration-300">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-white/45 text-sm leading-relaxed">{item.desc}</p>
                                     </div>
-                                    <h3 className="text-lg font-semibold mb-3 group-hover:text-teal transition-colors duration-300">
-                                        {item.title}
-                                    </h3>
-                                    <p className="text-white/45 text-sm leading-relaxed">{item.desc}</p>
-                                </div>
+                                </GlowCard>
                                 {/* Connector line (hidden on last) */}
                                 {i < 3 && (
                                     <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-teal/30 to-transparent" />
@@ -966,9 +744,41 @@ export default function Home() {
             </Section>
 
             {/* ═══════════════ VALUES ═══════════════ */}
-            <Section className="py-24 lg:py-32 relative z-10">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <motion.div variants={fadeUp} custom={0} className="text-center mb-16">
+            <Section className="py-24 lg:py-32 relative z-10 overflow-hidden">
+
+                {/* Parallax floating particles */}
+                <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                    {[
+                        { top: "12%", left: "7%", size: 4, delay: 0, dur: 6 },
+                        { top: "25%", left: "88%", size: 3, delay: 1, dur: 8 },
+                        { top: "55%", left: "15%", size: 2, delay: 2, dur: 7 },
+                        { top: "70%", left: "78%", size: 5, delay: 0.5, dur: 9 },
+                        { top: "40%", left: "50%", size: 3, delay: 1.5, dur: 6.5 },
+                        { top: "85%", left: "35%", size: 2, delay: 3, dur: 8 },
+                        { top: "8%", left: "60%", size: 4, delay: 2.5, dur: 7.5 },
+                        { top: "90%", left: "62%", size: 3, delay: 4, dur: 6 },
+                    ].map((p, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute rounded-full bg-teal/30"
+                            style={{ top: p.top, left: p.left, width: p.size, height: p.size }}
+                            animate={{ y: [0, -18, 0], opacity: [0.3, 0.8, 0.3] }}
+                            transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                    ))}
+                    <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-teal/5 rounded-full blur-[80px]" />
+                    <div className="absolute bottom-1/4 right-1/4 w-56 h-56 bg-cyan-500/5 rounded-full blur-[60px]" />
+                </div>
+
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
+                    <motion.div
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={0}
+                        className="text-center mb-16"
+                    >
                         <span className="text-teal text-sm font-semibold uppercase tracking-widest">
                             Prečo Mediconect
                         </span>
@@ -977,46 +787,149 @@ export default function Home() {
                         </h2>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {[
-                            {
-                                icon: <Clock size={28} />,
-                                title: "Efektivita času",
-                                desc: "Vieme, že váš čas je vzácny. Naše procesy sú nastavené tak, aby sme vás zaťažovali minimálne.",
-                            },
-                            {
-                                icon: <BarChart3 size={28} />,
-                                title: "Data a stratégia",
-                                desc: "Nerobíme marketing na základe pocitov. Každý krok je podložený dátami a smeruje k dlhodobému cieľu.",
-                            },
-                            {
-                                icon: <Layers size={28} />,
-                                title: "Komplexnost",
-                                desc: "Od prvého loga až po vlastné call centrum – sme jediným partnerom, ktorého pre svoj rast potrebujete.",
-                            },
-                            {
-                                icon: <Shield size={28} />,
-                                title: "Etika a bezpečnosť",
-                                desc: "Všetky naše kampane a systémy sú v plnom súlade s GDPR a lekárskou etikou.",
-                            },
-                        ].map((val, i) => (
-                            <motion.div
-                                key={i}
-                                variants={scaleIn}
-                                custom={i}
-                                className="glass rounded-2xl p-8 flex gap-6 items-start group hover:glow-teal transition-all duration-500 hover:border-teal/25"
-                            >
-                                <div className="w-14 h-14 rounded-xl bg-teal/10 flex-shrink-0 flex items-center justify-center text-teal group-hover:bg-teal/20 transition-all duration-300">
-                                    {val.icon}
+                    {/* Asymmetric grid: 1 large hero card + 3 smaller */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                        {/* HERO CARD — spans 2 rows */}
+                        <motion.div
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.1}
+                            className="lg:row-span-2 group"
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        >
+                            <GlowCard className="h-full">
+                                <div className="glass rounded-2xl p-10 h-full flex flex-col justify-between min-h-[280px] lg:min-h-0 transition-all duration-500">
+                                    <div>
+                                        <motion.div
+                                            className="w-16 h-16 rounded-xl bg-teal/10 flex items-center justify-center text-teal mb-6 group-hover:bg-teal/20 transition-all duration-300"
+                                            whileHover={{ rotate: 360 }}
+                                            transition={{ duration: 0.6, ease: "easeInOut" }}
+                                        >
+                                            <Clock size={32} />
+                                        </motion.div>
+                                        <h3 className="text-2xl font-bold mb-3 group-hover:text-teal transition-colors duration-300">
+                                            Efektivita času
+                                        </h3>
+                                        <p className="text-white/50 leading-relaxed">
+                                            Vieme, že váš čas je vzácny. Naše procesy sú nastavené tak, aby sme vás zaťažovali minimálne a výsledky prichádzali čo najskôr.
+                                        </p>
+                                    </div>
+                                    <div className="mt-8 text-teal/40 group-hover:text-teal/70 text-sm font-medium transition-colors duration-300">
+                                        Úspora 6h / týždeň v priemere →
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 className="text-xl font-semibold mb-2 group-hover:text-teal transition-colors duration-300">
-                                        {val.title}
-                                    </h3>
-                                    <p className="text-white/45 leading-relaxed text-sm">{val.desc}</p>
+                            </GlowCard>
+                        </motion.div>
+
+                        {/* Card 2 — Data */}
+                        <motion.div
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.2}
+                            className="group"
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        >
+                            <GlowCard className="h-full">
+                                <div className="glass rounded-2xl p-8 h-full flex gap-5 items-start transition-all duration-500">
+                                    <motion.div
+                                        className="w-14 h-14 rounded-xl bg-teal/10 flex-shrink-0 flex items-center justify-center text-teal group-hover:bg-teal/20 transition-all duration-300"
+                                        whileHover={{ scaleY: 1.3, scaleX: 0.85 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <BarChart3 size={28} />
+                                    </motion.div>
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-2 group-hover:text-teal transition-colors duration-300">
+                                            Data a stratégia
+                                        </h3>
+                                        <p className="text-white/45 leading-relaxed text-sm">
+                                            Nerobíme marketing na základe pocitov. Každý krok je podložený dátami.
+                                        </p>
+                                        <p className="text-teal/40 group-hover:text-teal/70 text-xs mt-3 font-medium transition-colors duration-300">
+                                            ROI merané každý mesiac →
+                                        </p>
+                                    </div>
                                 </div>
-                            </motion.div>
-                        ))}
+                            </GlowCard>
+                        </motion.div>
+
+                        {/* Card 3 — Komplexnosť */}
+                        <motion.div
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.3}
+                            className="group"
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        >
+                            <GlowCard className="h-full">
+                                <div className="glass rounded-2xl p-8 h-full flex gap-5 items-start transition-all duration-500">
+                                    <motion.div
+                                        className="w-14 h-14 rounded-xl bg-teal/10 flex-shrink-0 flex items-center justify-center text-teal group-hover:bg-teal/20 transition-all duration-300"
+                                        whileHover={{ y: -4 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <Layers size={28} />
+                                    </motion.div>
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-2 group-hover:text-teal transition-colors duration-300">
+                                            Komplexnosť
+                                        </h3>
+                                        <p className="text-white/45 leading-relaxed text-sm">
+                                            Od prvého loga až po vlastné call centrum – jeden partner, komplexné riešenie.
+                                        </p>
+                                        <p className="text-teal/40 group-hover:text-teal/70 text-xs mt-3 font-medium transition-colors duration-300">
+                                            12+ služieb pod jednou strechou →
+                                        </p>
+                                    </div>
+                                </div>
+                            </GlowCard>
+                        </motion.div>
+
+                        {/* Card 4 — Etika — spans last 2 cols on row 2 */}
+                        <motion.div
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.4}
+                            className="group lg:col-span-2"
+                            whileHover={{ scale: 1.015 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        >
+                            <GlowCard className="h-full">
+                                <div className="glass rounded-2xl p-8 h-full flex gap-5 items-center transition-all duration-500">
+                                    <motion.div
+                                        className="w-14 h-14 rounded-xl bg-teal/10 flex-shrink-0 flex items-center justify-center text-teal group-hover:bg-teal/20 transition-all duration-300"
+                                        whileHover={{ scale: 1.15 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <Shield size={28} />
+                                    </motion.div>
+                                    <div className="flex-1">
+                                        <h3 className="text-xl font-semibold mb-2 group-hover:text-teal transition-colors duration-300">
+                                            Etika a bezpečnosť
+                                        </h3>
+                                        <p className="text-white/45 leading-relaxed text-sm">
+                                            Všetky naše kampane a systémy sú v plnom súlade s GDPR a lekárskou etikou. Vaša dôveryhodnosť je pre nás prvoradá.
+                                        </p>
+                                    </div>
+                                    <div className="ml-auto flex-shrink-0 hidden lg:flex items-center text-teal/40 group-hover:text-teal/80 text-sm font-medium transition-colors duration-300 whitespace-nowrap">
+                                        100% GDPR →
+                                    </div>
+                                </div>
+                            </GlowCard>
+                        </motion.div>
+
                     </div>
                 </div>
             </Section>
@@ -1029,9 +942,52 @@ export default function Home() {
                         className="relative rounded-3xl overflow-hidden"
                     >
                         {/* Background glow */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-teal/15 via-navy to-navy-dark" />
-                        <div className="absolute top-0 right-0 w-80 h-80 bg-teal/10 rounded-full blur-[100px]" />
-                        <div className="absolute bottom-0 left-0 w-60 h-60 bg-teal/5 rounded-full blur-[80px]" />
+                        {/* Background glow & Mesh Gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-teal/10 via-navy to-navy-dark" />
+                        <div className="absolute inset-0 opacity-30 mix-blend-overlay">
+                            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(45,212,191,0.15),transparent_50%)] animate-pulse" />
+                        </div>
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-teal/10 rounded-full blur-[120px] animate-blob" />
+                        <div className="absolute bottom-0 left-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-[100px] animate-blob animation-delay-2000" />
+
+                        {/* Particles - Fixed positions to prevent hydration mismatch */}
+                        <div className="absolute inset-0 pointer-events-none">
+                            {[
+                                { top: "15%", left: "10%", size: 4, delay: 0, dur: 6 },
+                                { top: "35%", left: "85%", size: 3, delay: 1, dur: 8 },
+                                { top: "65%", left: "18%", size: 2, delay: 2, dur: 7 },
+                                { top: "80%", left: "75%", size: 5, delay: 0.5, dur: 9 },
+                                { top: "45%", left: "55%", size: 3, delay: 1.5, dur: 6.5 },
+                                { top: "90%", left: "30%", size: 2, delay: 3, dur: 8 },
+                                { top: "10%", left: "65%", size: 4, delay: 2.5, dur: 7.5 },
+                                { top: "25%", left: "40%", size: 3, delay: 4, dur: 6 },
+                                { top: "75%", left: "90%", size: 2.5, delay: 1.2, dur: 5.5 },
+                                { top: "5%", left: "25%", size: 3.5, delay: 3.5, dur: 7 },
+                                { top: "60%", left: "5%", size: 2, delay: 0.8, dur: 8.5 },
+                                { top: "95%", left: "50%", size: 4, delay: 2.2, dur: 6.8 },
+                            ].map((p, i) => (
+                                <motion.div
+                                    key={i}
+                                    className="absolute rounded-full bg-teal/40"
+                                    style={{
+                                        top: p.top,
+                                        left: p.left,
+                                        width: p.size,
+                                        height: p.size,
+                                    }}
+                                    animate={{
+                                        y: [0, -30, 0],
+                                        opacity: [0.2, 0.8, 0.2],
+                                    }}
+                                    transition={{
+                                        duration: p.dur,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                        delay: p.delay,
+                                    }}
+                                />
+                            ))}
+                        </div>
 
                         <div className="relative z-10 glass-strong rounded-3xl p-12 lg:p-20 text-center">
                             <motion.h2
@@ -1040,7 +996,9 @@ export default function Home() {
                                 className="text-3xl lg:text-5xl font-bold leading-tight mb-6"
                             >
                                 Otvorme diskusiu o budúcnosti{" "}
-                                <span className="text-gradient">vašej kliniky</span>
+                                <span className="text-gradient block mt-2 lg:block lg:mt-2 whitespace-nowrap">
+                                    <TypewriterText words={["vašej kliniky", "vašej praxe", "vášho úspechu"]} />
+                                </span>
                             </motion.h2>
                             <motion.p
                                 variants={fadeUp}
@@ -1051,24 +1009,29 @@ export default function Home() {
                                 hľadáte partnera, ktorý sa postará o váš rast s rovnakou precíznosťou, s akou vy
                                 pristupujete k svojim pacientom, radi sa s vami stretneme na nezáväznej konzultácii.
                             </motion.p>
-                            <motion.div variants={fadeUp} custom={2}>
-                                <button
-                                    onClick={() => setModalOpen(true)}
-                                    className="group inline-flex items-center gap-3 px-10 py-5 bg-teal text-navy-dark font-bold text-lg rounded-2xl hover:bg-teal/90 transition-all duration-300 animate-pulse-glow cursor-pointer"
-                                >
+                            <motion.div variants={fadeUp} custom={2} className="flex flex-col items-center gap-8">
+                                <MagicalButton onClick={() => setModalOpen(true)}>
                                     Bezplatná konzultácia
-                                    <ArrowRight
-                                        size={22}
-                                        className="group-hover:translate-x-1 transition-transform"
-                                    />
-                                </button>
+                                </MagicalButton>
+
+                                {/* Floating Contact Cards (Desktop only) */}
+                                <div className="hidden lg:flex gap-6 mt-4">
+                                    <div className="glass px-5 py-3 rounded-full flex items-center gap-3 text-sm text-teal/80 hover:text-teal hover:bg-teal/10 transition-all duration-300">
+                                        <Mail size={16} />
+                                        info@mediconect.sk
+                                    </div>
+                                    <div className="glass px-5 py-3 rounded-full flex items-center gap-3 text-sm text-teal/80 hover:text-teal hover:bg-teal/10 transition-all duration-300">
+                                        <Phone size={16} />
+                                        +421 948 220 845
+                                    </div>
+                                </div>
                             </motion.div>
 
-                            {/* Contact info */}
+                            {/* Contact info - Mobile only */}
                             <motion.div
                                 variants={fadeUp}
                                 custom={3}
-                                className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12 text-white/40 text-sm"
+                                className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12 text-white/40 text-sm lg:hidden"
                             >
                                 <a
                                     href="mailto:info@mediconect.sk"
@@ -1224,17 +1187,17 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                         {/* Brand */}
-                        <div>
+                        <div className="flex flex-col items-start text-left">
                             <a href="#" className="flex items-center gap-3 mb-6">
                                 <Image
                                     src="/logo 2.png"
-                                    alt="Mediconnect"
+                                    alt="Mediconect"
                                     width={40}
                                     height={40}
                                     className="rounded-xl"
                                 />
                                 <span className="text-xl font-bold tracking-tight">
-                                    Medi<span className="text-teal">connect</span>
+                                    Medi<span className="text-teal">conect</span>
                                 </span>
                             </a>
                             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
@@ -1244,9 +1207,9 @@ export default function Home() {
                         </div>
 
                         {/* Contact */}
-                        <div>
+                        <div className="flex flex-col items-start md:items-center text-left md:text-center">
                             <h4 className="font-semibold text-white/80 mb-4">Kontakt</h4>
-                            <div className="space-y-3 text-sm text-white/40">
+                            <div className="flex flex-col gap-3 text-sm text-white/40">
                                 <a
                                     href="mailto:info@mediconect.sk"
                                     className="flex items-center gap-2 hover:text-teal transition-colors"
@@ -1265,9 +1228,9 @@ export default function Home() {
                         </div>
 
                         {/* Legal */}
-                        <div>
+                        <div className="flex flex-col items-start md:items-end text-left md:text-right">
                             <h4 className="font-semibold text-white/80 mb-4">Právne</h4>
-                            <div className="space-y-3 text-sm text-white/40">
+                            <div className="flex flex-col gap-3 text-sm text-white/40 items-start md:items-end">
                                 <a href="#" className="block hover:text-teal transition-colors">
                                     Ochrana súkromia
                                 </a>
