@@ -19,6 +19,11 @@ export const metadata: Metadata = {
             "Komplexné marketingové riešenia pre lekárov, kliniky a ambulancie.",
         type: "website",
     },
+    icons: {
+        icon: "/logo 2.png",
+        shortcut: "/logo 2.png",
+        apple: "/logo 2.png",
+    },
 };
 
 export default function RootLayout({
