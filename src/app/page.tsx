@@ -1204,11 +1204,8 @@ export default function Home() {
                         <div className="flex flex-col items-start md:items-end text-left md:text-right">
                             <h4 className="font-semibold text-white/80 mb-4">Právne</h4>
                             <div className="flex flex-col gap-3 text-sm text-white/40 items-start md:items-end">
-                                <a href="#" className="block hover:text-teal transition-colors">
-                                    Ochrana súkromia
-                                </a>
-                                <a href="#" className="block hover:text-teal transition-colors">
-                                    GDPR
+                                <a href="/ochrana-osobnych-udajov" className="block hover:text-teal transition-colors">
+                                    Ochrana osobných údajov
                                 </a>
                             </div>
                         </div>
