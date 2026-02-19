@@ -161,6 +161,8 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 export default function Home() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
+    const lastScrollY = useRef(0);
     const [modalOpen, setModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -190,7 +192,29 @@ export default function Home() {
     };
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            // Scrolled state (transparency)
+            setScrolled(currentScrollY > 50);
+
+            // Hide/Show logic (Mobile only effectively, or global if preferred, let's do global behavior but user asked for mobile)
+            // Actually, limiting to mobile via JS is tricky with SSR/hydration mismatches if we rely on window.innerWidth initially.
+            // But inside useEffect we are safe.
+
+            if (window.innerWidth < 768) {
+                if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+                    setIsHidden(true);
+                } else {
+                    setIsHidden(false);
+                }
+            } else {
+                setIsHidden(false);
+            }
+
+            lastScrollY.current = currentScrollY;
+        };
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -207,8 +231,8 @@ export default function Home() {
             {/* ═══════════════ NAVBAR ═══════════════ */}
             <motion.nav
                 initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+                animate={{ y: isHidden ? -100 : 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border ${scrolled ? "glass-strong border-teal/20 shadow-lg shadow-black/20" : "bg-transparent border-transparent"
                     }`}
             >
