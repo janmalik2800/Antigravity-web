@@ -77,7 +77,7 @@ export async function POST(request: Request) {
         try {
             await resend.emails.send({
                 from: "Mediconect Web <onboarding@resend.dev>",
-                to: ["info@mediconect.sk"],
+                to: ["hupikcz@gmail.com"],
                 subject: `Nová poptávka: ${data.clinic}`,
                 html: `
                     <h1>Nová poptávka z webu</h1>
