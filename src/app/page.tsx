@@ -210,7 +210,7 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-navy-dark bg-grid relative">
+        <div className="min-h-screen bg-navy-dark bg-grid relative overflow-hidden">
             {/* ─── Background Orbs ─── */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
                 <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-teal/5 rounded-full blur-[120px] animate-float" />
