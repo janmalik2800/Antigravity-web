@@ -198,19 +198,9 @@ export default function Home() {
             // Scrolled state (transparency)
             setScrolled(currentScrollY > 50);
 
-            // Hide/Show logic (Mobile only effectively, or global if preferred, let's do global behavior but user asked for mobile)
-            // Actually, limiting to mobile via JS is tricky with SSR/hydration mismatches if we rely on window.innerWidth initially.
-            // But inside useEffect we are safe.
-
-            if (window.innerWidth < 768) {
-                if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-                    setIsHidden(true);
-                } else {
-                    setIsHidden(false);
-                }
-            } else {
-                setIsHidden(false);
-            }
+            // Hide/Show logic removed for mobile as requested.
+            // Navbar will just be absolute on mobile (scrolls away) and fixed on desktop.
+            setIsHidden(false);
 
             lastScrollY.current = currentScrollY;
         };
@@ -231,9 +221,9 @@ export default function Home() {
             {/* ═══════════════ NAVBAR ═══════════════ */}
             <motion.nav
                 initial={{ y: -100 }}
-                animate={{ y: isHidden ? -100 : 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border ${scrolled ? "glass-strong border-teal/20 shadow-lg shadow-black/20" : "bg-transparent border-transparent"
+                animate={{ y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className={`absolute md:fixed top-0 left-0 right-0 z-50 transition-all duration-500 border ${scrolled ? "glass-strong border-teal/20 shadow-lg shadow-black/20" : "bg-transparent border-transparent"
                     }`}
             >
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -277,52 +267,11 @@ export default function Home() {
                             </a>
                         </div>
 
-                        {/* Mobile hamburger */}
-                        <button
-                            className="md:hidden text-white/80"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        >
-                            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
+                        {/* Mobile hamburger removed as per request */}
                     </div>
                 </div>
 
-                {/* Mobile menu */}
-                <AnimatePresence>
-                    {mobileMenuOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="md:hidden glass-strong border-t border-white/5 overflow-hidden"
-                        >
-                            <div className="px-6 py-6 flex flex-col gap-4">
-                                {[
-                                    ["Služby", "#sluzby"],
-                                    ["Proces", "#proces"],
-                                    ["Prípadová štúdia", "#case-study"],
-                                    ["FAQ", "#faq"],
-                                ].map(([label, href]) => (
-                                    <a
-                                        key={href}
-                                        href={href}
-                                        className="text-white/70 hover:text-teal transition-colors"
-                                        onClick={() => setMobileMenuOpen(false)}
-                                    >
-                                        {label}
-                                    </a>
-                                ))}
-                                <a
-                                    href="#kontakt"
-                                    className="mt-2 px-6 py-3 bg-teal text-navy-dark font-semibold text-center rounded-xl"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    Bezplatná konzultácia
-                                </a>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {/* Mobile menu removed as per request */}
             </motion.nav>
 
             {/* ═══════════════ HERO ═══════════════ */}
@@ -682,13 +631,14 @@ export default function Home() {
             </Section>
 
             {/* ═══════════════ SERVICES (Interactive Showcase) ═══════════════ */}
+            <div id="sluzby" className="absolute -mt-24 h-24 w-full pointer-events-none" />
+
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 className="block lg:hidden"
             >
-                <div id="sluzby"></div>
                 <ServicesCarousel />
             </motion.div>
 
@@ -698,7 +648,6 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="hidden lg:block py-20"
             >
-                <div id="sluzby"></div>
                 <ServicesNebula />
             </motion.div>
 
