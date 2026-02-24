@@ -114,7 +114,7 @@ function Counter({ target, suffix = "", prefix = "" }: { target: number; suffix?
     }, [isInView, target]);
 
     return (
-        <span ref={ref}>
+        <span ref={ref} className="font-kanit tabular-nums">
             {prefix}{count.toLocaleString("sk-SK")}{suffix}
         </span>
     );
@@ -302,7 +302,7 @@ export default function Home() {
                                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/10 border border-teal/20 mb-8"
                             >
                                 <div className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-                                <span className="text-teal text-sm font-medium">
+                                <span className="text-teal text-sm font-medium font-kanit tracking-wide">
                                     Strategický partner pre zdravotníctvo
                                 </span>
                             </motion.div>
@@ -403,8 +403,8 @@ export default function Home() {
                                     className="glass-strong rounded-2xl p-6 glow-teal"
                                 >
                                     <div className="flex items-center justify-between mb-4">
-                                        <span className="text-xs text-white/40 uppercase tracking-wider font-medium">Návratnosť investícií</span>
-                                        <span className="text-xs text-teal bg-teal/10 px-2.5 py-1 rounded-full font-medium">+247%</span>
+                                        <span className="text-xs text-white/40 uppercase tracking-wider font-medium font-kanit">Návratnosť investícií</span>
+                                        <span className="text-xs text-teal bg-teal/10 px-2.5 py-1 rounded-full font-medium font-kanit">+247%</span>
                                     </div>
                                     <div className="flex items-end gap-1.5 h-14">
                                         {[35, 45, 30, 55, 70, 60, 85, 75, 90, 80, 95, 100].map((h, i) => (
@@ -454,8 +454,8 @@ export default function Home() {
                                             <BarChart3 size={18} className="text-teal" />
                                         </div>
                                         <div>
-                                            <p className="text-xs text-white/40">Spokojnosť</p>
-                                            <p className="text-lg font-bold text-teal">98,2%</p>
+                                            <p className="text-xs text-white/40 font-kanit">Spokojnosť</p>
+                                            <p className="text-lg font-bold text-teal font-kanit">98,2%</p>
                                         </div>
                                     </div>
                                     <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
@@ -486,8 +486,8 @@ export default function Home() {
                                             <Users size={18} className="text-teal" />
                                         </div>
                                         <div>
-                                            <p className="text-xs text-white/40">Noví pacienti / mes.</p>
-                                            <p className="text-lg font-bold">+127</p>
+                                            <p className="text-xs text-white/40 font-kanit">Noví pacienti / mes.</p>
+                                            <p className="text-lg font-bold font-kanit">+127</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-2 text-xs">

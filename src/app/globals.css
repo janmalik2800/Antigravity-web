@@ -1,5 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
+
+/* Stolzl Font Definition */
+@font-face {
+  font-family: 'Stolzl';
+  src: url('/fonts/stolzl_thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stolzl';
+  src: url('/fonts/stolzl_light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stolzl';
+  src: url('/fonts/stolzl_book.otf') format('opentype');
+  font-weight: 350;
+  /* Specific for book weight */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stolzl';
+  src: url('/fonts/stolzl_regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stolzl';
+  src: url('/fonts/stolzl_medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stolzl';
+  src: url('/fonts/stolzl_bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme {
   --color-navy: #0D1B2A;
@@ -15,12 +65,25 @@
   --color-gray-mid: #4A5568;
   --color-glass: rgba(13, 27, 42, 0.6);
   --color-glass-border: rgba(78, 205, 196, 0.12);
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Stolzl', system-ui, sans-serif;
+  --font-kanit: 'Kanit', sans-serif;
+  --font-stolzl: 'Stolzl', sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-kanit {
+  font-family: var(--font-kanit);
 }
 
 body {

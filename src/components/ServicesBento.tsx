@@ -75,7 +75,7 @@ export default function ServicesBento() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <span className="text-teal text-sm font-bold uppercase tracking-widest block mb-3">Ekosystém služieb</span>
+                    <span className="text-teal text-sm font-bold uppercase tracking-widest block mb-3 font-kanit">Ekosystém služieb</span>
                     <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
                         Komplexná starostlivosť <br />
                         <span className="text-white/30">okolo vašej značky</span>

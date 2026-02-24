@@ -99,7 +99,7 @@ export default function ServicesNebula() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <span className="text-teal text-sm font-bold uppercase tracking-widest block mb-3">Portfólio služieb</span>
+                    <span className="text-teal text-sm font-bold uppercase tracking-widest block mb-3 font-kanit">Portfólio služieb</span>
                     <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
                         Komplexné riešenia <br />
                         <span className="text-white/30">pre rast vašej praxe</span>
@@ -195,7 +195,7 @@ export default function ServicesNebula() {
                                             : "bg-black/30 text-white/60 border-white/5"
                                             }`}
                                     >
-                                        <span className="text-xs">{service.title}</span>
+                                        <span className="text-xs font-kanit">{service.title}</span>
                                     </motion.div>
                                 </motion.div>
                             );

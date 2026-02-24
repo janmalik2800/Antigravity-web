@@ -58,7 +58,7 @@ export default function ServicesCarousel() {
     return (
         <div className="py-20 relative overflow-hidden">
             <div className="px-6 mb-8 text-center text-left">
-                <span className="text-teal text-xs font-bold uppercase tracking-widest block mb-2">Portfólio služieb</span>
+                <span className="text-teal text-xs font-bold uppercase tracking-widest block mb-2 font-kanit">Portfólio služieb</span>
                 <h2 className="text-3xl font-bold leading-tight">Komplexné riešenia <br /> <span className="text-white/50">pre rast vašej praxe</span></h2>
             </div>
 
@@ -71,7 +71,7 @@ export default function ServicesCarousel() {
                     >
                         <div className="h-full glass-strong rounded-3xl p-8 flex flex-col relative overflow-hidden group min-h-[420px] border border-white/5">
                             {/* Background Number */}
-                            <div className="absolute -right-4 -top-6 text-[120px] font-black text-white/[0.03] leading-none select-none pointer-events-none">
+                            <div className="absolute -right-4 -top-6 text-[120px] font-black text-white/[0.03] leading-none select-none pointer-events-none font-kanit">
                                 {service.number}
                             </div>
 
