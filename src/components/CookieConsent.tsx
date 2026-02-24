@@ -83,12 +83,10 @@ export default function CookieConsent() {
                                         <h3 className="text-lg font-bold text-white">Nastavenie súkromia</h3>
                                     </div>
                                     <p className="text-white/60 text-sm leading-relaxed max-w-2xl">
-                                        Používame súbory cookies, aby sme vám poskytli čo najlepší zážitok z nášho webu.
-                                        Niektoré sú nevyhnutné pre fungovanie stránky, iné nám pomáhajú vylepšovať
-                                        naše služby a marketing.
+                                        Používame súbory cookies na zabezpečenie správneho fungovania stránky, analýzu návštevnosti a personalizáciu marketingu v súlade s GDPR.
                                     </p>
-                                    <a href="/ochrana-osobnych-udajov" className="text-teal text-xs font-semibold hover:underline inline-block mt-1">
-                                        Zásady ochrany osobných údajov →
+                                    <a href="/zasady-cookies" className="text-teal text-xs font-semibold hover:underline inline-block mt-1">
+                                        Zásady cookies →
                                     </a>
                                 </div>
 

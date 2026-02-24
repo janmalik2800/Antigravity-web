@@ -1207,6 +1207,9 @@ export default function Home() {
                                 <a href="/ochrana-osobnych-udajov" className="block hover:text-teal transition-colors">
                                     Ochrana osobných údajov
                                 </a>
+                                <a href="/zasady-cookies" className="block hover:text-teal transition-colors">
+                                    Zásady cookies
+                                </a>
                             </div>
                         </div>
                     </div>
