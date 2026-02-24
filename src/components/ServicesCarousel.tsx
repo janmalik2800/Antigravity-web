@@ -1,55 +1,55 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Target, Palette, Camera, Globe, Mail, Users, ChevronLeft, ChevronRight } from "lucide-react";
+import { Target, Palette, Camera, Globe, Mail, Users, ChevronLeft, ChevronRight, Layers, Zap, BrainCircuit } from "lucide-react";
 
 const servicesData = [
     {
         id: "akvizicia",
         icon: <Target size={32} />,
         title: "Akvizícia a výkonnostný marketing",
-        desc: "Zabezpečujeme kontinuálny prísun nových pacientov prostredníctvom precízne cielených kampaní na platformách Google a Meta.",
+        desc: "Kupujete si rýchlosť. Precízne cielené kampane (Google/Meta) nastavíme tak, aby prinášali zisk a merateľnú návratnosť – nie prázdne impresie.",
         detail: "Zameriavame sa na reálnu návratnosť investícií a kvalitu dopytov.",
         number: "01",
     },
     {
-        id: "branding",
-        icon: <Palette size={32} />,
-        title: "Vizuálna identita a branding",
-        desc: "Vytvárame unikátny vizuálny jazyk vašej praxe. Od loga a firemnej typografie až po kompletnú identitu.",
-        detail: "Identita, ktorá vás odlíši od konkurencie a vzbudí okamžitú dôveru.",
+        id: "web",
+        icon: <Globe size={32} />,
+        title: "Web a SEO",
+        desc: "Budujete si dôveru. Web je „prvá vyšetrovacia miestnosť“ pacienta – miesto, kde si s vami vytvorí vzťah ešte pred prvým kontaktom.",
+        detail: "Zjednodušujeme komunikáciu a automatizujeme proces objednávania.",
         number: "02",
     },
     {
-        id: "produkcia",
-        icon: <Camera size={32} />,
-        title: "Produkcia a vizuálny obsah",
-        desc: "Zabezpečujeme profesionálnu foto a video produkciu priamo vo vašich priestoroch. Disponujeme vlastným zázemím.",
-        detail: "Vytvoríme reprezentatívny obsah bez zaťaženia vášho personálu.",
+        id: "social",
+        icon: <Users size={32} />,
+        title: "Sociálne siete",
+        desc: "Vytvárate komunitu a autoritu. Ukážeme ľudskú tvár praxe, prostredie a štýl komunikácie tak, aby pacient získal dôveru k vašej odbornosti.",
+        detail: "Identita, ktorá vás odlíši od konkurencie a vzbudí okamžitú dôveru.",
         number: "03",
-    },
-    {
-        id: "web",
-        icon: <Globe size={32} />,
-        title: "Webové riešenia a CRM",
-        desc: "Navrhujeme a spravujeme moderné, plne funkčné webové stránky a systémy na správu pacientov (CRM).",
-        detail: "Zjednodušujeme komunikáciu a automatizujeme proces objednávania.",
-        number: "04",
     },
     {
         id: "email",
         icon: <Mail size={32} />,
         title: "Email marketing a práca s dátami",
-        desc: "Pomáhame vám naplno využiť potenciál vašej súčasnej databázy cez diskrétny a etický emailing.",
-        detail: "Udržiavame kontakt s vašimi pacientmi a zvyšujeme ich lojalitu k vašej ambulancii.",
+        desc: "Email je privátna zóna. Kým sociálne siete sú námestie, email je ako zatvorené dvere v ambulancii. Z vašej kartotéky spravíme aktívnu databázu.",
+        detail: "Zvyšuje návratnosť pacientov, podporuje prevenciu a šetrí čas personálu.",
+        number: "04",
+    },
+    {
+        id: "crm",
+        icon: <Layers size={32} />,
+        title: "CRM a automatizácie",
+        desc: "Prepojíme databázu so systémom, v ktorom vieme riadiť komunikáciu, segmentáciu a následné kroky pacienta.",
+        detail: "Vrátane automatizovaného objednávania a šikovných pripomienok.",
         number: "05",
     },
     {
-        id: "konzultacie",
-        icon: <Users size={32} />,
-        title: "Konzultácie a predajné procesy",
-        desc: "Poskytujeme odborné poradenstvo pri nastavovaní interných procesov a školíme váš tím.",
-        detail: "Cieľom je, aby ste z vášho marketingu a autority vyťažili maximum.",
+        id: "ai",
+        icon: <Camera size={32} />,
+        title: "Umelá inteligencia",
+        desc: "Naprogramujeme GPT asistenta pre vašu prax: odpovede na časté otázky, navigácia pacienta, interná podpora tímu.",
+        detail: "Menej opakovania, viac času na medicínu a starostlivosť o pacientov.",
         number: "06",
     },
 ];

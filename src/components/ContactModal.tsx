@@ -119,33 +119,33 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                 <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-teal/10 rounded-full blur-[80px]" />
 
                                 <div className="relative z-10">
-                                    <h3 className="text-2xl lg:text-3xl font-bold text-white leading-tight mb-4">
-                                        Posuňme vašu prax na{" "}
-                                        <span className="text-gradient">vyššiu úroveň</span>
+                                    <h3 className="text-2xl lg:text-3xl font-bold font-kanit text-white leading-tight mb-4">
+                                        Získajte 30 minútovú analýzu{" "}
+                                        <span className="text-gradient">potenciálu vašej ambulancie</span>
                                     </h3>
-                                    <p className="text-white/50 text-sm leading-relaxed mb-6">
-                                        Naša spolupráca začína jednoduchým rozhovorom. Vyplňte formulár a my sa vám ozveme do 24 hodín, aby sme prebrali vaše ciele.
+                                    <p className="text-white/50 text-sm font-stolzl leading-relaxed mb-6">
+                                        Vymeníme váš čas za konkrétne dáta a stratégiu, ktorá rešpektuje vašu odbornosť.
                                     </p>
-                                    <p className="text-teal text-sm font-medium italic mb-10">
+                                    <p className="text-teal text-sm font-medium font-stolzl italic mb-10">
                                         Prvá konzultácia je úplne zadarmo a k ničomu vás nezaväzuje.
                                     </p>
 
                                     {/* Director card */}
                                     <div className="flex items-center gap-4 mb-6">
-                                        <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-teal/30 flex-shrink-0">
+                                        <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-teal/30 flex-shrink-0">
                                             <Image
-                                                src="/reditel.png"
-                                                alt="PhDr. Víťazoslav Struhár"
+                                                src="/tomas_final.png"
+                                                alt="Tomáš Kuchta"
                                                 fill
                                                 className="object-cover object-top"
                                             />
                                         </div>
                                         <div>
                                             <p className="text-white font-semibold">
-                                                PhDr. Víťazoslav Struhár
+                                                Tomáš Kuchta
                                             </p>
                                             <p className="text-teal text-sm font-medium">
-                                                Marketingový riaditeľ
+                                                Sales & Operation Director
                                             </p>
                                         </div>
                                     </div>
@@ -288,7 +288,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                             </div>
                                             <span className="text-white/40 text-xs leading-relaxed group-hover:text-white/60 transition-colors">
                                                 Súhlasím so spracovaním osobných údajov v súlade s{" "}
-                                                <a href="#" className="text-teal hover:underline">nariadením GDPR</a>
+                                                <a href="/ochrana-osobnych-udajov" target="_blank" rel="noopener noreferrer" className="text-teal hover:underline" onClick={(e) => e.stopPropagation()}>
+                                                    nariadením GDPR
+                                                </a>
                                             </span>
                                         </label>
                                     </div>

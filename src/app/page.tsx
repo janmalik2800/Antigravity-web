@@ -30,6 +30,7 @@ import {
 import dynamic from "next/dynamic";
 import CaseStudyDashboard from "../components/CaseStudyDashboard";
 import GlowCard from "../components/GlowCard";
+import ValuesStackingCards from "@/components/ValuesStackingCards";
 import MagicalButton from "../components/MagicalButton";
 import TypewriterText from "../components/TypewriterText";
 
@@ -121,7 +122,7 @@ function Counter({ target, suffix = "", prefix = "" }: { target: number; suffix?
 }
 
 /* ─── FAQ Accordion Item ─── */
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ question, answer }: { question: string; answer: React.ReactNode }) {
     const [open, setOpen] = useState(false);
     return (
         <div className="border-b border-white/5">
@@ -145,7 +146,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                     >
-                        <p className="pb-6 text-white/60 leading-relaxed max-w-3xl">{answer}</p>
+                        <div className="pb-6 text-white/60 leading-relaxed max-w-3xl space-y-4">{answer}</div>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -303,7 +304,7 @@ export default function Home() {
                             >
                                 <div className="w-2 h-2 rounded-full bg-teal animate-pulse" />
                                 <span className="text-teal text-sm font-medium font-kanit tracking-wide">
-                                    Strategický partner pre zdravotníctvo
+                                    Zdravotnícky marketing založený na dátach
                                 </span>
                             </motion.div>
 
@@ -311,11 +312,11 @@ export default function Home() {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.3 }}
-                                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.08] tracking-tight mb-8"
+                                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold leading-[1.08] tracking-tight mb-8"
                             >
-                                Budujeme dôveru a&nbsp;autoritu{" "}
-                                <span className="text-gradient">vašej praxe</span>{" "}
-                                v&nbsp;očiach pacientov
+                                Pomôžeme vám urobiť z&nbsp;vašej{" "}
+                                <span className="text-gradient">ambulantnej praxe</span>{" "}
+                                dôveryhodnú a&nbsp;rešpektovanú značku
                             </motion.h1>
 
                             <motion.p
@@ -325,7 +326,7 @@ export default function Home() {
                                 className="text-lg lg:text-xl text-white/50 leading-relaxed max-w-xl mb-10"
                             >
                                 Strategický partner pre lekárov, kliniky a ambulancie, ktoré hľadajú komplexné
-                                riešenia v&nbsp;oblasti marketingu, vizuálnej identity a akvizície pacientov.
+                                riešenia v&nbsp;oblasti brandu, vizuálnej identity aj akvizície pacientov.
                             </motion.p>
 
                             <motion.div
@@ -372,7 +373,7 @@ export default function Home() {
                                         </div>
                                     ))}
                                 </div>
-                                <span>Dôverujú nám kliniky po celom Slovensku</span>
+                                <span>Prepojíme vás s pacientmi prostredníctvom inovatívnych riešení digitálneho marketingu a navýšime príjmy vašej klinickej praxe. Aby ste sa vy mohli naplno venovať liečbe svojich pacientov.</span>
                             </motion.div>
                         </div>
 
@@ -559,19 +560,19 @@ export default function Home() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
                             {
-                                value: 80,
-                                suffix: " %",
-                                label: "Pacientov hľadá lekára online pred prvou návštevou",
-                            },
-                            {
                                 value: 72,
                                 suffix: " %",
-                                label: "Dôveruje online recenziám rovnako ako odporúčaniam",
+                                label: "72% pacientov používa sociálne siete na prieskum skôr, než sa objedná k novému lekárovi.",
                             },
                             {
-                                value: 45,
+                                value: 41,
                                 suffix: " %",
-                                label: "Vyššia návratnosť pacientov s aktívnou komunikáciou",
+                                label: "41% spotrebiteľov tvrdí, že sociálne siete priamo ovplyvnili ich výber konkrétnej nemocnice alebo lekára.",
+                            },
+                            {
+                                value: 90,
+                                suffix: " %",
+                                label: "90% mladých dospelých (18–24) dôveruje zdravotným informáciám zdieľaným ich rovesníkmi na sieťach.",
                             },
                         ].map((stat, i) => (
                             <motion.div
@@ -596,7 +597,7 @@ export default function Home() {
                     <div className="max-w-4xl mx-auto">
                         <motion.div variants={fadeUp} custom={0} className="mb-6">
                             <span className="text-teal text-sm font-semibold uppercase tracking-widest">
-                                Filozofia
+                                Naša filozofia
                             </span>
                         </motion.div>
                         <motion.h2
@@ -604,15 +605,12 @@ export default function Home() {
                             custom={1}
                             className="text-3xl lg:text-5xl font-bold leading-tight mb-8"
                         >
-                            Marketing pre zdravotníctvo, ktorý rozumie{" "}
-                            <span className="text-gradient">hodnote vášho času</span>
+                            Marketing, ktorý nie je o lajkoch. Je o{" "}
+                            <span className="text-gradient">dôvere a konverzii.</span>
                         </motion.h2>
                         <motion.div variants={fadeUp} custom={2} className="space-y-6">
                             <p className="text-lg text-white/50 leading-relaxed">
-                                Mediconect nie je len ďalšia marketingová agentúra. Sme tím špecialistov, ktorí
-                                preberajú plnú zodpovednosť za vašu digitálnu stopu. Chápeme, že lekár nie je
-                                marketér – vaším poslaním je starostlivosť o zdravie, naším poslaním je starostlivosť
-                                o vašu prosperitu a dobré meno.
+                                Mediconect nie je len ďalšia marketingová agentúra. Sme tím špecialistov, ktorí preberajú plnú zodpovednosť za váš digitálny obraz. V&nbsp;Mediconecte veríme, že za každou úspešnou ambulanciou stojí silný príbeh a dôvera pacientov. Naším cieľom je pomôcť vám tento príbeh vyrozprávať moderne a profesionálne. Chápeme, že lekár nie je marketér – vaším poslaním je starostlivosť o zdravie, naším poslaním je starostlivosť o vašu prosperitu, dobré meno a&nbsp;konzistentný kmeň pacientov.
                             </p>
                             <p className="text-lg text-white/50 leading-relaxed">
                                 Využívame vaše minimum času na dosiahnutie maximálnych výsledkov. Či už ide o tvorbu
@@ -675,23 +673,23 @@ export default function Home() {
                         {[
                             {
                                 step: "01",
-                                title: "Nezáväzná konzultácia zadarmo",
-                                desc: "Hovor, kde sa navzájom dozvieme, či sme pre seba správna voľba.",
+                                title: "Nezáväzná bezplatná konzultácia",
+                                desc: "Krátky hovor, kde zistíme, ako vieme zabezpečiť rast vašej lekárskej praxe.",
                             },
                             {
                                 step: "02",
-                                title: "Audit a analýza",
-                                desc: "Vykonáme prieskum vašej online prítomnosti a identifikujeme príležitosti.",
+                                title: "Vykonáme prieskum vašej online prítomnosti a identifikujeme príležitosti",
+                                desc: "Upgradujeme kontakty, doplníme emaily, otestujeme dostupnosť a vytvoríme „zdroj potenciálu“, cieľové skupiny, tematické okruhy kampaní, tón komunikácie a KPI.",
                             },
                             {
                                 step: "03",
                                 title: "Stratégia na mieru",
-                                desc: "Konkrétny plán prispôsobený vašej špecializácii a cieľom.",
+                                desc: "Konkrétny plán prispôsobený vašej špecializácii a cieľom: Emailing, web/SEO, sociálne siete, CRM s minimálnym zaťažením vášho tímu.",
                             },
                             {
                                 step: "04",
                                 title: "Realizácia a výsledky",
-                                desc: "Začneme spoluprácu a pravidelne reportujeme merateľné výsledky.",
+                                desc: "Začneme spoluprácu a pravidelne reportujeme merateľné výsledky. Máte detailný prehľad o efektivite a výstupoch z vášho digitálneho marketingu.",
                             },
                         ].map((item, i) => (
                             <motion.div key={i} variants={fadeUp} custom={i} className="relative group">
@@ -716,194 +714,45 @@ export default function Home() {
                 </div>
             </Section>
 
-            {/* ═══════════════ VALUES ═══════════════ */}
-            <Section className="py-24 lg:py-32 relative z-10 overflow-hidden">
+            {/* ═══════════════ VALUES (5I Stacking Cards) ═══════════════ */}
+            <Section className="py-24 lg:py-32 relative z-10 overflow-visible">
 
-                {/* Parallax floating particles */}
+                {/* Parallax floating particles - background effects */}
                 <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-                    {[
-                        { top: "12%", left: "7%", size: 4, delay: 0, dur: 6 },
-                        { top: "25%", left: "88%", size: 3, delay: 1, dur: 8 },
-                        { top: "55%", left: "15%", size: 2, delay: 2, dur: 7 },
-                        { top: "70%", left: "78%", size: 5, delay: 0.5, dur: 9 },
-                        { top: "40%", left: "50%", size: 3, delay: 1.5, dur: 6.5 },
-                        { top: "85%", left: "35%", size: 2, delay: 3, dur: 8 },
-                        { top: "8%", left: "60%", size: 4, delay: 2.5, dur: 7.5 },
-                        { top: "90%", left: "62%", size: 3, delay: 4, dur: 6 },
-                    ].map((p, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute rounded-full bg-teal/30"
-                            style={{ top: p.top, left: p.left, width: p.size, height: p.size }}
-                            animate={{ y: [0, -18, 0], opacity: [0.3, 0.8, 0.3] }}
-                            transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
-                        />
-                    ))}
-                    <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-teal/5 rounded-full blur-[80px]" />
-                    <div className="absolute bottom-1/4 right-1/4 w-56 h-56 bg-cyan-500/5 rounded-full blur-[60px]" />
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal/5 rounded-full blur-[100px]" />
+                    <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-blue-500/5 rounded-full blur-[80px]" />
                 </div>
 
-                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
                     <motion.div
                         variants={fadeUp}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         custom={0}
-                        className="text-center mb-16"
+                        className="text-center mb-16 max-w-3xl mx-auto"
                     >
-                        <span className="text-teal text-sm font-semibold uppercase tracking-widest">
+                        <span className="text-teal text-sm font-semibold uppercase tracking-widest font-kanit">
                             Prečo Mediconect
                         </span>
-                        <h2 className="text-3xl lg:text-5xl font-bold mt-4">
-                            Naše <span className="text-gradient">hodnoty</span>
+                        <h2 className="text-3xl lg:text-5xl font-bold mt-4 font-kanit">
+                            <span className="text-gradient">Hodnoty</span>, na ktorých staviame váš úspech
                         </h2>
+                        <p className="mt-6 text-white/60 text-lg leading-relaxed font-stolzl">
+                            V Mediconecte nerobíme marketing od stola. Veríme, že moderná medicína si zaslúži modernú komunikáciu. Našich 5 pilierov (5I) tvorí základ každej stratégie, ktorú pre vás pripravujeme:
+                        </p>
                     </motion.div>
 
-                    {/* Asymmetric grid: 1 large hero card + 3 smaller */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-                        {/* HERO CARD — spans 2 rows */}
-                        <motion.div
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.1}
-                            className="lg:row-span-2 group"
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        >
-                            <GlowCard className="h-full">
-                                <div className="glass rounded-2xl p-10 h-full flex flex-col justify-between min-h-[280px] lg:min-h-0 transition-all duration-500">
-                                    <div>
-                                        <motion.div
-                                            className="w-16 h-16 rounded-xl bg-teal/10 flex items-center justify-center text-teal mb-6 group-hover:bg-teal/20 transition-all duration-300"
-                                            whileHover={{ rotate: 360 }}
-                                            transition={{ duration: 0.6, ease: "easeInOut" }}
-                                        >
-                                            <Clock size={32} />
-                                        </motion.div>
-                                        <h3 className="text-2xl font-bold mb-3 group-hover:text-teal transition-colors duration-300">
-                                            Efektivita času
-                                        </h3>
-                                        <p className="text-white/50 leading-relaxed">
-                                            Vieme, že váš čas je vzácny. Naše procesy sú nastavené tak, aby sme vás zaťažovali minimálne a výsledky prichádzali čo najskôr.
-                                        </p>
-                                    </div>
-                                    <div className="mt-8 text-teal/40 group-hover:text-teal/70 text-sm font-medium transition-colors duration-300">
-                                        Úspora 6h / týždeň v priemere →
-                                    </div>
-                                </div>
-                            </GlowCard>
-                        </motion.div>
-
-                        {/* Card 2 — Data */}
-                        <motion.div
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.2}
-                            className="group"
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        >
-                            <GlowCard className="h-full">
-                                <div className="glass rounded-2xl p-8 h-full flex gap-5 items-start transition-all duration-500">
-                                    <motion.div
-                                        className="w-14 h-14 rounded-xl bg-teal/10 flex-shrink-0 flex items-center justify-center text-teal group-hover:bg-teal/20 transition-all duration-300"
-                                        whileHover={{ scaleY: 1.3, scaleX: 0.85 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <BarChart3 size={28} />
-                                    </motion.div>
-                                    <div>
-                                        <h3 className="text-xl font-semibold mb-2 group-hover:text-teal transition-colors duration-300">
-                                            Data a stratégia
-                                        </h3>
-                                        <p className="text-white/45 leading-relaxed text-sm">
-                                            Nerobíme marketing na základe pocitov. Každý krok je podložený dátami.
-                                        </p>
-                                        <p className="text-teal/40 group-hover:text-teal/70 text-xs mt-3 font-medium transition-colors duration-300">
-                                            ROI merané každý mesiac →
-                                        </p>
-                                    </div>
-                                </div>
-                            </GlowCard>
-                        </motion.div>
-
-                        {/* Card 3 — Komplexnosť */}
-                        <motion.div
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.3}
-                            className="group"
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        >
-                            <GlowCard className="h-full">
-                                <div className="glass rounded-2xl p-8 h-full flex gap-5 items-start transition-all duration-500">
-                                    <motion.div
-                                        className="w-14 h-14 rounded-xl bg-teal/10 flex-shrink-0 flex items-center justify-center text-teal group-hover:bg-teal/20 transition-all duration-300"
-                                        whileHover={{ y: -4 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <Layers size={28} />
-                                    </motion.div>
-                                    <div>
-                                        <h3 className="text-xl font-semibold mb-2 group-hover:text-teal transition-colors duration-300">
-                                            Komplexnosť
-                                        </h3>
-                                        <p className="text-white/45 leading-relaxed text-sm">
-                                            Od prvého loga až po vlastné call centrum – jeden partner, komplexné riešenie.
-                                        </p>
-                                        <p className="text-teal/40 group-hover:text-teal/70 text-xs mt-3 font-medium transition-colors duration-300">
-                                            12+ služieb pod jednou strechou →
-                                        </p>
-                                    </div>
-                                </div>
-                            </GlowCard>
-                        </motion.div>
-
-                        {/* Card 4 — Etika — spans last 2 cols on row 2 */}
-                        <motion.div
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.4}
-                            className="group lg:col-span-2"
-                            whileHover={{ scale: 1.015 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        >
-                            <GlowCard className="h-full">
-                                <div className="glass rounded-2xl p-8 h-full flex gap-5 items-center transition-all duration-500">
-                                    <motion.div
-                                        className="w-14 h-14 rounded-xl bg-teal/10 flex-shrink-0 flex items-center justify-center text-teal group-hover:bg-teal/20 transition-all duration-300"
-                                        whileHover={{ scale: 1.15 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <Shield size={28} />
-                                    </motion.div>
-                                    <div className="flex-1">
-                                        <h3 className="text-xl font-semibold mb-2 group-hover:text-teal transition-colors duration-300">
-                                            Etika a bezpečnosť
-                                        </h3>
-                                        <p className="text-white/45 leading-relaxed text-sm">
-                                            Všetky naše kampane a systémy sú v plnom súlade s GDPR a lekárskou etikou. Vaša dôveryhodnosť je pre nás prvoradá.
-                                        </p>
-                                    </div>
-                                    <div className="ml-auto flex-shrink-0 hidden lg:flex items-center text-teal/40 group-hover:text-teal/80 text-sm font-medium transition-colors duration-300 whitespace-nowrap">
-                                        100% GDPR →
-                                    </div>
-                                </div>
-                            </GlowCard>
-                        </motion.div>
-
-                    </div>
+                    {/* Vložená nová komponenta se skládacími kartami s fade-in animací */}
+                    <motion.div
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        custom={1}
+                    >
+                        <ValuesStackingCards />
+                    </motion.div>
                 </div>
             </Section>
 
@@ -962,29 +811,27 @@ export default function Home() {
                             ))}
                         </div>
 
-                        <div className="relative z-10 glass-strong rounded-3xl p-12 lg:p-20 text-center">
+                        <div className="relative z-10 glass-strong rounded-3xl px-4 py-10 sm:p-12 lg:p-20 text-center">
                             <motion.h2
                                 variants={fadeUp}
                                 custom={0}
-                                className="text-3xl lg:text-5xl font-bold leading-tight mb-6"
+                                className="text-2xl sm:text-3xl lg:text-5xl font-bold font-kanit leading-tight mb-6"
                             >
-                                Otvorme diskusiu o budúcnosti{" "}
-                                <span className="text-gradient block mt-2 lg:block lg:mt-2 whitespace-nowrap">
-                                    <TypewriterText words={["vašej kliniky", "vašej praxe", "vášho úspechu"]} />
+                                Vaša odbornosť si zaslúži správnu
+                                <span className="text-gradient block mt-2 lg:mt-4 whitespace-nowrap">
+                                    <TypewriterText words={["viditeľnosť", "pozornosť", "prezentáciu"]} />
                                 </span>
                             </motion.h2>
                             <motion.p
                                 variants={fadeUp}
                                 custom={1}
-                                className="text-lg text-white/50 leading-relaxed max-w-3xl mx-auto mb-10"
+                                className="text-base sm:text-lg text-white/50 leading-relaxed max-w-3xl font-stolzl mx-auto mb-10"
                             >
-                                Každá spolupráca v Mediconect začína hĺbkovým pochopením vašich potrieb. Ak
-                                hľadáte partnera, ktorý sa postará o váš rast s rovnakou precíznosťou, s akou vy
-                                pristupujete k svojim pacientom, radi sa s vami stretneme na nezáväznej konzultácii.
+                                Spájame medicínsku etiku s dátovou inteligenciou. Rezervujte si 30-minútovú online konzultáciu, kde spoločne identifikujeme bariéry rastu vašej ambulancie a navrhneme riešenia, ktoré fungujú v praxi.
                             </motion.p>
                             <motion.div variants={fadeUp} custom={2} className="flex flex-col items-center gap-8">
                                 <MagicalButton onClick={() => setModalOpen(true)}>
-                                    Bezplatná konzultácia
+                                    Rezervovať termín stretnutia
                                 </MagicalButton>
 
                                 {/* Floating Contact Cards (Desktop only) */}
@@ -1047,20 +894,20 @@ export default function Home() {
                         {/* Left: Photo */}
                         <div className="relative flex justify-center">
                             {/* Glow behind photo */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-teal/15 rounded-full blur-[80px]" />
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[331px] h-[331px] bg-teal/15 rounded-full blur-[80px]" />
                             {/* Decorative ring */}
                             <motion.div
                                 animate={{ rotate: 360 }}
                                 transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full border border-teal/10"
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[368px] h-[368px] rounded-full border border-teal/10"
                             />
-                            <div className="relative w-72 h-80 lg:w-80 lg:h-[400px]">
+                            <div className="relative w-[331px] h-[368px] lg:w-[368px] lg:h-[460px]">
                                 <Image
-                                    src="/reditel.png"
-                                    alt="PhDr. Víťazoslav Struhár"
+                                    src="/tomas_final.png"
+                                    alt="Tomáš Struhár"
                                     fill
                                     className="object-contain object-bottom drop-shadow-2xl"
-                                    sizes="(max-width: 1024px) 288px, 320px"
+                                    sizes="(max-width: 1024px) 331px, 368px"
                                 />
                             </div>
                         </div>
@@ -1076,25 +923,25 @@ export default function Home() {
                                     <div className="mb-8">
                                         <div className="text-teal text-4xl font-serif leading-none mb-4">&ldquo;</div>
                                         <p className="text-white/80 text-lg leading-relaxed italic">
-                                            Každá klinika je unikátna a zaslúži si individuálny prístup. Naším cieľom je pochopiť vaše potreby a premeniť ich na merateľné výsledky.
+                                            Od loga až po plnú čakáreň. Komplexne riadime váš marketing, sociálne siete a automatizovaný nábor pacientov. Vy liečite, my budujeme váš úspech.
                                         </p>
                                     </div>
 
                                     {/* Name & Title */}
                                     <div className="border-t border-white/10 pt-6">
                                         <h3 className="text-xl font-bold text-white">
-                                            PhDr. Víťazoslav Struhár
+                                            Tomáš Kuchta
                                         </h3>
                                         <p className="text-teal font-medium mt-1">
-                                            Marketingový riaditeľ
+                                            Sales & Operation Director
                                         </p>
                                     </div>
 
                                     {/* Contact links */}
-                                    <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                                    <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-6">
                                         <a
                                             href="tel:+421948220845"
-                                            className="flex items-center gap-3 px-5 py-3 rounded-xl glass hover:border-teal/30 border border-transparent transition-all duration-300 group"
+                                            className="flex-shrink-0 flex items-center justify-center gap-3 px-5 py-3 rounded-xl glass hover:border-teal/30 border border-transparent transition-all duration-300 group"
                                         >
                                             <Phone size={18} className="text-teal" />
                                             <span className="text-white/70 group-hover:text-white transition-colors text-sm whitespace-nowrap">
@@ -1103,10 +950,10 @@ export default function Home() {
                                         </a>
                                         <a
                                             href="mailto:info@mediconect.sk"
-                                            className="flex items-center gap-3 px-5 py-3 rounded-xl glass hover:border-teal/30 border border-transparent transition-all duration-300 group"
+                                            className="flex-shrink-0 flex items-center justify-center gap-3 px-5 py-3 rounded-xl glass hover:border-teal/30 border border-transparent transition-all duration-300 group"
                                         >
                                             <Mail size={18} className="text-teal" />
-                                            <span className="text-white/70 group-hover:text-white transition-colors text-sm">
+                                            <span className="text-white/70 group-hover:text-white transition-colors text-sm whitespace-nowrap">
                                                 info@mediconect.sk
                                             </span>
                                         </a>
@@ -1133,23 +980,54 @@ export default function Home() {
                     <motion.div variants={fadeUp} custom={1}>
                         <FAQItem
                             question="Koľko môjho času si bude vyžadovať správa marketingu?"
-                            answer="Vieme, že váš čas je najcennejší v ambulancii pri pacientoch. Naším cieľom je odbremeniť vás. Po úvodnom nastavení stratégie preberáme operatívu na seba. Od vás budeme potrebovať len občasné schválenie kľúčových materiálov alebo spätnú väzbu na kvalitu dopytov. Marketing beží na pozadí, zatiaľ čo vy pracujete."
+                            answer="Po úvodnom nastavení stratégie preberáme operatívu (kampane, obsah, reporting aj optimalizáciu). Od vás potrebujeme len občasné schválenie kľúčových materiálov a spätnú väzbu na kvalitu dopytov. Marketing beží na pozadí, kým vy sa venujete pacientom."
                         />
                         <FAQItem
-                            question="Ako komunikujete citlivé zdravotnícke alebo estetické témy?"
-                            answer="Všetky naše kampane a komunikácia prechádzajú prísnym interným procesom, ktorý zabezpečuje súlad s etickými normami a legislatívnymi požiadavkami. Máme skúsenosti so špecifikami zdravotníckeho marketingu a vieme, kde sú hranice."
+                            question="Ako rýchlo uvidím prvé výsledky marketingu?"
+                            answer="Pri výkonnostných kampaniach sa prvé merateľné výsledky (návštevnosť a dopyty) zvyčajne objavia do 4–8 týždňov. Email marketing a práca s databázou môžu priniesť výsledky aj po prvej kampani. Budovanie autority je dlhodobý proces na niekoľko mesiacov. Spravidla si nechávame prvé 3 mesiace na optimálne nastavenie a testovanie všetkých systémov a databázy."
+                        />
+                        <FAQItem
+                            question="Garantujete konkrétne výsledky (počet pacientov, dopytov)?"
+                            answer="Negarantujeme nereálne čísla. Garantujeme transparentný reporting, jasne definované KPI a priebežnú optimalizáciu. Cieľom je stabilný a merateľný rast pri zachovaní reputácie ambulancie."
                         />
                         <FAQItem
                             question="Je vaša stratégia vhodná aj pre menšiu špecializovanú ambulanciu?"
-                            answer="Absolútne. Naše riešenia sú modulárne a škálovateľné. Či už ste veľká klinika alebo menšia špecializovaná ambulancia, prispôsobíme stratégiu vášmu rozpočtu a cieľom tak, aby ste dosahovali merateľné výsledky."
+                            answer="Áno. Riešenia sú modulárne a škálovateľné – od základnej stratégie a lokálneho SEO až po výkonnostné kampane, email marketing a automatizácie. Stratégiu prispôsobíme rozpočtu aj cieľom ambulancie."
                         />
                         <FAQItem
-                            question="Kedy môžem očakávať prvé výsledky a viete mi ich zaručiť?"
-                            answer="Prvé výsledky v podobe zvýšeného trafficu a dopytov sa zvyčajne dostavujú v priebehu 4-8 týždňov. Dlhodobé budovanie autority a značky je proces na niekoľko mesiacov. Negarantujeme konkrétne čísla, ale garantujeme transparentný reporting a neustálu optimalizáciu."
+                            question="Ako komunikujete citlivé zdravotnícke alebo estetické témy?"
+                            answer="Obsah a kampane pripravujeme v súlade s etickými normami, legislatívou a pravidlami reklamných platforiem. Používame profesionálny, edukatívny tón bez zavádzajúcich sľubov. Prioritou je dôvera a reputačná bezpečnosť."
                         />
                         <FAQItem
                             question="Neriskujem pri online reklame zablokovanie účtu alebo problémy s predpismi?"
-                            answer="Nie. Máme rozsiahle skúsenosti s reklamou v regulovanom zdravotníckom sektore. Poznáme pravidlá reklamných platforiem aj legislatívne požiadavky. Vaše účty sú v bezpečí a všetky kampane sú v súlade s predpismi."
+                            answer="Nie. Pri regulovanom zdravotníckom segmente poznáme pravidlá platforiem (napr. Meta/Google) aj legislatívne hranice. Kampane nastavujeme tak, aby boli v súlade s predpismi a minimalizovali riziko zamietnutia alebo blokácie."
+                        />
+                        <FAQItem
+                            question="Ako meriate úspešnosť marketingu v ambulancii?"
+                            answer="Sledujeme najmä počet a kvalitu dopytov, cenu za dopyt/pacienta, konverzné pomery, návratnosť investície (ROI) a výkonnosť kanálov. Reporting je zrozumiteľný a orientovaný na rozhodovanie."
+                        />
+                        <FAQItem
+                            question="Čo ak už máme marketingovú agentúru alebo interný tím?"
+                            answer="Môžeme doplniť to, čo chýba: audit, výkonové kampane, práca s databázou a email marketing, CRM a automatizácie alebo strategické vedenie pre zdravotnícky segment. Spolupráca je možná aj popri existujúcom dodávateľovi."
+                        />
+                        <FAQItem
+                            question="Koľko stojí marketing pre ambulanciu a kliniku?"
+                            answer="Cena závisí od rozsahu (web/SEO, kampane, email marketing, CRM, obsah) a cieľov. Po konzultácii pripravíme návrh stratégie a odporúčaný rozpočet tak, aby dával ekonomický zmysel. Na rozdiel od veľkých reklamných agentúr so širokým rozsahom projektov, my sa sústreďujeme len na jeden segment. Na rozdiel od veľkých marketingových agentúr, ktoré si účtujú tisícky eur za svoje služby, my ideme cestou ekonomicky prívetivých balíkov a riešení, ktoré dokážeme flexibilne prispôsobiť vašim individuálnym potrebám."
+                        />
+                        <FAQItem
+                            question="Ako začať spoluprácu?"
+                            answer="Začneme krátkou nezáväznou konzultáciou, kde zhodnotíme aktuálny stav, ciele a najrýchlejšie príležitosti rastu. Následne pripravíme návrh stratégie a implementačný plán."
+                        />
+                        <FAQItem
+                            question="Ako sú chránené kontakty a databázy pacientov, s ktorými pracujete?"
+                            answer={
+                                <>
+                                    <p>Ochrana osobných údajov je základom každej spolupráce. Databázy pacientov spracúvame výlučne v súlade s GDPR a platnou slovenskou legislatívou. Ambulancia zostáva prevádzkovateľom údajov a výhradným vlastníkom databázy – my vystupujeme ako sprostredkovateľ na základe riadnej zmluvy o spracúvaní osobných údajov (DPA).</p>
+                                    <p>Využívame zabezpečené cloudové riešenia v rámci EÚ, šifrovaný prenos dát (SSL/TLS), viacfaktorové overovanie prístupu a prístupové práva na princípe „need-to-know“. Údaje pravidelne zálohujeme, evidujeme prístupy a pracujeme iba s rozsahom údajov nevyhnutným na definovaný účel.</p>
+                                    <p>Databázy nikdy nepredávame ani nepoužívame na vlastné marketingové aktivity. Transparentnosť, minimalizácia rizika a reputačná ochrana ambulancie sú pre nás rovnako dôležité ako samotný marketingový výkon.</p>
+                                    <p>Bezpečnosť údajov nevnímame ako formalitu – ale ako súčasť profesionálnej zodpovednosti voči pacientom.</p>
+                                </>
+                            }
                         />
                     </motion.div>
                 </div>
@@ -1174,8 +1052,7 @@ export default function Home() {
                                 </span>
                             </a>
                             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
-                                Strategický partner pre kliniky a ambulancie v oblasti marketingu, vizuálnej
-                                identity a akvizície pacientov.
+                                Vašu odbornosť meníme na dôveru. Inteligentný marketing pre ambulancie a kliniky 21. storočia s víziou a integritou.
                             </p>
                         </div>
 
@@ -1197,6 +1074,13 @@ export default function Home() {
                                     <Phone size={14} />
                                     +421 948 220 845
                                 </a>
+                                <div className="mt-4 pt-4 border-t border-white/10 md:text-center text-left">
+                                    <p>MediConect s.r.o.</p>
+                                    <p>Lounská 629/2</p>
+                                    <p>031 04 Liptovský Mikuláš</p>
+                                    <p>IČO: 57016615</p>
+                                    <p>IČ DPH: SK2122534216</p>
+                                </div>
                             </div>
                         </div>
 

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useSpring, useMotionValue, useTransform } from "framer-motion";
 import Image from "next/image";
-import { Target, Palette, Camera, Globe, Mail, Users, ArrowRight } from "lucide-react";
+import { Target, Palette, Camera, Globe, Mail, Users, Layers, Zap, BrainCircuit, ArrowRight } from 'lucide-react';
 
 /* ─── Data ─── */
 const servicesData = [
@@ -11,49 +11,49 @@ const servicesData = [
         id: "akvizicia",
         icon: <Target size={28} />,
         title: "Akvizícia a výkonnostný marketing",
-        desc: "Zabezpečujeme kontinuálny prísun nových pacientov prostredníctvom precízne cielených kampaní na platformách Google a Meta.",
+        desc: "Kupujete si rýchlosť. Precízne cielené kampane (Google/Meta) nastavíme tak, aby prinášali zisk a merateľnú návratnosť – nie prázdne impresie.",
         detail: "Zameriavame sa na reálnu návratnosť investícií a kvalitu dopytov.",
         // 3D Position relative to center (0,0) - Adjusted for Left Column
         pos: { x: -140, y: -100, z: 20 }
     },
     {
-        id: "branding",
-        icon: <Palette size={28} />,
-        title: "Vizuálna identita a branding",
-        desc: "Vytvárame unikátny vizuálny jazyk vašej praxe. Od loga a firemnej typografie až po kompletnú identitu.",
-        detail: "Identita, ktorá vás odlíši od konkurencie a vzbudí okamžitú dôveru.",
+        id: "web",
+        icon: <Globe size={28} />,
+        title: "Web a SEO",
+        desc: "Budujete si dôveru. Web je „prvá vyšetrovacia miestnosť“ pacienta – miesto, kde si s vami vytvorí vzťah ešte pred prvým kontaktom.",
+        detail: "Zjednodušujeme komunikáciu a automatizujeme proces objednávania.",
         pos: { x: 140, y: -80, z: -10 }
     },
     {
-        id: "produkcia",
-        icon: <Camera size={28} />,
-        title: "Produkcia a vizuálny obsah",
-        desc: "Zabezpečujeme profesionálnu foto a video produkciu priamo vo vašich priestoroch. Disponujeme vlastným zázemím.",
-        detail: "Vytvoríme reprezentatívny obsah bez zaťaženia vášho personálu.",
+        id: "social",
+        icon: <Users size={28} />,
+        title: "Sociálne siete",
+        desc: "Vytvárate komunitu a autoritu. Ukážeme ľudskú tvár praxe, prostredie a štýl komunikácie tak, aby pacient získal dôveru k vašej odbornosti.",
+        detail: "Identita, ktorá vás odlíši od konkurencie a vzbudí okamžitú dôveru.",
         pos: { x: 160, y: 100, z: 30 }
-    },
-    {
-        id: "web",
-        icon: <Globe size={28} />,
-        title: "Webové riešenia a CRM",
-        desc: "Navrhujeme a spravujeme moderné, plne funkčné webové stránky a systémy na správu pacientov (CRM).",
-        detail: "Zjednodušujeme komunikáciu a automatizujeme proces objednávania.",
-        pos: { x: -160, y: 80, z: -30 }
     },
     {
         id: "email",
         icon: <Mail size={28} />,
         title: "Email marketing a práca s dátami",
-        desc: "Pomáhame vám naplno využiť potenciál vašej súčasnej databázy cez diskrétny a etický emailing.",
-        detail: "Udržiavame kontakt s vašimi pacientmi a zvyšujeme ich lojalitu k vašej ambulancii.",
+        desc: "Email je privátna zóna. Kým sociálne siete sú námestie, email je ako zatvorené dvere v ambulancii. Z vašej kartotéky spravíme aktívnu databázu.",
+        detail: "Zvyšuje návratnosť pacientov, podporuje prevenciu a šetrí čas personálu.",
+        pos: { x: -160, y: 80, z: -30 }
+    },
+    {
+        id: "crm",
+        icon: <Layers size={28} />,
+        title: "CRM a automatizácie",
+        desc: "Prepojíme databázu so systémom, v ktorom vieme riadiť komunikáciu, segmentáciu a následné kroky pacienta.",
+        detail: "Vrátane automatizovaného objednávania a šikovných pripomienok.",
         pos: { x: 0, y: 180, z: 10 }
     },
     {
-        id: "konzultacie",
-        icon: <Users size={28} />,
-        title: "Konzultácie a predajné procesy",
-        desc: "Poskytujeme odborné poradenstvo pri nastavovaní interných procesov a školíme váš tím.",
-        detail: "Cieľom je, aby ste z vášho marketingu a autority vyťažili maximum.",
+        id: "ai",
+        icon: <Camera size={28} />,
+        title: "Umelá inteligencia",
+        desc: "Naprogramujeme GPT asistenta pre vašu prax: odpovede na časté otázky, navigácia pacienta, interná podpora tímu.",
+        detail: "Menej opakovania, viac času na medicínu a starostlivosť o pacientov.",
         pos: { x: 0, y: -180, z: 0 }
     },
 ];
@@ -108,7 +108,13 @@ export default function ServicesNebula() {
             </div>
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+                >
 
                     {/* LEFT COLUMN: 3D Nebula Cloud */}
                     <motion.div
@@ -258,7 +264,7 @@ export default function ServicesNebula() {
                         </AnimatePresence>
                     </div>
 
-                </div>
+                </motion.div>
             </div>
         </div>
     );

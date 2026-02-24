@@ -2,64 +2,63 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
-import { Target, Palette, Camera, Globe, Mail, Users, ArrowRight, ArrowUpRight } from "lucide-react";
+import { Target, Palette, Camera, Globe, Mail, Users, ArrowRight, ArrowUpRight, Layers, Zap, BrainCircuit } from "lucide-react";
 
 /* ─── Data ─── */
 const servicesData = [
     {
         id: "akvizicia",
         icon: <Target size={28} />,
-        title: "Akvizícia a marketing",
-        desc: "Zabezpečujeme kontinuálny prísun nových pacientov prostredníctvom precízne cielených kampaní.",
-        detail: "Kompletná správa kampaní na Google a Meta. Zameriavame sa na výkon a reálnu návratnosť investícií (ROI).",
+        title: "Akvizícia a výkonnostný marketing",
+        desc: "Kupujete si rýchlosť. Precízne cielené kampane (Google/Meta)...",
+        detail: "Nastavíme kampane tak, aby prinášali zisk a merateľnú návratnosť – nie prázdne impresie.",
         colSpan: "md:col-span-2",
         bgGradient: "from-teal/20 to-transparent"
     },
     {
-        id: "branding",
-        icon: <Palette size={28} />,
-        title: "Vizuálna identita",
-        desc: "Vytvárame unikátny vizuálny jazyk.",
-        detail: "Logo, farebná paleta, typografia a kompletný brand manuál.",
-        colSpan: "md:col-span-1",
-        bgGradient: "from-purple-500/10 to-transparent"
-    },
-    {
         id: "web",
         icon: <Globe size={28} />,
-        title: "Webové riešenia",
-        desc: "Moderné weby optimalizované pre konverzie.",
-        detail: "Rýchle, bezpečné a responzívne webstránky s integráciou rezervačných systémov.",
+        title: "Web a SEO",
+        desc: "Budujete si dôveru. Web je vaša „prvá vyšetrovacia miestnosť“...",
+        detail: "Miesto, kde si s vami pacient vytvorí vzťah ešte pred prvým kontaktom.",
         colSpan: "md:col-span-1",
         bgGradient: "from-blue-500/10 to-transparent"
-
     },
     {
-        id: "produkcia",
-        icon: <Camera size={28} />,
-        title: "Foto a video produkcia",
-        desc: "Profesionálny vizuálny obsah.",
-        detail: "Tvorba reprezentatívnych fotografií a videí z vašich priestorov.",
-        colSpan: "md:col-span-1",
-        bgGradient: "from-pink-500/10 to-transparent"
-    },
-    {
-        id: "konzultacie",
+        id: "social",
         icon: <Users size={28} />,
-        title: "Konzultácie a procesy",
-        desc: "Optimalizácia interných procesov.",
-        detail: "Pomáhame nastaviť procesy tak, aby marketing fungoval.",
+        title: "Sociálne siete",
+        desc: "Vytvárate komunitu a autoritu. Ukážeme ľudskú tvár praxe...",
+        detail: "Prostredie a štýl komunikácie tak, aby pacient získal dôveru k vašej odbornosti.",
         colSpan: "md:col-span-1",
-        bgGradient: "from-orange-500/10 to-transparent"
+        bgGradient: "from-purple-500/10 to-transparent"
     },
     {
         id: "email",
         icon: <Mail size={28} />,
         title: "Email marketing",
-        desc: "Lojalita pacientov.",
-        detail: "Automatizované newslettre a kampane.",
-        colSpan: "md:col-span-1", // Stays small to fit the grid nicel
-        bgGradient: "from-indigo-500/10 to-transparent"
+        desc: "Email je privátna zóna. Z vašej kartotéky spravíme aktívnu databázu...",
+        detail: "Zvyšuje návratnosť pacientov, podporuje prevenciu a šetrí čas personálu.",
+        colSpan: "md:col-span-1",
+        bgGradient: "from-pink-500/10 to-transparent"
+    },
+    {
+        id: "crm",
+        icon: <Layers size={28} />,
+        title: "CRM a automatizácie",
+        desc: "Prepojíme databázu so systémom riadenia komunikácie...",
+        detail: "Segmentácia, objednávanie a pripomienky následných krokov pre pacienta.",
+        colSpan: "md:col-span-1",
+        bgGradient: "from-orange-500/10 to-transparent"
+    },
+    {
+        id: "ai",
+        icon: <Camera size={28} />,
+        title: "Umelá inteligencia",
+        desc: "Naprogramujeme GPT asistenta pre vašu prax a tím...",
+        detail: "Odpovede na časté otázky a navigácia pacienta. Menej opakovania, viac medicíny.",
+        colSpan: "md:col-span-2",
+        bgGradient: "from-teal/10 to-transparent"
     },
 ];
 

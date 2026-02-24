@@ -23,8 +23,7 @@ export default function CaseStudyDashboard() {
 
                     <div className="space-y-6 text-white/60 leading-relaxed text-lg">
                         <p>
-                            Náš klient, všeobecný lekár, čelil problému s nízkou návštevnosťou preventívnych prehliadok.
-                            Bežné notifikácie z informačného systému pacienti ignorovali alebo prehliadali.
+                            Náš klient, všeobecný lekár, mal pretrvávajúci problém s počtom pacientov na preventívne prehliadky. Aj napriek notifikáciám, ktoré generoval jeho informačný systém, pacienti sa na prehliadky nehlásili v potrebnom počte, alebo sa prihlásili a neprišli.
                         </p>
                         <ul className="space-y-4 my-6">
                             <li className="flex gap-3">
@@ -33,7 +32,7 @@ export default function CaseStudyDashboard() {
                                 </span>
                                 <div>
                                     <strong className="text-white block">Riešenie</strong>
-                                    <span className="text-sm">Nasadili sme personalizovanú e-mailovú kampaň zameranú na edukáciu o zdravotných rizikách.</span>
+                                    <span className="text-sm">Pripravili sme kampaň v podobe informačného mailu, ktorý však nevyzýval na návštevu ambulancie. Popisoval kritickú situáciu v populácii a zdravotné následky, ktoré z takého prístupu vyplývali.</span>
                                 </div>
                             </li>
                             <li className="flex gap-3">
