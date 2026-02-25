@@ -154,7 +154,84 @@ function FAQItem({ question, answer }: { question: string; answer: React.ReactNo
     );
 }
 
+/* ─── Newsletter Form ─── */
+function NewsletterForm() {
+    const [email, setEmail] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (email.trim()) {
+            setIsLoading(true);
+            setError("");
+
+            try {
+                const response = await fetch("/api/newsletter", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: email.trim() }),
+                });
+
+                if (response.ok) {
+                    setIsSubmitted(true);
+                } else {
+                    const data = await response.json();
+                    setError(data.error || "Niekde nastala chyba, skúste to prosím znova.");
+                }
+            } catch (err) {
+                setError("Chyba pripojenia. Skontrolujte prosím svoje internetové pripojenie.");
+            } finally {
+                setIsLoading(false);
+            }
+        }
+    };
+
+    if (isSubmitted) {
+        return (
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="w-full max-w-sm flex flex-col items-center justify-center p-6 bg-teal/10 border border-teal/20 rounded-2xl text-center"
+            >
+                <div className="w-12 h-12 bg-teal/20 rounded-full flex items-center justify-center mb-3">
+                    <Check size={24} className="text-teal" />
+                </div>
+                <h4 className="text-white font-bold font-kanit text-lg mb-1">Ste na zozname!</h4>
+                <p className="text-white/60 text-sm font-stolzl">
+                    Ďakujeme. Najbližšie marketingové tipy pošleme do vašej schránky.
+                </p>
+            </motion.div>
+        );
+    }
+
+    return (
+        <div className="w-full max-w-lg">
+            <form className="relative flex items-center" onSubmit={handleSubmit}>
+                <input
+                    type="email"
+                    placeholder="Váš e-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/30 rounded-full py-5 pl-8 pr-32 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/50 transition-all font-stolzl text-base h-16 disabled:opacity-50"
+                />
+                <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="absolute right-2 px-6 h-12 bg-teal text-navy-dark font-bold font-kanit text-base rounded-full hover:bg-teal/90 hover:scale-105 transition-all duration-300 pointer flex items-center justify-center disabled:opacity-70 disabled:hover:scale-100"
+                >
+                    {isLoading ? "Pridávam..." : "Odoberať"}
+                </button>
+            </form>
+            {error && (
+                <p className="text-red-400 text-sm mt-3 text-center lg:text-left ml-4 font-stolzl">{error}</p>
+            )}
+        </div>
+    );
+}
 
 /* ═══════════════════════════════════════════════ */
 /*                  MAIN PAGE                     */
@@ -1029,6 +1106,35 @@ export default function Home() {
                                 </>
                             }
                         />
+                    </motion.div>
+                </div>
+            </Section>
+
+            {/* ═══════════════ NEWSLETTER (The Insider Footer) ═══════════════ */}
+            <Section className="relative z-10 pb-16 lg:pb-24">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <motion.div
+                        variants={fadeUp}
+                        custom={0}
+                        className="glass-strong rounded-3xl p-8 lg:p-12 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-10"
+                    >
+                        {/* Background glow for the newsletter box */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-teal/10 rounded-full blur-[80px] pointer-events-none" />
+
+                        {/* Text Content */}
+                        <div className="relative z-10 max-w-xl text-center lg:text-left">
+                            <h3 className="text-2xl lg:text-3xl font-bold font-kanit text-white mb-4">
+                                Zákulisie úspešných ambulancií.
+                            </h3>
+                            <p className="text-white/60 text-sm md:text-base font-stolzl leading-relaxed">
+                                Udržte si náskok. Prinášame overené marketingové postupy a dáta, z ktorých urobíte informované rozhodnutia pre vašu prax. Priamo na váš e-mail, bez zbytočného spamu.
+                            </p>
+                        </div>
+
+                        {/* Input Form */}
+                        <div className="relative z-10 w-full lg:w-auto flex-shrink-0 flex items-center justify-center lg:justify-end min-h-[80px]">
+                            <NewsletterForm />
+                        </div>
                     </motion.div>
                 </div>
             </Section>
