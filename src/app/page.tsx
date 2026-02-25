@@ -1200,6 +1200,12 @@ export default function Home() {
                                 <a href="/zasady-cookies" className="block hover:text-teal transition-colors">
                                     Zásady cookies
                                 </a>
+                                <button
+                                    onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event("open_cookie_settings")); }}
+                                    className="block hover:text-teal transition-colors md:text-right text-left"
+                                >
+                                    Nastavenia cookies (Súhlas)
+                                </button>
                             </div>
                         </div>
                     </div>
