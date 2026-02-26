@@ -296,7 +296,6 @@ export default function Home() {
                 <div className="absolute top-2/3 left-1/3 w-[400px] h-[400px] bg-teal/4 rounded-full blur-[100px] animate-float" />
             </div>
 
-            {/* ═══════════════ NAVBAR ═══════════════ */}
             <motion.nav
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
@@ -307,18 +306,15 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
                         {/* Logo */}
-                        <a href="#" className="flex items-center gap-3 group">
+                        <a href="#" className="flex items-center group">
                             <Image
-                                src="/logo 2.png"
+                                src="/nove-logo.png"
                                 alt="Mediconect"
-                                width={40}
-                                height={40}
+                                width={180}
+                                height={45}
                                 priority
-                                className="rounded-xl group-hover:shadow-lg group-hover:shadow-teal/30 transition-all duration-300"
+                                className="h-11 w-auto transition-all duration-300"
                             />
-                            <span className="text-xl font-bold tracking-tight">
-                                Medi<span className="text-teal">connect</span>
-                            </span>
                         </a>
 
                         {/* Desktop nav */}
@@ -1145,17 +1141,14 @@ export default function Home() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                         {/* Brand */}
                         <div className="flex flex-col items-start text-left">
-                            <a href="#" className="flex items-center gap-3 mb-6">
+                            <a href="#" className="flex items-center mb-6">
                                 <Image
-                                    src="/logo 2.png"
+                                    src="/nove-logo.png"
                                     alt="Mediconect"
-                                    width={40}
-                                    height={40}
-                                    className="rounded-xl"
+                                    width={180}
+                                    height={45}
+                                    className="h-11 w-auto"
                                 />
-                                <span className="text-xl font-bold tracking-tight">
-                                    Medi<span className="text-teal">conect</span>
-                                </span>
                             </a>
                             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
                                 Vašu odbornosť meníme na dôveru. Inteligentný marketing pre ambulancie a kliniky 21. storočia s víziou a integritou.
