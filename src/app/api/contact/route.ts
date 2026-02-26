@@ -5,81 +5,83 @@ import { z } from "zod";
 
 // Validation schema
 const formSchema = z.object({
-    name: z.string().min(2, "Meno je príliš krátke"),
-    clinic: z.string().min(2, "Názov kliniky je príliš krátky"),
-    email: z.string().email("Neplatný e-mail"),
-    phone: z.string().min(9, "Telefónne číslo je príliš krátke"),
-    practice: z.string().optional(),
-    message: z.string().optional(),
-    gdpr: z.boolean().refine((val) => val === true, "Musíte súhlasiť so spracovaním údajov"),
+  name: z.string().min(2, "Meno je príliš krátke"),
+  clinic: z.string().min(2, "Názov kliniky je príliš krátky"),
+  email: z.string().email("Neplatný e-mail"),
+  phone: z.string().min(9, "Telefónne číslo je príliš krátke"),
+  practice: z.string().optional(),
+  message: z.string().optional(),
+  marketing: z.boolean().optional(),
 });
 
 export async function POST(request: Request) {
+  try {
+    // Initialize clients inside the handler to avoid build-time errors
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const resendApiKey = process.env.RESEND_API_KEY;
+
+    if (!supabaseUrl || !supabaseKey || !resendApiKey) {
+      const missing = [];
+      if (!supabaseUrl) missing.push("NEXT_PUBLIC_SUPABASE_URL");
+      if (!supabaseKey) missing.push("NEXT_PUBLIC_SUPABASE_ANON_KEY");
+      if (!resendApiKey) missing.push("RESEND_API_KEY");
+
+      console.error("Missing environment variables:", missing.join(", "));
+      return NextResponse.json(
+        { error: `Chyba konfigurácie servera. Chýba: ${missing.join(", ")}` },
+        { status: 500 }
+      );
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const resend = new Resend(resendApiKey);
+
+    const body = await request.json();
+
+    // 1. Validate data
+    const result = formSchema.safeParse(body);
+    if (!result.success) {
+      return NextResponse.json(
+        { error: "Neplatné údaje", details: result.error.flatten() },
+        { status: 400 }
+      );
+    }
+
+    const data = result.data;
+
+    // 2. Save to Supabase
+    const { error: dbError } = await supabase
+      .from("leads")
+      .insert([
+        {
+          name: data.name,
+          clinic: data.clinic,
+          email: data.email,
+          phone: data.phone,
+          practice: data.practice,
+          message: data.message,
+          gdpr: true, // Implicitný súhlas s GDPR podľa textu "Odoslaním formulára..."
+          // Ak už tabuľka nemá stĺpec marketing, odkomentuj po migrácii databázy:
+          // marketing: data.marketing,
+        },
+      ]);
+
+    if (dbError) {
+      console.error("Supabase Error:", dbError);
+      return NextResponse.json(
+        { error: "Chyba pri ukladaní do databázy" },
+        { status: 500 }
+      );
+    }
+
+    // 3. Send Email via Resend
     try {
-        // Initialize clients inside the handler to avoid build-time errors
-        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-        const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-        const resendApiKey = process.env.RESEND_API_KEY;
-
-        if (!supabaseUrl || !supabaseKey || !resendApiKey) {
-            const missing = [];
-            if (!supabaseUrl) missing.push("NEXT_PUBLIC_SUPABASE_URL");
-            if (!supabaseKey) missing.push("NEXT_PUBLIC_SUPABASE_ANON_KEY");
-            if (!resendApiKey) missing.push("RESEND_API_KEY");
-
-            console.error("Missing environment variables:", missing.join(", "));
-            return NextResponse.json(
-                { error: `Chyba konfigurácie servera. Chýba: ${missing.join(", ")}` },
-                { status: 500 }
-            );
-        }
-
-        const supabase = createClient(supabaseUrl, supabaseKey);
-        const resend = new Resend(resendApiKey);
-
-        const body = await request.json();
-
-        // 1. Validate data
-        const result = formSchema.safeParse(body);
-        if (!result.success) {
-            return NextResponse.json(
-                { error: "Neplatné údaje", details: result.error.flatten() },
-                { status: 400 }
-            );
-        }
-
-        const data = result.data;
-
-        // 2. Save to Supabase
-        const { error: dbError } = await supabase
-            .from("leads")
-            .insert([
-                {
-                    name: data.name,
-                    clinic: data.clinic,
-                    email: data.email,
-                    phone: data.phone,
-                    practice: data.practice,
-                    message: data.message,
-                    gdpr: data.gdpr,
-                },
-            ]);
-
-        if (dbError) {
-            console.error("Supabase Error:", dbError);
-            return NextResponse.json(
-                { error: "Chyba pri ukladaní do databázy" },
-                { status: 500 }
-            );
-        }
-
-        // 3. Send Email via Resend
-        try {
-            await resend.emails.send({
-                from: "Mediconect Web <onboarding@resend.dev>",
-                to: ["hupikcz@gmail.com"],
-                subject: `Nová poptávka na webe mediconect: ${data.clinic}`,
-                html: `
+      await resend.emails.send({
+        from: "Mediconect Web <onboarding@resend.dev>",
+        to: ["hupikcz@gmail.com"],
+        subject: `Nová poptávka na webe mediconect: ${data.clinic}`,
+        html: `
                     <!DOCTYPE html>
                     <html>
                     <head><meta charset="utf-8"></head>
@@ -164,6 +166,14 @@ export async function POST(request: Request) {
                                             <td style="color:#0a1628;font-size:15px;">${data.message}</td>
                                           </tr>
                                           ` : ''}
+                                          ${data.marketing ? `
+                                          <tr>
+                                            <td style="color:#6b7280;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding-bottom:4px;">Marketingový súhlas</td>
+                                          </tr>
+                                          <tr>
+                                            <td style="color:#0a1628;font-size:15px;padding-bottom:14px;">Udeliť súhlas pre prijímanie kampaní (Áno)</td>
+                                          </tr>
+                                          ` : ''}
                                         </table>
                                       </td>
                                     </tr>
@@ -197,19 +207,19 @@ export async function POST(request: Request) {
                     </body>
                     </html>
                 `,
-            });
-        } catch (emailError) {
-            console.error("Resend Error:", emailError);
-        }
-
-        return NextResponse.json({ success: true });
-    } catch (error) {
-        console.error("Server Error:", error);
-        return NextResponse.json(
-            { error: "Interná chyba servera" },
-            { status: 500 }
-        );
+      });
+    } catch (emailError) {
+      console.error("Resend Error:", emailError);
     }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Server Error:", error);
+    return NextResponse.json(
+      { error: "Interná chyba servera" },
+      { status: 500 }
+    );
+  }
 }
 
 // Force deploy: Fix Vercel build error

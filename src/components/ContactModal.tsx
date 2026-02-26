@@ -18,7 +18,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         phone: "",
         practice: "",
         message: "",
-        gdpr: false,
+        marketing: false,
     });
 
     // Reset form when modal opens
@@ -31,7 +31,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 phone: "",
                 practice: "",
                 message: "",
-                gdpr: false,
+                marketing: false,
             });
         }
     }, [isOpen]);
@@ -271,28 +271,41 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                             />
                                         </div>
 
-                                        {/* GDPR checkbox */}
-                                        <label className="flex items-start gap-3 cursor-pointer group">
+                                        {/* Závazný text o zpracování dat */}
+                                        <div className="text-white/40 text-xs leading-relaxed group-hover:text-white/60 transition-colors">
+                                            Odoslaním formulára beriem na vedomie, že spoločnosť MediConect s.r.o., Lounská
+                                            629/2, 031 04 Liptovský Mikuláš, IČO: 57016615, bude spracúvať moje osobné údaje
+                                            v rozsahu meno, priezvisko, názov spoločnosti, e-mail a telefónne číslo za účelom
+                                            odpovede na môj dopyt a komunikácie v súlade s čl. 6 ods. 1 písm. b) Nariadenia
+                                            (EÚ) 2016/679 (GDPR).
+                                        </div>
+
+                                        {/* Marketing checkbox (volitelný) */}
+                                        <label className="flex items-start gap-3 cursor-pointer group mt-4">
                                             <div className="relative mt-0.5">
                                                 <input
                                                     type="checkbox"
-                                                    name="gdpr"
-                                                    required
-                                                    checked={formData.gdpr}
+                                                    name="marketing"
+                                                    checked={formData.marketing}
                                                     onChange={handleFormChange}
                                                     className="sr-only peer"
                                                 />
                                                 <div className="w-5 h-5 rounded-md border border-white/20 bg-white/5 peer-checked:bg-teal peer-checked:border-teal transition-all flex items-center justify-center">
-                                                    {formData.gdpr && <Check size={14} className="text-navy-dark" />}
+                                                    {formData.marketing && <Check size={14} className="text-navy-dark" />}
                                                 </div>
                                             </div>
                                             <span className="text-white/40 text-xs leading-relaxed group-hover:text-white/60 transition-colors">
-                                                Súhlasím so spracovaním osobných údajov v súlade s{" "}
-                                                <a href="/ochrana-osobnych-udajov" target="_blank" rel="noopener noreferrer" className="text-teal hover:underline" onClick={(e) => e.stopPropagation()}>
-                                                    nariadením GDPR
-                                                </a>
+                                                Súhlasím so spracúvaním mojich osobných údajov na účely zasielania marketingových informácií, noviniek a ponúk služieb spoločnosti MediConect s.r.o. v súlade s čl. 6 ods. 1 písm. a) GDPR.
                                             </span>
                                         </label>
+
+                                        {/* Link na ochranu osobných údajov pod formulárom */}
+                                        <div className="text-white/40 text-xs leading-relaxed mt-4">
+                                            Viac informácií o spracúvaní osobných údajov nájdete v dokumente{" "}
+                                            <a href="/ochrana-osobnych-udajov" target="_blank" rel="noopener noreferrer" className="text-teal hover:underline" onClick={(e) => e.stopPropagation()}>
+                                                Ochrana osobných údajov
+                                            </a>.
+                                        </div>
                                     </div>
 
                                     {submitError && (

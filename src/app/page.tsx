@@ -157,13 +157,14 @@ function FAQItem({ question, answer }: { question: string; answer: React.ReactNo
 /* ─── Newsletter Form ─── */
 function NewsletterForm() {
     const [email, setEmail] = useState("");
+    const [gdpr, setGdpr] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (email.trim()) {
+        if (email.trim() && gdpr) {
             setIsLoading(true);
             setError("");
 
@@ -208,23 +209,48 @@ function NewsletterForm() {
 
     return (
         <div className="w-full max-w-lg">
-            <form className="relative flex items-center" onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="Váš e-mail"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={isLoading}
-                    className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/30 rounded-full py-5 pl-8 pr-32 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/50 transition-all font-stolzl text-base h-16 disabled:opacity-50"
-                />
-                <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="absolute right-2 px-6 h-12 bg-teal text-navy-dark font-bold font-kanit text-base rounded-full hover:bg-teal/90 hover:scale-105 transition-all duration-300 pointer flex items-center justify-center disabled:opacity-70 disabled:hover:scale-100"
-                >
-                    {isLoading ? "Pridávam..." : "Odoberať"}
-                </button>
+            <form className="relative flex flex-col gap-4 w-full" onSubmit={handleSubmit}>
+                <div className="relative flex items-center w-full">
+                    <input
+                        type="email"
+                        placeholder="Váš e-mail"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        disabled={isLoading}
+                        className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/30 rounded-full py-5 pl-8 pr-32 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/50 transition-all font-stolzl text-base h-16 disabled:opacity-50"
+                    />
+                    <button
+                        type="submit"
+                        disabled={isLoading || !gdpr}
+                        className="absolute right-2 px-6 h-12 bg-teal text-navy-dark font-bold font-kanit text-base rounded-full hover:bg-teal/90 hover:scale-105 transition-all duration-300 pointer flex items-center justify-center disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                    >
+                        {isLoading ? "Pridávam..." : "Odoberať"}
+                    </button>
+                </div>
+
+                {/* GDPR checkbox */}
+                <label className="flex items-start gap-3 cursor-pointer group mt-2 ml-4">
+                    <div className="relative mt-0.5">
+                        <input
+                            type="checkbox"
+                            name="gdpr-newsletter"
+                            required
+                            checked={gdpr}
+                            onChange={(e) => setGdpr(e.target.checked)}
+                            className="sr-only peer"
+                        />
+                        <div className="w-5 h-5 rounded-md border border-white/20 bg-white/5 peer-checked:bg-teal peer-checked:border-teal transition-all flex items-center justify-center">
+                            {gdpr && <Check size={14} className="text-navy-dark" />}
+                        </div>
+                    </div>
+                    <span className="text-white/40 text-xs leading-relaxed group-hover:text-white/60 transition-colors">
+                        Súhlasím so spracovaním osobných údajov na účely zasielania noviniek v súlade s dokumentom{" "}
+                        <a href="/ochrana-osobnych-udajov" target="_blank" rel="noopener noreferrer" className="text-teal hover:underline" onClick={(e) => e.stopPropagation()}>
+                            Ochrana osobných údajov
+                        </a>.
+                    </span>
+                </label>
             </form>
             {error && (
                 <p className="text-red-400 text-sm mt-3 text-center lg:text-left ml-4 font-stolzl">{error}</p>
