@@ -50,7 +50,7 @@ const servicesData = [
     },
     {
         id: "ai",
-        icon: <Camera size={28} />,
+        icon: <BrainCircuit size={28} />,
         title: "Umelá inteligencia",
         desc: "Naprogramujeme GPT asistenta pre vašu prax: odpovede na časté otázky, navigácia pacienta, interná podpora tímu.",
         detail: "Menej opakovania, viac času na medicínu a starostlivosť o pacientov.",

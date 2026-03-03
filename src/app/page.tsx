@@ -334,7 +334,7 @@ export default function Home() {
                         {/* Logo */}
                         <a href="#" className="flex items-center group">
                             <Image
-                                src="/nove-logo.png"
+                                src="/Logo final.png"
                                 alt="Mediconect"
                                 width={234}
                                 height={59}
@@ -715,6 +715,9 @@ export default function Home() {
                                 Využívame vaše minimum času na dosiahnutie maximálnych výsledkov. Či už ide o tvorbu
                                 vizuálnej identity, správu sociálnych sietí alebo sofistikovanú automatizáciu, každý
                                 krok konzultujeme efektívne a s ohľadom na vašu vyťaženosť.
+                            </p>
+                            <p className="text-lg text-white/50 leading-relaxed">
+                                Zmyslom nášho marketingu nie je popularita. Pekné príspevky neliečia pacientov a neplatia faktúry. V zdravotníctve rozhoduje dôvera, dostupnosť a kontinuita kontaktu. Preto staviame marketing na dátach, práci s databázou a diskrétnej komunikácii, ktorá pacienta edukuje, vedie k prevencii a zvyšuje adherenciu k liečbe.
                             </p>
                         </motion.div>
                         {/* Decorative accent line */}
@@ -1169,7 +1172,7 @@ export default function Home() {
                         <div className="flex flex-col items-start text-left">
                             <a href="#" className="flex items-center mb-6">
                                 <Image
-                                    src="/nove-logo.png"
+                                    src="/Logo final.png"
                                     alt="Mediconect"
                                     width={234}
                                     height={59}

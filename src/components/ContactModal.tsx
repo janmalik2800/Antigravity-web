@@ -134,18 +134,18 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     <div className="flex items-center gap-4 mb-6">
                                         <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-teal/30 flex-shrink-0">
                                             <Image
-                                                src="/tomas_final.png"
-                                                alt="Tomáš Kuchta"
+                                                src="/reditel.png"
+                                                alt="Víťazoslav Struhár"
                                                 fill
                                                 className="object-cover object-top"
                                             />
                                         </div>
                                         <div>
                                             <p className="text-white font-semibold">
-                                                Tomáš Kuchta
+                                                Víťazoslav Struhár
                                             </p>
                                             <p className="text-teal text-sm font-medium">
-                                                Sales & Operation Director
+                                                Marketing Director
                                             </p>
                                         </div>
                                     </div>

@@ -32,7 +32,7 @@ export default function CaseStudyDashboard() {
                                 </span>
                                 <div>
                                     <strong className="text-white block">Riešenie</strong>
-                                    <span className="text-sm">Pripravili sme kampaň v podobe informačného mailu, ktorý však nevyzýval na návštevu ambulancie. Popisoval kritickú situáciu v populácii a zdravotné následky, ktoré z takého prístupu vyplývali.</span>
+                                    <span className="text-sm">Pripravili sme kampaň v podobe informačného mailu, ktorý však nepozýval na návštevu ambulancie. Popisoval kritickú situáciu v populácii a zdravotné následky, ktoré z takého prístupu vyplývali.</span>
                                 </div>
                             </li>
                             <li className="flex gap-3">
@@ -90,14 +90,14 @@ export default function CaseStudyDashboard() {
                                     </linearGradient>
                                 </defs>
                                 <motion.path
-                                    d="M0 40 L0 30 C10 30, 10 35, 20 25 C30 15, 30 20, 40 10 C50 0, 50 15, 60 5 C70 -5, 70 10, 80 5 C90 0, 90 20, 100 15 L100 40 Z"
+                                    d="M0 40 L0 38 C15 36, 25 30, 35 24 C50 16, 60 10, 75 5 C85 2, 92 1, 100 0 L100 40 Z"
                                     fill="url(#gradient)"
                                     initial={{ opacity: 0 }}
                                     whileInView={{ opacity: 1 }}
                                     transition={{ duration: 1, delay: 0.5 }}
                                 />
                                 <motion.path
-                                    d="M0 30 C10 30, 10 35, 20 25 C30 15, 30 20, 40 10 C50 0, 50 15, 60 5 C70 -5, 70 10, 80 5 C90 0, 90 20, 100 15"
+                                    d="M0 38 C15 36, 25 30, 35 24 C50 16, 60 10, 75 5 C85 2, 92 1, 100 0"
                                     fill="none"
                                     stroke="#4ECDC4"
                                     strokeWidth="2"
@@ -108,18 +108,7 @@ export default function CaseStudyDashboard() {
                                 />
                             </svg>
                             {/* Data points */}
-                            <motion.div
-                                initial={{ scale: 0 }}
-                                whileInView={{ scale: 1 }}
-                                transition={{ delay: 1, type: "spring" }}
-                                className="absolute top-1/4 left-1/3 w-3 h-3 bg-teal border-2 border-navy rounded-full shadow-[0_0_10px_rgba(78,205,196,0.5)]"
-                            />
-                            <motion.div
-                                initial={{ scale: 0 }}
-                                whileInView={{ scale: 1 }}
-                                transition={{ delay: 1.2, type: "spring" }}
-                                className="absolute top-[10%] left-2/3 w-3 h-3 bg-teal border-2 border-navy rounded-full shadow-[0_0_10px_rgba(78,205,196,0.5)]"
-                            />
+
                         </div>
 
                         {/* Grid Metrics */}
