@@ -1,0 +1,40 @@
+# Mediconect – llms.txt
+# This file provides structured information for AI language models and crawlers.
+
+## Company
+Name: MediConect s.r.o.
+Website: https://www.mediconect.sk
+Description: Mediconect is a healthcare marketing agency specializing in helping doctors, clinics, and medical practices grow their patient base through data-driven digital marketing, brand building, and patient communication automation.
+
+## Services
+- Acquisition & Performance Marketing (Google/Meta campaigns for medical practices)
+- Web design & SEO for healthcare
+- Social media management for doctors and clinics
+- Email marketing & patient database management
+- CRM & marketing automation for healthcare
+- AI-powered patient communication assistants (GPT-based)
+
+## Target Audience
+Medical professionals in Slovakia and Czech Republic:
+- General practitioners
+- Specialist doctors (dermatology, dentistry, surgery, etc.)
+- Private clinics and outpatient facilities
+- Aesthetic medicine clinics
+
+## Contact
+Email: info@mediconect.sk
+Phone: +421 948 220 845
+Address: Lounská 629/2, 031 04 Liptovský Mikuláš, Slovakia
+Company ID (IČO): 57016615
+VAT (IČ DPH): SK2122534216
+
+## Key Facts
+- Healthcare marketing experts focused exclusively on the medical sector
+- GDPR-compliant data handling for patient databases
+- Services available in Slovak and Czech language
+- Founded in Slovakia, serving Central European healthcare market
+
+## Pages
+- Homepage: https://www.mediconect.sk
+- Privacy Policy: https://www.mediconect.sk/ochrana-osobnych-udajov
+- Cookie Policy: https://www.mediconect.sk/zasady-cookies

@@ -72,9 +72,9 @@ export default function CaseStudyDashboard() {
                         </div>
 
                         {/* Big Metric */}
-                        <div className="mb-8">
+                        <div className="mb-6">
                             <div className="flex items-baseline gap-2">
-                                <span className="text-5xl font-bold text-white font-kanit">42,31 %</span>
+                                <span className="text-4xl lg:text-5xl font-bold text-white font-kanit">42,31 %</span>
                             </div>
                             <p className="text-white/40 text-sm mt-1 font-kanit">Nárast rezervácií na prehliadku</p>
                         </div>
@@ -112,24 +112,24 @@ export default function CaseStudyDashboard() {
                         </div>
 
                         {/* Grid Metrics */}
-                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                            <div className="p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                                <div className="flex items-center gap-2 mb-2 text-white/50 text-xs font-kanit">
-                                    <Send size={14} /> Odoslané emaily
+                        <div className="grid grid-cols-3 gap-2 lg:gap-4">
+                            <div className="p-3 lg:p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                                <div className="flex flex-col gap-1 mb-2 text-white/50 text-[10px] lg:text-xs font-kanit">
+                                    <Send size={12} /> Odoslané emaily
                                 </div>
-                                <div className="text-lg font-bold text-white font-kanit">1 618</div>
+                                <div className="text-sm lg:text-lg font-bold text-white font-kanit">1 618</div>
                             </div>
-                            <div className="p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                                <div className="flex items-center gap-2 mb-2 text-white/50 text-xs font-kanit">
-                                    <Mail size={14} /> Doručené emaily
+                            <div className="p-3 lg:p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                                <div className="flex flex-col gap-1 mb-2 text-white/50 text-[10px] lg:text-xs font-kanit">
+                                    <Mail size={12} /> Doručené emaily
                                 </div>
-                                <div className="text-lg font-bold text-white font-kanit">98,52 %</div>
+                                <div className="text-sm lg:text-lg font-bold text-white font-kanit">98,52 %</div>
                             </div>
-                            <div className="p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                                <div className="flex items-center gap-2 mb-2 text-white/50 text-xs font-kanit">
-                                    <PieChart size={14} /> Otvorené emaily
+                            <div className="p-3 lg:p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                                <div className="flex flex-col gap-1 mb-2 text-white/50 text-[10px] lg:text-xs font-kanit">
+                                    <PieChart size={12} /> Otvorené emaily
                                 </div>
-                                <div className="text-lg font-bold text-white font-kanit">70,89 %</div>
+                                <div className="text-sm lg:text-lg font-bold text-white font-kanit">70,89 %</div>
                             </div>
                         </div>
                     </motion.div>

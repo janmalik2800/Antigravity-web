@@ -318,7 +318,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full mt-6 py-4 bg-teal text-navy-dark font-bold text-base rounded-2xl hover:bg-teal/90 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer hover:shadow-lg hover:shadow-teal/25 uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full mt-6 py-4 px-4 bg-teal text-navy-dark font-bold text-xs lg:text-base rounded-2xl hover:bg-teal/90 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer hover:shadow-lg hover:shadow-teal/25 uppercase lg:tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? (
                                             "Odosielam..."
