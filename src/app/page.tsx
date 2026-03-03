@@ -335,7 +335,7 @@ export default function Home() {
                         <a href="#" className="flex items-center group">
                             <Image
                                 src="/Logo final.png"
-                                alt="Mediconect"
+                                alt="Mediconect – logo, healthcare marketing agentúra"
                                 width={234}
                                 height={59}
                                 priority
@@ -1006,7 +1006,7 @@ export default function Home() {
                             <div className="relative w-[331px] h-[368px] lg:w-[368px] lg:h-[460px]">
                                 <Image
                                     src="/tomas_final.png"
-                                    alt="Tomáš Struhár"
+                                    alt="Víťazoslav Struhár – Marketing Director, Mediconect"
                                     fill
                                     className="object-contain object-bottom drop-shadow-2xl"
                                     sizes="(max-width: 1024px) 331px, 368px"
@@ -1173,7 +1173,7 @@ export default function Home() {
                             <a href="#" className="flex items-center mb-6">
                                 <Image
                                     src="/Logo final.png"
-                                    alt="Mediconect"
+                                    alt="Mediconect – logo, strategický partner pre zdravotníctvo"
                                     width={234}
                                     height={59}
                                     className="h-[58px] w-auto"

@@ -42,12 +42,21 @@ export const metadata: Metadata = {
         siteName: "Mediconect",
         locale: "sk_SK",
         type: "website",
+        images: [
+            {
+                url: `${baseUrl}/og-image.png`,
+                width: 1200,
+                height: 630,
+                alt: "Mediconect – Strategický partner pre zdravotníctvo",
+            },
+        ],
     },
     twitter: {
         card: "summary_large_image",
         title: "Mediconect | Strategický partner pre zdravotníctvo",
         description:
             "Komplexné marketingové riešenia pre lekárov, kliniky a ambulancie.",
+        images: [`${baseUrl}/og-image.png`],
     },
     robots: {
         index: true,
@@ -173,6 +182,28 @@ export default function RootLayout({
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
+                {/* Preload critical fonts */}
+                <link
+                    rel="preload"
+                    href="https://fonts.gstatic.com/s/kanit/v15/nKKZ-Go6G5tXcoaS.woff2"
+                    as="font"
+                    type="font/woff2"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    rel="preload"
+                    href="/fonts/stolzl_regular.otf"
+                    as="font"
+                    type="font/otf"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    rel="preload"
+                    href="/fonts/stolzl_bold.otf"
+                    as="font"
+                    type="font/otf"
+                    crossOrigin="anonymous"
                 />
             </head>
             <body className="antialiased" style={{ position: 'relative' }}>
