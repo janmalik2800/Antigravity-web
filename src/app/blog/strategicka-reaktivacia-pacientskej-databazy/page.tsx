@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, TrendingUp, Mail, Send, PieChart, Users, ArrowRight } from "lucide-react";
 import ScrollGradientBackground from "../../../components/ScrollGradientBackground";
+import SiteHeader from "../../../components/SiteHeader";
 
 export const metadata: Metadata = {
     title: "Ako sme v ambulancii MUDr. Čajku zvýšili počet preventívnych prehliadok o 42 % | Blog | Mediconect",
@@ -57,34 +58,10 @@ export default function CaseStudyPage() {
 
             <div className="relative" style={{ zIndex: 2 }}>
                 {/* Nav */}
-                <nav
-                    className="relative z-50 border-b border-white/5 backdrop-blur-md"
-                    style={{ backgroundColor: "rgba(6,15,24,0.6)" }}
-                >
-                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                        <div className="flex items-center justify-between h-20">
-                            <Link href="/" className="flex items-center group">
-                                <Image
-                                    src="/Logo final.png"
-                                    alt="Mediconect – logo"
-                                    width={234}
-                                    height={59}
-                                    priority
-                                    className="h-[48px] w-auto transition-all duration-300"
-                                />
-                            </Link>
-                            <Link
-                                href="/#kontakt"
-                                className="px-6 py-2.5 bg-teal text-navy-dark font-semibold text-sm rounded-xl hover:bg-teal/90 transition-all duration-300"
-                            >
-                                Bezplatná konzultácia
-                            </Link>
-                        </div>
-                    </div>
-                </nav>
+                <SiteHeader />
 
                 {/* Breadcrumb */}
-                <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 pt-10">
+                <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 pt-28">
                     <Link
                         href="/blog"
                         className="inline-flex items-center gap-2 text-white/40 hover:text-teal transition-colors text-sm"

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
+import { ArrowRight, Calendar, Tag } from "lucide-react";
 import ScrollGradientBackground from "../../components/ScrollGradientBackground";
+import SiteHeader from "../../components/SiteHeader";
 
 export const metadata: Metadata = {
     title: "Blog | Mediconect",
@@ -29,8 +30,7 @@ const posts = [
         title: "Ako sme v ambulancii MUDr. Čajku zvýšili počet preventívnych prehliadok o 42 %",
         excerpt:
             "Spolu s MUDr. Romanom Čajkom, všeobecným lekárom zo Žiliny, sme ukázali, ako digitálny marketing dokáže reálne zlepšiť zdravie pacientov aj efektivitu ambulancie.",
-        date: "Február 2025",
-        readTime: "5 min čítania",
+        date: "Marec 2026",
         tags: ["E-mail marketing", "Preventívna starostlivosť", "Zdravotníctvo"],
         metrics: [
             { label: "Nárast rezervácií", value: "+42,31 %" },
@@ -46,35 +46,10 @@ export default function BlogPage() {
             <ScrollGradientBackground />
 
             <div className="relative" style={{ zIndex: 2 }}>
-                {/* Nav */}
-                <nav
-                    className="relative z-50 border-b border-white/5 backdrop-blur-md"
-                    style={{ backgroundColor: "rgba(6,15,24,0.6)" }}
-                >
-                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                        <div className="flex items-center justify-between h-20">
-                            <Link href="/" className="flex items-center group">
-                                <Image
-                                    src="/Logo final.png"
-                                    alt="Mediconect – logo, healthcare marketing agentúra"
-                                    width={234}
-                                    height={59}
-                                    priority
-                                    className="h-[48px] w-auto transition-all duration-300"
-                                />
-                            </Link>
-                            <Link
-                                href="/#kontakt"
-                                className="px-6 py-2.5 bg-teal text-navy-dark font-semibold text-sm rounded-xl hover:bg-teal/90 transition-all duration-300"
-                            >
-                                Bezplatná konzultácia
-                            </Link>
-                        </div>
-                    </div>
-                </nav>
+                <SiteHeader />
 
                 {/* Hero */}
-                <section className="relative z-10 pt-24 pb-16 px-6 lg:px-8">
+                <section className="relative z-10 pt-32 pb-16 px-6 lg:px-8">
                     <div className="max-w-7xl mx-auto">
                         <div className="max-w-2xl">
                             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/10 border border-teal/20 mb-8">
@@ -154,20 +129,16 @@ export default function BlogPage() {
                                         </div>
 
                                         {/* Meta + CTA */}
-                                        <div className="flex items-center justify-between border-t border-white/5 pt-6">
-                                            <div className="flex items-center gap-4 text-white/30 text-sm">
+                                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/5 pt-6">
+                                            <div className="flex items-center gap-2 text-white/30 text-sm">
                                                 <span className="flex items-center gap-1.5">
                                                     <Calendar size={13} />
                                                     {post.date}
                                                 </span>
-                                                <span className="flex items-center gap-1.5">
-                                                    <Clock size={13} />
-                                                    {post.readTime}
-                                                </span>
                                             </div>
-                                            <span className="flex items-center gap-2 text-teal text-sm font-semibold group-hover:gap-3 transition-all duration-300">
+                                            <span className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-teal text-navy-dark font-semibold text-sm group-hover:bg-teal/90 transition-all duration-300">
                                                 Čítať viac
-                                                <ArrowRight size={16} />
+                                                <ArrowRight size={15} />
                                             </span>
                                         </div>
                                     </article>

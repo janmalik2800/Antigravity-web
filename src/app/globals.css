@@ -74,6 +74,8 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   font-family: var(--font-sans);
+  background-color: #060f18;
+  overscroll-behavior-x: none;
 }
 
 h1,
@@ -88,8 +90,11 @@ h6,
 
 body {
   font-family: var(--font-sans);
-  background-color: transparent;
+  background-color: #060f18;
   color: var(--color-white);
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 html {
