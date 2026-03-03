@@ -27,9 +27,9 @@ const posts = [
     {
         slug: "strategicka-reaktivacia-pacientskej-databazy",
         badge: "Prípadová štúdia",
-        title: "Ako sme v ambulancii MUDr. Čajku zvýšili počet preventívnych prehliadok o 42 %",
+        title: "Ako sme u nášho klienta zvýšili počet preventívnych prehliadok o 42 %",
         excerpt:
-            "Spolu s MUDr. Romanom Čajkom, všeobecným lekárom zo Žiliny, sme ukázali, ako digitálny marketing dokáže reálne zlepšiť zdravie pacientov aj efektivitu ambulancie.",
+            "Pozrite sa, ako jedna dobre navrhnutá e-mailová kampaň postavená na edukatívnom obsahu dokáže reálne zvýšiť počet rezervácií a zmeniť spôsob, ako pacienti prijímajú prevěnciu.",
         date: "Marec 2026",
         tags: ["E-mail marketing", "Preventívna starostlivosť", "Zdravotníctvo"],
         metrics: [
