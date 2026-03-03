@@ -6,17 +6,17 @@ import ScrollGradientBackground from "../../../components/ScrollGradientBackgrou
 import SiteHeader from "../../../components/SiteHeader";
 
 export const metadata: Metadata = {
-    title: "Ako sme v ambulancii MUDr. ÄŚajku zvĂ˝Ĺˇili poÄŤet preventĂ­vnych prehliadok o 42 % | Blog | Mediconect",
+    title: "Ako sme u nášho klienta zvýšili počet preventívnych prehliadok o 42 % | Blog | Mediconect",
     description:
-        "PrĂ­padovĂˇ ĹˇtĂşdia: Ako sme jednou e-mailovou kampaĹou postavenou na edukatĂ­vnom obsahu zvĂ˝Ĺˇili poÄŤet preventĂ­vnych prehliadok u MUDr. ÄŚajku o 42,31 %.",
+        "Prípadová štúdia: Ako sme jednou e-mailovou kampaňou postavenou na edukatívnom obsahu zvýšili počet preventívnych prehliadok o 42,31 %.",
     alternates: {
         canonical:
             "https://www.mediconect.sk/blog/strategicka-reaktivacia-pacientskej-databazy",
     },
     openGraph: {
-        title: "Ako sme u nĂˇĹˇho klienta zvĂ˝Ĺˇili poÄŤet preventĂ­vnych prehliadok o 42Â % | Mediconect",
+        title: "Ako sme u nášho klienta zvýšili počet preventívnych prehliadok o 42 % | Mediconect",
         description:
-            "PrĂ­padovĂˇ ĹˇtĂşdia: +42,31 % nĂˇrast rezervĂˇciĂ­ na preventĂ­vne prehliadky vÄŹaka jednej e-mailovej kampani.",
+            "Prípadová štúdia: +42,31 % nárast rezervácií na preventívne prehliadky vďaka jednej e-mailovej kampani.",
         url: "https://www.mediconect.sk/blog/strategicka-reaktivacia-pacientskej-databazy",
         siteName: "Mediconect",
         locale: "sk_SK",
@@ -27,27 +27,27 @@ export const metadata: Metadata = {
 const metrics = [
     {
         icon: Send,
-        label: "OdoslanĂ© e-maily",
+        label: "Odoslané e-maily",
         value: "1 618",
-        description: "CelkovĂ˝ objem kampane",
+        description: "Celkový objem kampane",
     },
     {
         icon: Mail,
-        label: "Miera doruÄŤenia",
+        label: "Miera doručenia",
         value: "98,52 %",
-        description: "Takmer nulovĂˇ chybovosĹĄ",
+        description: "Takmer nulová chybovosť",
     },
     {
         icon: PieChart,
         label: "Open rate",
         value: "70,89 %",
-        description: "2Ă— priemer odvetvia",
+        description: "2× priemer odvetvia",
     },
     {
         icon: TrendingUp,
-        label: "NĂˇrast rezervĂˇciĂ­",
+        label: "Nárast rezervácií",
         value: "+42,31 %",
-        description: "MerateÄľnĂ˝ dopad na prax",
+        description: "Merateľný dopad na prax",
     },
 ];
 
@@ -67,7 +67,7 @@ export default function CaseStudyPage() {
                         className="inline-flex items-center gap-2 text-white/40 hover:text-teal transition-colors text-sm"
                     >
                         <ArrowLeft size={14} />
-                        SpĂ¤ĹĄ na Blog
+                        Späť na Blog
                     </Link>
                 </div>
 
@@ -79,22 +79,22 @@ export default function CaseStudyPage() {
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/10 border border-teal/20 mb-8">
                             <div className="w-2 h-2 rounded-full bg-teal animate-pulse" />
                             <span className="text-teal text-sm font-semibold uppercase tracking-widest">
-                                PrĂ­padovĂˇ ĹˇtĂşdia
+                                Prípadová štúdia
                             </span>
                         </div>
 
                         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-                            Ako sme u nĂˇĹˇho klienta zvĂ˝Ĺˇili poÄŤet{" "}
-                            <span className="text-gradient">preventĂ­vnych prehliadok o 42&nbsp;%</span>
+                            Ako sme u nášho klienta zvýšili počet{" "}
+                            <span className="text-gradient">preventívnych prehliadok o 42&nbsp;%</span>
                         </h1>
 
                         <p className="text-xl text-white/50 leading-relaxed max-w-2xl mb-10">
-                            V modernom zdravotnĂ­ctve uĹľ nestaÄŤĂ­ len â€žlieÄŤiĹĄ". SkutoÄŤnou vĂ˝zvou je
-                            motivovaĹĄ pacientov k prevencii skĂ´r, neĹľ sa objavĂ­ problĂ©m.
+                            V modernom zdravotníctve už nestačí len „liečiť". Skutočnou výzvou je
+                            motivovať pacientov k prevencii skôr, než sa objaví problém.
                         </p>
 
                         <div className="flex flex-wrap gap-2 text-sm">
-                            {["E-mail marketing", "PreventĂ­vna starostlivosĹĄ", "DatabĂˇzovĂ˝ marketing", "ZdravotnĂ­ctvo"].map((tag) => (
+                            {["E-mail marketing", "Preventívna starostlivosť", "Databázový marketing", "Zdravotníctvo"].map((tag) => (
                                 <span
                                     key={tag}
                                     className="text-white/40 bg-white/5 border border-white/5 rounded-full px-4 py-1.5"
@@ -131,106 +131,106 @@ export default function CaseStudyPage() {
 
                         {/* Intro */}
                         <p className="text-lg text-white/60 leading-relaxed">
-                            Spolu s naĹˇĂ­m klientom, vĹˇeobecnĂ˝m lekĂˇrom, sme sa pozreli na to, ako digitĂˇlny
-                            marketing dokĂˇĹľe reĂˇlne zlepĹˇiĹĄ zdravie pacientov aj efektivitu
+                            Spolu s naším klientom, všeobecným lekárom, sme sa pozreli na to, ako
+                            digitálny marketing dokáže reálne zlepšiť zdravie pacientov aj efektivitu
                             ambulancie.
                         </p>
 
-                        {/* 1. VĂ˝zva */}
+                        {/* 1. Výzva */}
                         <section>
                             <div className="flex items-center gap-3 mb-5">
                                 <span className="text-teal font-black text-3xl font-kanit">1.</span>
                                 <h2 className="text-2xl lg:text-3xl font-bold text-white">
-                                    VĂ˝zva: KeÄŹ automatickĂ© systĂ©my nestaÄŤia
+                                    Výzva: Keď automatické systémy nestačia
                                 </h2>
                             </div>
                             <div className="space-y-5 text-white/60 leading-relaxed text-lg">
                                 <p>
-                                    Ambulancia MUDr. ÄŚajku disponovala informaÄŤnĂ˝m systĂ©mom, ktorĂ˝
-                                    pacientov automaticky upozorĹoval na termĂ­ny preventĂ­vnych
-                                    prehliadok. VĂ˝sledok? Pacienti na notifikĂˇcie nereagovali
-                                    v dostatoÄŤnom poÄŤte, alebo sa objednali a nepriĹˇli.
+                                    Ambulancia nášho klienta disponovala informačným systémom, ktorý
+                                    pacientov automaticky upozorňoval na termíny preventívnych
+                                    prehliadok. Výsledok? Pacienti na notifikácie nereagovali
+                                    v dostatočnom počte, alebo sa objednali a neprišli.
                                 </p>
                                 <div className="glass rounded-2xl p-6 border border-teal/10 flex gap-4">
-                                    <span className="text-teal text-2xl flex-shrink-0">đź’ˇ</span>
+                                    <span className="text-teal text-2xl flex-shrink-0">💡</span>
                                     <p className="text-white/70">
-                                        <strong className="text-white">ProblĂ©m:</strong> SuchĂˇ
-                                        informĂˇcia o termĂ­ne v dneĹˇnom preplnenom digitĂˇlnom svete
-                                        nestaÄŤĂ­. Pacient potrebuje pochopiĹĄ â€žpreÄŤo".
+                                        <strong className="text-white">Problém:</strong> Suchá
+                                        informácia o termíne v dnešnom preplnenom digitálnom svete
+                                        nestačí. Pacient potrebuje pochopiť „prečo".
                                     </p>
                                 </div>
                             </div>
                         </section>
 
-                        {/* 2. StratĂ©gia */}
+                        {/* 2. Stratégia */}
                         <section>
                             <div className="flex items-center gap-3 mb-5">
                                 <span className="text-teal font-black text-3xl font-kanit">2.</span>
                                 <h2 className="text-2xl lg:text-3xl font-bold text-white">
-                                    StratĂ©gia: Od pripomienky k edukĂˇcii
+                                    Stratégia: Od pripomienky k edukácii
                                 </h2>
                             </div>
                             <div className="space-y-5 text-white/60 leading-relaxed text-lg">
                                 <p>
-                                    V Mediconecte sme sa rozhodli â€žnelieÄŤiĹĄ symptĂłmy, ale hÄľadaĹĄ
-                                    prĂ­ÄŤiny". Namiesto ÄŹalĹˇej strohej upomienky sme vytvorili
-                                    edukaÄŤnĂş kampaĹ.
+                                    V Mediconecte sme sa rozhodli „neliečiť symptómy, ale hľadať
+                                    príčiny". Namiesto ďalšej strohej upomienky sme vytvorili
+                                    edukačnú kampaň.
                                 </p>
                                 <div className="space-y-4">
                                     <div className="glass rounded-xl p-5 border border-white/5">
                                         <strong className="text-white block mb-2">Obsah s pridanou hodnotou</strong>
                                         <p className="text-sm">
-                                            Pripravili sme e-mail, ktorĂ˝ nevyzĂ˝val na nĂˇvĹˇtevu, ale
-                                            opisoval kritickĂş situĂˇciu v populĂˇcii a zdravotnĂ© dĂ´sledky
+                                            Pripravili sme e-mail, ktorý nevyzýval na návštevu, ale
+                                            opisoval kritickú situáciu v populácii a zdravotné dôsledky
                                             zanedbanej prevencie.
                                         </p>
                                     </div>
                                     <div className="glass rounded-xl p-5 border border-white/5">
-                                        <strong className="text-white block mb-2">EmocionĂˇlna inteligencia</strong>
+                                        <strong className="text-white block mb-2">Emocionálna inteligencia</strong>
                                         <p className="text-sm">
-                                            Text bol koncipovanĂ˝ s Ăşctou k lekĂˇrskej etike
-                                            (â€žreĹˇpektujeme bielu farbu"), no s dĂ´razom na osobnĂş
-                                            zodpovednosĹĄ pacienta.
+                                            Text bol koncipovaný s úctou k lekárskej etike
+                                            („rešpektujeme bielu farbu"), no s dôrazom na osobnú
+                                            zodpovednosť pacienta.
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        {/* 3. RealizĂˇcia */}
+                        {/* 3. Realizácia */}
                         <section>
                             <div className="flex items-center gap-3 mb-5">
                                 <span className="text-teal font-black text-3xl font-kanit">3.</span>
                                 <h2 className="text-2xl lg:text-3xl font-bold text-white">
-                                    RealizĂˇcia: PrecĂ­zny e-mail marketing
+                                    Realizácia: Precízny e-mail marketing
                                 </h2>
                             </div>
                             <div className="space-y-5 text-white/60 leading-relaxed text-lg">
                                 <p>
-                                    Cielili sme na databĂˇzu pacientov, ktorĂ­ dlhodobo odkladali svoju
+                                    Cielili sme na databázu pacientov, ktorí dlhodobo odkladali svoju
                                     prehliadku. Celkovo sme odoslali{" "}
                                     <strong className="text-white">1 618 e-mailov</strong>.
                                 </p>
                                 <p>
-                                    VyuĹľili sme nĂˇstroje, ktorĂ© zabezpeÄŤili maximĂˇlnu doruÄŤiteÄľnosĹĄ a
-                                    ÄŤistotu dizajnu, aby sprĂˇva nepĂ´sobila ako spam, ale ako dĂ´leĹľitĂ˝
-                                    list od ich oĹˇetrujĂşceho lekĂˇra.
+                                    Využili sme nástroje, ktoré zabezpečili maximálnu doručiteľnosť a
+                                    čistotu dizajnu, aby správa nepôsobila ako spam, ale ako dôležitý
+                                    list od ich ošetrujúceho lekára.
                                 </p>
                             </div>
                         </section>
 
-                        {/* 4. VĂ˝sledky */}
+                        {/* 4. Výsledky */}
                         <section>
                             <div className="flex items-center gap-3 mb-5">
                                 <span className="text-teal font-black text-3xl font-kanit">4.</span>
                                 <h2 className="text-2xl lg:text-3xl font-bold text-white">
-                                    VĂ˝sledky: ÄŚĂ­sla, ktorĂ© hovoria jasnou reÄŤou
+                                    Výsledky: Čísla, ktoré hovoria jasnou rečou
                                 </h2>
                             </div>
                             <div className="space-y-5 text-white/60 leading-relaxed text-lg mb-8">
                                 <p>
-                                    DosiahnutĂ© dĂˇta potvrdili, Ĺľe personalizovanĂ˝ a odbornĂ˝ prĂ­stup
-                                    v zdravotnĂ­ctve funguje nĂˇsobne lepĹˇie neĹľ komerÄŤnĂ© Ĺˇtandardy:
+                                    Dosiahnuté dáta potvrdili, že personalizovaný a odborný prístup
+                                    v zdravotníctve funguje násobne lepšie než komerčné štandardy:
                                 </p>
                             </div>
 
@@ -238,17 +238,17 @@ export default function CaseStudyPage() {
                             <div className="bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
                                 <div className="flex items-center justify-between mb-8">
                                     <div>
-                                        <h3 className="text-white font-medium">PrehÄľad kampane</h3>
-                                        <p className="text-white/30 text-xs">FebruĂˇr 2025 Â· MUDr. ÄŚajka</p>
+                                        <h3 className="text-white font-medium">Prehľad kampane</h3>
+                                        <p className="text-white/30 text-xs">Február 2025</p>
                                     </div>
                                     <span className="text-xs text-teal bg-teal/10 px-3 py-1 rounded-full font-semibold font-kanit">
-                                        DokonÄŤenĂˇ
+                                        Dokončená
                                     </span>
                                 </div>
                                 <div className="mb-8">
                                     <div className="text-5xl font-bold text-white font-kanit">42,31 %</div>
                                     <p className="text-white/40 text-sm mt-1 font-kanit">
-                                        NĂˇrast rezervĂˇciĂ­ na preventĂ­vnu prehliadku
+                                        Nárast rezervácií na preventívnu prehliadku
                                     </p>
                                 </div>
                                 <div className="h-32 w-full mb-8 relative">
@@ -266,61 +266,58 @@ export default function CaseStudyPage() {
                                 <div className="grid grid-cols-3 gap-3">
                                     <div className="p-4 rounded-xl bg-white/5 border border-white/5">
                                         <div className="flex flex-col gap-1 mb-2 text-white/50 text-xs font-kanit">
-                                            <Send size={12} /> OdoslanĂ©
+                                            <Send size={12} /> Odoslané
                                         </div>
                                         <div className="text-lg font-bold text-white font-kanit">1 618</div>
                                     </div>
                                     <div className="p-4 rounded-xl bg-white/5 border border-white/5">
                                         <div className="flex flex-col gap-1 mb-2 text-white/50 text-xs font-kanit">
-                                            <Mail size={12} /> DoruÄŤenĂ©
+                                            <Mail size={12} /> Doručené
                                         </div>
                                         <div className="text-lg font-bold text-white font-kanit">98,52 %</div>
                                     </div>
                                     <div className="p-4 rounded-xl bg-white/5 border border-white/5">
                                         <div className="flex flex-col gap-1 mb-2 text-white/50 text-xs font-kanit">
-                                            <PieChart size={12} /> OtvorenĂ©
+                                            <PieChart size={12} /> Otvorené
                                         </div>
                                         <div className="text-lg font-bold text-white font-kanit">70,89 %</div>
                                     </div>
                                 </div>
-
-                                {/* Open rate note */}
                                 <div className="mt-4 p-4 rounded-xl bg-teal/5 border border-teal/10 text-sm text-white/50">
-                                    <span className="text-teal font-semibold">Open Rate 70,89 %</span> â€”
-                                    svetovĂ˝ ĹˇtatistickĂ˝ priemer v tomto segmente je 15â€“25 %. NaĹˇa stratĂ©gia
+                                    <span className="text-teal font-semibold">Open Rate 70,89 %</span> —
+                                    svetový štatistický priemer v tomto segmente je 15–25 %. Naša stratégia
                                     dosiahla{" "}
-                                    <strong className="text-white">viac ako dvojnĂˇsobnĂş ĂşspeĹˇnosĹĄ</strong>.
+                                    <strong className="text-white">viac ako dvojnásobnú úspešnosť</strong>.
                                 </div>
                             </div>
                         </section>
 
-                        {/* 5. ZĂˇver */}
+                        {/* 5. Záver */}
                         <section>
                             <div className="flex items-center gap-3 mb-5">
                                 <span className="text-teal font-black text-3xl font-kanit">5.</span>
                                 <h2 className="text-2xl lg:text-3xl font-bold text-white">
-                                    ZĂˇver: Viac neĹľ len marketing
+                                    Záver: Viac než len marketing
                                 </h2>
                             </div>
                             <div className="space-y-5 text-white/60 leading-relaxed text-lg">
                                 <p>
-                                    TĂˇto prĂ­padovĂˇ ĹˇtĂşdia dokazuje, Ĺľe marketing v zdravotnĂ­ctve nie
-                                    je â€žpredaj", ale budovanie dĂ´very. VÄŹaka sprĂˇvnej komunikĂˇcii sme
-                                    pomohli MUDr. ÄŚajkovi nielen zaplniĹĄ kapacity ambulancie
-                                    relevantnĂ˝mi vĂ˝konmi, ale predovĹˇetkĂ˝m sme pomohli stovkĂˇm
-                                    pacientov urobiĹĄ kÄľĂşÄŤovĂ˝ krok pre ich zdravie.
+                                    Táto prípadová štúdia dokazuje, že marketing v zdravotníctve nie
+                                    je „predaj", ale budovanie dôvery. Vďaka správnej komunikácii sme
+                                    pomohli nášmu klientovi nielen zaplniť kapacity ambulancie
+                                    relevantnými výkonmi, ale predovšetkým sme pomohli stovkám
+                                    pacientov urobiť kľúčový krok pre ich zdravie.
                                 </p>
                             </div>
 
-                            {/* Quote */}
                             <blockquote className="mt-8 glass rounded-2xl p-8 border-l-4 border-teal relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-48 h-48 bg-teal/5 rounded-full blur-[60px] pointer-events-none" />
                                 <p className="text-white/80 text-xl italic leading-relaxed relative z-10">
-                                    â€žVy sa starajte o zdravie svojich pacientov. My sa postarĂˇme o
-                                    zdravie vaĹˇej znaÄŤky."
+                                    „Vy sa starajte o zdravie svojich pacientov. My sa postaráme o
+                                    zdravie vašej značky."
                                 </p>
                                 <footer className="mt-4 text-teal text-sm font-semibold relative z-10">
-                                    â€” Manifest Mediconect v praxi
+                                    — Manifest Mediconect v praxi
                                 </footer>
                             </blockquote>
                         </section>
@@ -334,22 +331,22 @@ export default function CaseStudyPage() {
                                 <div className="flex items-center gap-2 mb-3">
                                     <Users size={18} className="text-teal" />
                                     <span className="text-teal text-sm font-semibold uppercase tracking-wider">
-                                        Chcete podobnĂ© vĂ˝sledky?
+                                        Chcete podobné výsledky?
                                     </span>
                                 </div>
                                 <h3 className="text-2xl font-bold text-white mb-3">
-                                    PorozprĂˇvajme sa o vaĹˇej praxi
+                                    Porozprávajme sa o vašej praxi
                                 </h3>
                                 <p className="text-white/50 max-w-lg">
-                                    KaĹľdĂˇ ambulancia mĂˇ svoju databĂˇzu. PomĂ´Ĺľeme vĂˇm ju premeniĹĄ na
-                                    merateÄľnĂ© vĂ˝sledky â€“ so stratĂ©giou Ĺˇitou na mieru.
+                                    Každá ambulancia má svoju databázu. Pomôžeme vám ju premeniť na
+                                    merateľné výsledky – so stratégiou šitou na mieru.
                                 </p>
                             </div>
                             <Link
                                 href="/#kontakt"
                                 className="flex-shrink-0 group inline-flex items-center gap-3 px-8 py-4 bg-teal text-navy-dark font-semibold text-lg rounded-2xl hover:bg-teal/90 transition-all duration-300 hover:shadow-lg hover:shadow-teal/25"
                             >
-                                BezplatnĂˇ konzultĂˇcia
+                                Bezplatná konzultácia
                                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </div>
@@ -369,14 +366,14 @@ export default function CaseStudyPage() {
                             />
                         </Link>
                         <p className="text-white/30 text-sm text-center">
-                            Â© 2026 Mediconect. VĹˇetky prĂˇva vyhradenĂ©.
+                            © 2026 Mediconect. Všetky práva vyhradené.
                         </p>
                         <div className="flex items-center gap-6 text-sm text-white/40">
                             <Link href="/blog" className="hover:text-teal transition-colors">
-                                â† Blog
+                                ← Blog
                             </Link>
                             <Link href="/ochrana-osobnych-udajov" className="hover:text-teal transition-colors">
-                                Ochrana Ăşdajov
+                                Ochrana údajov
                             </Link>
                         </div>
                     </div>
@@ -385,4 +382,3 @@ export default function CaseStudyPage() {
         </div>
     );
 }
-
