@@ -314,20 +314,20 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-navy-dark bg-grid relative overflow-hidden">
-            {/* ─── Background Orbs ─── */}
-            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-                <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-teal/5 rounded-full blur-[120px] animate-float" />
-                <div className="absolute bottom-1/3 -right-32 w-[600px] h-[600px] bg-teal/3 rounded-full blur-[150px] animate-float-delayed" />
-                <div className="absolute top-2/3 left-1/3 w-[400px] h-[400px] bg-teal/4 rounded-full blur-[100px] animate-float" />
-            </div>
+        <div className="min-h-screen bg-grid relative overflow-hidden">
+
 
             <motion.nav
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className={`absolute md:fixed top-0 left-0 right-0 z-50 transition-all duration-500 border ${scrolled ? "glass-strong border-teal/20 shadow-lg shadow-black/20" : "bg-transparent border-transparent"
+                className={`absolute md:fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+                    ? ""
+                    : ""
                     }`}
+                style={{
+                    background: 'linear-gradient(to bottom, #060f18 0%, rgba(6,15,24,0.85) 60%, transparent 100%)',
+                }}
             >
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
@@ -336,10 +336,10 @@ export default function Home() {
                             <Image
                                 src="/nove-logo.png"
                                 alt="Mediconect"
-                                width={180}
-                                height={45}
+                                width={234}
+                                height={59}
                                 priority
-                                className="h-11 w-auto transition-all duration-300"
+                                className="h-[58px] w-auto transition-all duration-300"
                             />
                         </a>
 
@@ -1171,9 +1171,9 @@ export default function Home() {
                                 <Image
                                     src="/nove-logo.png"
                                     alt="Mediconect"
-                                    width={180}
-                                    height={45}
-                                    className="h-11 w-auto"
+                                    width={234}
+                                    height={59}
+                                    className="h-[58px] w-auto"
                                 />
                             </a>
                             <p className="text-white/40 text-sm leading-relaxed max-w-xs">

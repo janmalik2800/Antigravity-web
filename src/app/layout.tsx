@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import CookieConsent from "../components/CookieConsent";
+import ScrollGradientBackground from "../components/ScrollGradientBackground";
 
 export const metadata: Metadata = {
     title: "Mediconect | Strategický partner pre zdravotníctvo",
@@ -33,9 +34,12 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="sk" suppressHydrationWarning>
-            <body className="antialiased">
-                {children}
-                <CookieConsent />
+            <body className="antialiased" style={{ position: 'relative' }}>
+                <ScrollGradientBackground />
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                    {children}
+                    <CookieConsent />
+                </div>
             </body>
         </html>
     );
