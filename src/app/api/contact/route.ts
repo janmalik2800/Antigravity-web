@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { z } from "zod";
 
@@ -16,25 +15,16 @@ const formSchema = z.object({
 
 export async function POST(request: Request) {
   try {
-    // Initialize clients inside the handler to avoid build-time errors
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     const resendApiKey = process.env.RESEND_API_KEY;
 
-    if (!supabaseUrl || !supabaseKey || !resendApiKey) {
-      const missing = [];
-      if (!supabaseUrl) missing.push("NEXT_PUBLIC_SUPABASE_URL");
-      if (!supabaseKey) missing.push("NEXT_PUBLIC_SUPABASE_ANON_KEY");
-      if (!resendApiKey) missing.push("RESEND_API_KEY");
-
-      console.error("Missing environment variables:", missing.join(", "));
+    if (!resendApiKey) {
+      console.error("Missing environment variable: RESEND_API_KEY");
       return NextResponse.json(
-        { error: `Chyba konfigurácie servera. Chýba: ${missing.join(", ")}` },
+        { error: "Chyba konfigurácie servera." },
         { status: 500 }
       );
     }
 
-    const supabase = createClient(supabaseUrl, supabaseKey);
     const resend = new Resend(resendApiKey);
 
     const body = await request.json();
@@ -50,36 +40,11 @@ export async function POST(request: Request) {
 
     const data = result.data;
 
-    // 2. Save to Supabase
-    const { error: dbError } = await supabase
-      .from("leads")
-      .insert([
-        {
-          name: data.name,
-          clinic: data.clinic,
-          email: data.email,
-          phone: data.phone,
-          practice: data.practice,
-          message: data.message,
-          gdpr: true, // Implicitný súhlas s GDPR podľa textu "Odoslaním formulára..."
-          // Ak už tabuľka nemá stĺpec marketing, odkomentuj po migrácii databázy:
-          // marketing: data.marketing,
-        },
-      ]);
-
-    if (dbError) {
-      console.error("Supabase Error:", dbError);
-      return NextResponse.json(
-        { error: "Chyba pri ukladaní do databázy" },
-        { status: 500 }
-      );
-    }
-
-    // 3. Send Email via Resend
+    // 2. Send Email via Resend
     try {
       await resend.emails.send({
         from: "Mediconect Web <onboarding@resend.dev>",
-        to: ["hupikcz@gmail.com"],
+        to: ["info@mediconect.sk"],
         subject: `Nová poptávka na webe mediconect: ${data.clinic}`,
         html: `
                     <!DOCTYPE html>
@@ -212,6 +177,49 @@ export async function POST(request: Request) {
       console.error("Resend Error:", emailError);
     }
 
+    // 3. Add contact to Smartemailing
+    try {
+      const seUsername = process.env.SMARTEMAILING_USERNAME;
+      const seApiKey = process.env.SMARTEMAILING_API_KEY;
+      const seListId = process.env.SMARTEMAILING_CONTACT_LIST_ID;
+
+      if (seUsername && seApiKey && seListId) {
+        const nameParts = data.name.trim().split(" ");
+        const firstName = nameParts[0] || "";
+        const lastName = nameParts.slice(1).join(" ") || "";
+
+        await fetch("https://app.smartemailing.cz/api/v3/import", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Basic " +
+              Buffer.from(`${seUsername}:${seApiKey}`).toString("base64"),
+          },
+          body: JSON.stringify({
+            settings: {
+              update: "enabled",
+              send_activation_emails: "disabled",
+            },
+            data: [
+              {
+                emailaddress: data.email,
+                name: firstName,
+                surname: lastName,
+                cellphone: data.phone,
+                notes: data.clinic,
+                contactlists: [
+                  { id: parseInt(seListId), status: "confirmed" },
+                ],
+              },
+            ],
+          }),
+        });
+      }
+    } catch (seError) {
+      console.error("Smartemailing Error:", seError);
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Server Error:", error);
@@ -221,5 +229,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
-// Force deploy: Fix Vercel build error
