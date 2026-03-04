@@ -188,18 +188,24 @@ export async function POST(request: Request) {
         const firstName = nameParts[0] || "";
         const lastName = nameParts.slice(1).join(" ") || "";
 
-        await fetch("https://app.smartemailing.cz/api/v3/import", {
+        const response = await fetch("https://app.smartemailing.cz/api/v3/import", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
             Authorization:
               "Basic " +
               Buffer.from(`${seUsername}:${seApiKey}`).toString("base64"),
           },
           body: JSON.stringify({
             settings: {
-              update: "enabled",
-              send_activation_emails: "disabled",
+              update: true,
+              add_namedays: true,
+              add_genders: true,
+              add_salutations: true,
+              preserve_unsubscribed: true,
+              skip_invalid_emails: true,
+              create_update_custom_fields: false,
             },
             data: [
               {
@@ -215,9 +221,16 @@ export async function POST(request: Request) {
             ],
           }),
         });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error(`Smartemailing API HTTP Error (${response.status}):`, errorText);
+        }
+      } else {
+        console.error("Smartemailing missing env vars:", { seUsername, seApiKey, seListId });
       }
     } catch (seError) {
-      console.error("Smartemailing Error:", seError);
+      console.error("Smartemailing Catch Error:", seError);
     }
 
     return NextResponse.json({ success: true });
