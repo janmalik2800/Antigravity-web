@@ -501,7 +501,7 @@ export default function Home() {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
-                                className="text-lg lg:text-xl text-white/50 leading-relaxed max-w-xl mb-10"
+                                className="text-lg lg:text-xl text-white/65 leading-relaxed max-w-xl mb-10"
                             >
                                 Strategický partner pre lekárov, kliniky a ambulancie, ktoré hľadajú komplexné
                                 riešenia v&nbsp;oblasti brandu, vizuálnej identity aj akvizície pacientov.
@@ -933,7 +933,7 @@ export default function Home() {
                                             <h3 className="text-lg font-semibold mb-3 group-hover:text-teal transition-colors duration-300">
                                                 {item.title}
                                             </h3>
-                                            <p className="text-white/45 text-sm leading-relaxed">{item.desc}</p>
+                                            <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
                                         </div>
                                     </div>
                                 </GlowCard>
@@ -1058,7 +1058,7 @@ export default function Home() {
                             <motion.p
                                 variants={fadeUp}
                                 custom={1}
-                                className="text-base sm:text-lg text-white/50 leading-relaxed max-w-3xl font-stolzl mx-auto mb-10"
+                                className="text-base sm:text-lg text-white/65 leading-relaxed max-w-3xl font-stolzl mx-auto mb-10"
                             >
                                 Spájame medicínsku etiku s dátovou inteligenciou. Rezervujte si 30-minútovú online konzultáciu, kde spoločne identifikujeme bariéry rastu vašej ambulancie a navrhneme riešenia, ktoré fungujú v praxi.
                             </motion.p>
@@ -1254,12 +1254,12 @@ export default function Home() {
                         <FAQItem
                             question="Ako sú chránené kontakty a databázy pacientov, s ktorými pracujete?"
                             answer={
-                                <>
-                                    <p>Ochrana osobných údajov je základom každej spolupráce. Databázy pacientov spracúvame výlučne v súlade s GDPR a platnou slovenskou legislatívou. Ambulancia zostáva prevádzkovateľom údajov a výhradným vlastníkom databázy – my vystupujeme ako sprostredkovateľ na základe riadnej zmluvy o spracúvaní osobných údajov (DPA).</p>
-                                    <p>Využívame zabezpečené cloudové riešenia v rámci EÚ, šifrovaný prenos dát (SSL/TLS), viacfaktorové overovanie prístupu a prístupové práva na princípe „need-to-know“. Údaje pravidelne zálohujeme, evidujeme prístupy a pracujeme iba s rozsahom údajov nevyhnutným na definovaný účel.</p>
-                                    <p>Databázy nikdy nepredávame ani nepoužívame na vlastné marketingové aktivity. Transparentnosť, minimalizácia rizika a reputačná ochrana ambulancie sú pre nás rovnako dôležité ako samotný marketingový výkon.</p>
-                                    <p>Bezpečnosť údajov nevnímame ako formalitu – ale ako súčasť profesionálnej zodpovednosti voči pacientom.</p>
-                                </>
+                                <ul className="space-y-2">
+                                    <li>• Spracúvame výlučne v súlade s <strong className="text-white/80">GDPR</strong> — ambulancia zostáva výhradným vlastníkom databázy.</li>
+                                    <li>• <strong className="text-white/80">SSL/TLS šifrovanie</strong>, cloudové riešenia v rámci EÚ, viacfaktorové overovanie prístupu.</li>
+                                    <li>• Databázy <strong className="text-white/80">nikdy nepredávame</strong> ani nepoužívame na vlastné aktivity.</li>
+                                    <li>• Bezpečnosť údajov je súčasť profesionálnej zodpovednosti voči pacientom.</li>
+                                </ul>
                             }
                         />
                     </motion.div>
