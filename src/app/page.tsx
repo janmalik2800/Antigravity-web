@@ -977,13 +977,42 @@ export default function Home() {
                         </p>
                     </motion.div>
 
+                    {/* ─── "Prečo my" stat strip ─── */}
+                    <motion.div
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={1}
+                        className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16"
+                    >
+                        {[
+                            { value: "10+", label: "klientov z medicíny" },
+                            { value: "4–8", label: "týždňov do prvých výsledkov" },
+                            { value: "98%", label: "spokojených klientov" },
+                            { value: "100%", label: "GDPR & etika v každom kroku" },
+                        ].map((stat, i) => (
+                            <motion.div
+                                key={i}
+                                variants={scaleIn}
+                                custom={i}
+                                className="glass rounded-2xl p-5 text-center hover:glow-teal transition-all duration-500"
+                            >
+                                <div className="text-2xl lg:text-3xl font-bold text-teal font-kanit mb-1">
+                                    {stat.value}
+                                </div>
+                                <p className="text-white/55 text-xs lg:text-sm leading-snug">{stat.label}</p>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+
                     {/* Vložená nová komponenta se skládacími kartami s fade-in animací */}
                     <motion.div
                         variants={fadeUp}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
-                        custom={1}
+                        custom={2}
                     >
                         <ValuesStackingCards />
                     </motion.div>
@@ -1218,8 +1247,8 @@ export default function Home() {
                                 key={cat}
                                 onClick={() => setFaqCategory(cat)}
                                 className={`px-5 py-2 rounded-full text-sm font-medium font-kanit capitalize transition-all duration-300 cursor-pointer ${faqCategory === cat
-                                        ? "bg-teal text-navy-dark shadow-[0_0_16px_rgba(78,205,196,0.35)]"
-                                        : "glass text-white/60 hover:text-teal hover:border-teal/30"
+                                    ? "bg-teal text-navy-dark shadow-[0_0_16px_rgba(78,205,196,0.35)]"
+                                    : "glass text-white/60 hover:text-teal hover:border-teal/30"
                                     }`}
                             >
                                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
