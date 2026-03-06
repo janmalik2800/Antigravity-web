@@ -772,12 +772,12 @@ export default function Home() {
             {/* ═══════════════ PHILOSOPHY ═══════════════ */}
             <Section className="py-24 lg:py-32 relative z-10 overflow-hidden" id="filozofia">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-0 lg:gap-12 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 items-center">
 
                         {/* LEFT: Doctor Image — 30% */}
                         <motion.div
                             variants={fadeIn}
-                            className="relative flex items-center justify-center lg:justify-start mb-10 lg:mb-0"
+                            className="relative flex items-center justify-center lg:justify-start order-2 lg:order-1"
                         >
                             <div className="absolute inset-0 bg-teal/5 rounded-3xl blur-[80px] scale-90 pointer-events-none" />
                             <div
@@ -801,7 +801,7 @@ export default function Home() {
                         </motion.div>
 
                         {/* RIGHT: Text content — 70% */}
-                        <div className="flex flex-col">
+                        <div className="flex flex-col order-1 lg:order-2">
                             {/* Label */}
                             <motion.div variants={fadeUp} custom={0} className="mb-4">
                                 <span className="text-teal text-sm font-semibold uppercase tracking-widest">
@@ -841,7 +841,7 @@ export default function Home() {
                             <motion.div
                                 variants={fadeUp}
                                 custom={3}
-                                className="h-px bg-gradient-to-r from-teal/50 via-teal/20 to-transparent"
+                                className="hidden lg:block h-px bg-gradient-to-r from-teal/50 via-teal/20 to-transparent"
                             />
                         </div>
                     </div>
