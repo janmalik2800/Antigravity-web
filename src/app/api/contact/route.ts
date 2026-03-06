@@ -238,13 +238,13 @@ export async function POST(request: Request) {
       const sheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
 
       if (sheetsWebhookUrl) {
-        fetch(sheetsWebhookUrl, {
+        await fetch(sheetsWebhookUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-        }).catch(err => console.error("Sheets webhook fetch error:", err)); // Non-blocking
+        });
       } else {
         console.warn("GOOGLE_SHEETS_WEBHOOK_URL is not defined in .env");
       }
