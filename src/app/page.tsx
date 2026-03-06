@@ -259,6 +259,85 @@ function NewsletterForm() {
     );
 }
 
+/* ─── Floating Mobile Menu ─── */
+const mobileLinks = [
+    { href: "#sluzby", icon: Layers, label: "Služby" },
+    { href: "#case-study", icon: BarChart3, label: "Výsledky" },
+    { href: "#proces", icon: Target, label: "Proces" },
+    { href: "#kontakt", icon: Mail, label: "Kontakt" },
+];
+
+function FloatingMobileMenu() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+        const handleScroll = () => {
+            setIsScrolled((prev) => {
+                const nowScrolled = window.scrollY > 80;
+                if (prev !== nowScrolled) {
+                    setIsOpen(false); // Close menu on position change
+                }
+                return nowScrolled;
+            });
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        setIsScrolled(window.scrollY > 80);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    if (!isMounted) return null;
+
+    return (
+        <div className="fixed inset-0 z-[100] pointer-events-none md:hidden">
+            <div className={`absolute inset-0 w-full h-full flex transition-all duration-500 ${isScrolled ? 'items-end justify-center pb-6' : 'items-start justify-end pt-[10px] pr-6'}`}>
+                <motion.div
+                    layout
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    className="flex items-center gap-1 bg-[#060f18]/85 backdrop-blur-xl border border-white/10 shadow-2xl p-1.5 pointer-events-auto"
+                    style={{ borderRadius: 32 }}
+                >
+                    <AnimatePresence>
+                        {isOpen && (
+                            <motion.div
+                                initial={{ width: 0, opacity: 0 }}
+                                animate={{ width: "auto", opacity: 1 }}
+                                exit={{ width: 0, opacity: 0 }}
+                                className="flex items-center gap-1 overflow-hidden"
+                            >
+                                {mobileLinks.map((link, idx) => {
+                                    const Icon = link.icon;
+                                    return (
+                                        <a
+                                            key={idx}
+                                            href={link.href}
+                                            onClick={() => setIsOpen(false)}
+                                            className="relative flex flex-col items-center justify-center w-12 h-12 rounded-full text-white/70 hover:text-teal hover:bg-white/5 transition-colors group whitespace-nowrap"
+                                        >
+                                            <Icon size={20} className="mb-0.5" />
+                                            <span className="text-[9px] font-medium font-kanit tracking-wide">{link.label}</span>
+                                        </a>
+                                    );
+                                })}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    <motion.button
+                        layout="position"
+                        onClick={() => setIsOpen(!isOpen)}
+                        className={`flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 ${isOpen ? 'bg-white/10 text-white' : 'bg-teal text-navy-dark shadow-[0_0_15px_rgba(78,205,196,0.4)]'}`}
+                    >
+                        {isOpen ? <X size={20} /> : <Menu size={20} />}
+                    </motion.button>
+                </motion.div>
+            </div>
+        </div>
+    );
+}
+
 /* ═══════════════════════════════════════════════ */
 /*                  MAIN PAGE                     */
 /* ═══════════════════════════════════════════════ */
@@ -1247,6 +1326,9 @@ export default function Home() {
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
             />
+
+            {/* Mobile Bottom Menu */}
+            <FloatingMobileMenu />
         </div>
     );
 }
