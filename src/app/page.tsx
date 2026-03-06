@@ -347,6 +347,7 @@ export default function Home() {
     const [isHidden, setIsHidden] = useState(false);
     const lastScrollY = useRef(0);
     const [modalOpen, setModalOpen] = useState(false);
+    const [faqCategory, setFaqCategory] = useState<"spolupráca" | "výsledky" | "bezpečnosť">("spolupráca");
     const [formData, setFormData] = useState({
         name: "",
         clinic: "",
@@ -1201,7 +1202,7 @@ export default function Home() {
             {/* ═══════════════ FAQ ═══════════════ */}
             <Section className="py-24 lg:py-32 relative z-10" id="faq">
                 <div className="max-w-3xl mx-auto px-6 lg:px-8">
-                    <motion.div variants={fadeUp} custom={0} className="text-center mb-16">
+                    <motion.div variants={fadeUp} custom={0} className="text-center mb-10">
                         <span className="text-teal text-sm font-semibold uppercase tracking-widest">
                             FAQ
                         </span>
@@ -1210,58 +1211,96 @@ export default function Home() {
                         </h2>
                     </motion.div>
 
-                    <motion.div variants={fadeUp} custom={1}>
-                        <FAQItem
-                            question="Koľko môjho času si bude vyžadovať správa marketingu?"
-                            answer="Po úvodnom nastavení stratégie preberáme operatívu (kampane, obsah, reporting aj optimalizáciu). Od vás potrebujeme len občasné schválenie kľúčových materiálov a spätnú väzbu na kvalitu dopytov. Marketing beží na pozadí, kým vy sa venujete pacientom."
-                        />
-                        <FAQItem
-                            question="Ako rýchlo uvidím prvé výsledky marketingu?"
-                            answer="Pri výkonnostných kampaniach sa prvé merateľné výsledky (návštevnosť a dopyty) zvyčajne objavia do 4–8 týždňov. Email marketing a práca s databázou môžu priniesť výsledky aj po prvej kampani. Budovanie autority je dlhodobý proces na niekoľko mesiacov. Spravidla si nechávame prvé 3 mesiace na optimálne nastavenie a testovanie všetkých systémov a databázy."
-                        />
-                        <FAQItem
-                            question="Garantujete konkrétne výsledky (počet pacientov, dopytov)?"
-                            answer="Negarantujeme nereálne čísla. Garantujeme transparentný reporting, jasne definované KPI a priebežnú optimalizáciu. Cieľom je stabilný a merateľný rast pri zachovaní reputácie ambulancie."
-                        />
-                        <FAQItem
-                            question="Je vaša stratégia vhodná aj pre menšiu špecializovanú ambulanciu?"
-                            answer="Áno. Riešenia sú modulárne a škálovateľné – od základnej stratégie a lokálneho SEO až po výkonnostné kampane, email marketing a automatizácie. Stratégiu prispôsobíme rozpočtu aj cieľom ambulancie."
-                        />
-                        <FAQItem
-                            question="Ako komunikujete citlivé zdravotnícke alebo estetické témy?"
-                            answer="Obsah a kampane pripravujeme v súlade s etickými normami, legislatívou a pravidlami reklamných platforiem. Používame profesionálny, edukatívny tón bez zavádzajúcich sľubov. Prioritou je dôvera a reputačná bezpečnosť."
-                        />
-                        <FAQItem
-                            question="Neriskujem pri online reklame zablokovanie účtu alebo problémy s predpismi?"
-                            answer="Nie. Pri regulovanom zdravotníckom segmente poznáme pravidlá platforiem (napr. Meta/Google) aj legislatívne hranice. Kampane nastavujeme tak, aby boli v súlade s predpismi a minimalizovali riziko zamietnutia alebo blokácie."
-                        />
-                        <FAQItem
-                            question="Ako meriate úspešnosť marketingu v ambulancii?"
-                            answer="Sledujeme najmä počet a kvalitu dopytov, cenu za dopyt/pacienta, konverzné pomery, návratnosť investície (ROI) a výkonnosť kanálov. Reporting je zrozumiteľný a orientovaný na rozhodovanie."
-                        />
-                        <FAQItem
-                            question="Čo ak už máme marketingovú agentúru alebo interný tím?"
-                            answer="Môžeme doplniť to, čo chýba: audit, výkonové kampane, práca s databázou a email marketing, CRM a automatizácie alebo strategické vedenie pre zdravotnícky segment. Spolupráca je možná aj popri existujúcom dodávateľovi."
-                        />
-                        <FAQItem
-                            question="Koľko stojí marketing pre ambulanciu a kliniku?"
-                            answer="Cena závisí od rozsahu (web/SEO, kampane, email marketing, CRM, obsah) a cieľov. Po konzultácii pripravíme návrh stratégie a odporúčaný rozpočet tak, aby dával ekonomický zmysel. Na rozdiel od veľkých reklamných agentúr so širokým rozsahom projektov, my sa sústreďujeme len na jeden segment. Na rozdiel od veľkých marketingových agentúr, ktoré si účtujú tisícky eur za svoje služby, my ideme cestou ekonomicky prívetivých balíkov a riešení, ktoré dokážeme flexibilne prispôsobiť vašim individuálnym potrebám."
-                        />
-                        <FAQItem
-                            question="Ako začať spoluprácu?"
-                            answer="Začneme krátkou nezáväznou konzultáciou, kde zhodnotíme aktuálny stav, ciele a najrýchlejšie príležitosti rastu. Následne pripravíme návrh stratégie a implementačný plán."
-                        />
-                        <FAQItem
-                            question="Ako sú chránené kontakty a databázy pacientov, s ktorými pracujete?"
-                            answer={
-                                <ul className="space-y-2">
-                                    <li>• Spracúvame výlučne v súlade s <strong className="text-white/80">GDPR</strong> — ambulancia zostáva výhradným vlastníkom databázy.</li>
-                                    <li>• <strong className="text-white/80">SSL/TLS šifrovanie</strong>, cloudové riešenia v rámci EÚ, viacfaktorové overovanie prístupu.</li>
-                                    <li>• Databázy <strong className="text-white/80">nikdy nepredávame</strong> ani nepoužívame na vlastné aktivity.</li>
-                                    <li>• Bezpečnosť údajov je súčasť profesionálnej zodpovednosti voči pacientom.</li>
-                                </ul>
-                            }
-                        />
+                    {/* Category tabs */}
+                    <motion.div variants={fadeUp} custom={1} className="flex gap-2 justify-center mb-10 flex-wrap">
+                        {(["spolupráca", "výsledky", "bezpečnosť"] as const).map((cat) => (
+                            <button
+                                key={cat}
+                                onClick={() => setFaqCategory(cat)}
+                                className={`px-5 py-2 rounded-full text-sm font-medium font-kanit capitalize transition-all duration-300 cursor-pointer ${faqCategory === cat
+                                        ? "bg-teal text-navy-dark shadow-[0_0_16px_rgba(78,205,196,0.35)]"
+                                        : "glass text-white/60 hover:text-teal hover:border-teal/30"
+                                    }`}
+                            >
+                                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                            </button>
+                        ))}
+                    </motion.div>
+
+                    <motion.div variants={fadeUp} custom={2}>
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={faqCategory}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.25 }}
+                            >
+                                {faqCategory === "spolupráca" && (
+                                    <>
+                                        <FAQItem
+                                            question="Koľko môjho času si bude vyžadovať správa marketingu?"
+                                            answer="Po úvodnom nastavení stratégie preberáme operatívu (kampane, obsah, reporting aj optimalizáciu). Od vás potrebujeme len občasné schválenie kľúčových materiálov a spätnú väzbu na kvalitu dopytov. Marketing beží na pozadí, kým vy sa venujete pacientom."
+                                        />
+                                        <FAQItem
+                                            question="Je vaša stratégia vhodná aj pre menšiu špecializovanú ambulanciu?"
+                                            answer="Áno. Riešenia sú modulárne a škálovateľné – od základnej stratégie a lokálneho SEO až po výkonnostné kampane, email marketing a automatizácie. Stratégiu prispôsobíme rozpočtu aj cieľom ambulancie."
+                                        />
+                                        <FAQItem
+                                            question="Čo ak už máme marketingovú agentúru alebo interný tím?"
+                                            answer="Môžeme doplniť to, čo chýba: audit, výkonové kampane, práca s databázou a email marketing, CRM a automatizácie alebo strategické vedenie pre zdravotnícky segment. Spolupráca je možná aj popri existujúcom dodávateľovi."
+                                        />
+                                        <FAQItem
+                                            question="Koľko stojí marketing pre ambulanciu a kliniku?"
+                                            answer="Cena závisí od rozsahu (web/SEO, kampane, email marketing, CRM, obsah) a cieľov. Po konzultácii pripravíme návrh stratégie a odporúčaný rozpočet tak, aby dával ekonomický zmysel. Na rozdiel od veľkých agentúr ideme cestou ekonomicky prívetivých balíkov, ktoré dokážeme flexibilne prispôsobiť vašim potrebám."
+                                        />
+                                        <FAQItem
+                                            question="Ako začať spoluprácu?"
+                                            answer="Začneme krátkou nezáväznou konzultáciou, kde zhodnotíme aktuálny stav, ciele a najrýchlejšie príležitosti rastu. Následne pripravíme návrh stratégie a implementačný plán."
+                                        />
+                                    </>
+                                )}
+                                {faqCategory === "výsledky" && (
+                                    <>
+                                        <FAQItem
+                                            question="Ako rýchlo uvidím prvé výsledky marketingu?"
+                                            answer="Pri výkonnostných kampaniach sa prvé merateľné výsledky (návštevnosť a dopyty) zvyčajne objavia do 4–8 týždňov. Email marketing a práca s databázou môžu priniesť výsledky aj po prvej kampani. Budovanie autority je dlhodobý proces na niekoľko mesiacov. Spravidla si nechávame prvé 3 mesiace na optimálne nastavenie a testovanie všetkých systémov a databázy."
+                                        />
+                                        <FAQItem
+                                            question="Garantujete konkrétne výsledky (počet pacientov, dopytov)?"
+                                            answer="Negarantujeme nereálne čísla. Garantujeme transparentný reporting, jasne definované KPI a priebežnú optimalizáciu. Cieľom je stabilný a merateľný rast pri zachovaní reputácie ambulancie."
+                                        />
+                                        <FAQItem
+                                            question="Ako meriate úspešnosť marketingu v ambulancii?"
+                                            answer="Sledujeme najmä počet a kvalitu dopytov, cenu za dopyt/pacienta, konverzné pomery, návratnosť investície (ROI) a výkonnosť kanálov. Reporting je zrozumiteľný a orientovaný na rozhodovanie."
+                                        />
+                                    </>
+                                )}
+                                {faqCategory === "bezpečnosť" && (
+                                    <>
+                                        <FAQItem
+                                            question="Ako komunikujete citlivé zdravotnícke alebo estetické témy?"
+                                            answer="Obsah a kampane pripravujeme v súlade s etickými normami, legislatívou a pravidlami reklamných platforiem. Používame profesionálny, edukatívny tón bez zavádzajúcich sľubov. Prioritou je dôvera a reputačná bezpečnosť."
+                                        />
+                                        <FAQItem
+                                            question="Neriskujem pri online reklame zablokovanie účtu alebo problémy s predpismi?"
+                                            answer="Nie. Pri regulovanom zdravotníckom segmente poznáme pravidlá platforiem (napr. Meta/Google) aj legislatívne hranice. Kampane nastavujeme tak, aby boli v súlade s predpismi a minimalizovali riziko zamietnutia alebo blokácie."
+                                        />
+                                        <FAQItem
+                                            question="Ako sú chránené kontakty a databázy pacientov, s ktorými pracujete?"
+                                            answer={
+                                                <ul className="space-y-2">
+                                                    <li>• Spracúvame výlučne v súlade s <strong className="text-white/80">GDPR</strong> — ambulancia zostáva výhradným vlastníkom databázy.</li>
+                                                    <li>• <strong className="text-white/80">SSL/TLS šifrovanie</strong>, cloudové riešenia v rámci EÚ, viacfaktorové overovanie prístupu.</li>
+                                                    <li>• Databázy <strong className="text-white/80">nikdy nepredávame</strong> ani nepoužívame na vlastné aktivity.</li>
+                                                    <li>• Bezpečnosť údajov je súčasť profesionálnej zodpovednosti voči pacientom.</li>
+                                                </ul>
+                                            }
+                                        />
+                                    </>
+                                )}
+                            </motion.div>
+                        </AnimatePresence>
                     </motion.div>
                 </div>
             </Section>
