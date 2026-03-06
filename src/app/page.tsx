@@ -43,25 +43,26 @@ const ContactModal = dynamic(() => import("../components/ContactModal"), {
 
 /* ─── Animation Variants ─── */
 const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
     visible: (i: number = 0) => ({
         opacity: 1,
         y: 0,
-        transition: { duration: 0.7, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
+        filter: "blur(0px)",
+        transition: { duration: 0.5, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
     }),
 };
 
 const fadeIn = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.8 } },
+    hidden: { opacity: 0, filter: "blur(4px)" },
+    visible: { opacity: 1, filter: "blur(0px)", transition: { duration: 0.5 } },
 };
 
 const scaleIn = {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: { opacity: 0, scale: 0.92 },
     visible: (i: number = 0) => ({
         opacity: 1,
         scale: 1,
-        transition: { duration: 0.6, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
+        transition: { duration: 0.45, delay: i * 0.08, ease: [0.25, 0.46, 0.45, 0.94] },
     }),
 };
 
@@ -76,7 +77,7 @@ function Section({
     id?: string;
 }) {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-80px" });
+    const isInView = useInView(ref, { once: true, margin: "-40px" });
 
     return (
         <motion.section
@@ -478,7 +479,7 @@ export default function Home() {
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
+                                transition={{ duration: 0.5, delay: 0.1 }}
                                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/10 border border-teal/20 mb-8"
                             >
                                 <div className="w-2 h-2 rounded-full bg-teal animate-pulse" />
@@ -490,7 +491,7 @@ export default function Home() {
                             <motion.h1
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.3 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
                                 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-bold leading-[1.08] tracking-tight mb-8"
                             >
                                 Pomôžeme vám urobiť z&nbsp;vašej{" "}
@@ -501,7 +502,7 @@ export default function Home() {
                             <motion.p
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.5 }}
+                                transition={{ duration: 0.6, delay: 0.35 }}
                                 className="text-lg lg:text-xl text-white/65 leading-relaxed max-w-xl mb-10"
                             >
                                 Strategický partner pre lekárov, kliniky a ambulancie, ktoré hľadajú komplexné
@@ -511,7 +512,7 @@ export default function Home() {
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: 0.7 }}
+                                transition={{ duration: 0.5, delay: 0.45 }}
                                 className="flex flex-col sm:flex-row gap-4 mb-12"
                             >
                                 <a
@@ -537,7 +538,7 @@ export default function Home() {
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: 1.0, duration: 0.8 }}
+                                transition={{ delay: 0.55, duration: 0.5 }}
                                 className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 text-white/30 text-sm"
                             >
                                 <div className="flex -space-x-2">
