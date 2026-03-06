@@ -233,6 +233,25 @@ export async function POST(request: Request) {
       console.error("Smartemailing Catch Error:", seError);
     }
 
+    // 4. Send to Google Sheets (Webhook via Apps Script)
+    try {
+      const sheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+
+      if (sheetsWebhookUrl) {
+        fetch(sheetsWebhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }).catch(err => console.error("Sheets webhook fetch error:", err)); // Non-blocking
+      } else {
+        console.warn("GOOGLE_SHEETS_WEBHOOK_URL is not defined in .env");
+      }
+    } catch (sheetsError) {
+      console.error("Google Sheets Error:", sheetsError);
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Server Error:", error);
