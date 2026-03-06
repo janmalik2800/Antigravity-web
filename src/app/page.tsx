@@ -770,41 +770,80 @@ export default function Home() {
             </Section>
 
             {/* ═══════════════ PHILOSOPHY ═══════════════ */}
-            <Section className="py-24 lg:py-32 relative z-10" id="filozofia">
+            <Section className="py-24 lg:py-32 relative z-10 overflow-hidden" id="filozofia">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="max-w-4xl mx-auto">
-                        <motion.div variants={fadeUp} custom={0} className="mb-6">
-                            <span className="text-teal text-sm font-semibold uppercase tracking-widest">
-                                Naša filozofia
-                            </span>
-                        </motion.div>
-                        <motion.h2
-                            variants={fadeUp}
-                            custom={1}
-                            className="text-3xl lg:text-5xl font-bold leading-tight mb-8"
-                        >
-                            Marketing, ktorý nie je o lajkoch. Je o{" "}
-                            <span className="text-gradient">dôvere a konverzii.</span>
-                        </motion.h2>
-                        <motion.div variants={fadeUp} custom={2} className="space-y-6">
-                            <p className="text-lg text-white/50 leading-relaxed">
-                                Mediconect nie je len ďalšia marketingová agentúra. Sme tím špecialistov, ktorí preberajú plnú zodpovednosť za váš digitálny obraz. V&nbsp;Mediconecte veríme, že za každou úspešnou ambulanciou stojí silný príbeh a dôvera pacientov. Naším cieľom je pomôcť vám tento príbeh vyrozprávať moderne a profesionálne. Chápeme, že lekár nie je marketér – vaším poslaním je starostlivosť o zdravie, naším poslaním je starostlivosť o vašu prosperitu, dobré meno a&nbsp;konzistentný kmeň pacientov.
-                            </p>
-                            <p className="text-lg text-white/50 leading-relaxed">
-                                Využívame vaše minimum času na dosiahnutie maximálnych výsledkov. Či už ide o tvorbu
-                                vizuálnej identity, správu sociálnych sietí alebo sofistikovanú automatizáciu, každý
-                                krok konzultujeme efektívne a s ohľadom na vašu vyťaženosť.
-                            </p>
-                            <p className="text-lg text-white/50 leading-relaxed">
-                                Zmyslom nášho marketingu nie je popularita. Pekné príspevky neliečia pacientov a neplatia faktúry. V zdravotníctve rozhoduje dôvera, dostupnosť a kontinuita kontaktu. Preto staviame marketing na dátach, práci s databázou a diskrétnej komunikácii, ktorá pacienta edukuje, vedie k prevencii a zvyšuje adherenciu k liečbe.
-                            </p>
-                        </motion.div>
-                        {/* Decorative accent line */}
+                    <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-0 lg:gap-12 items-center">
+
+                        {/* LEFT: Doctor Image — 30% */}
                         <motion.div
-                            variants={fadeUp}
-                            custom={3}
-                            className="mt-12 h-px bg-gradient-to-r from-teal/50 via-teal/20 to-transparent"
-                        />
+                            variants={fadeIn}
+                            className="relative flex items-center justify-center lg:justify-start mb-10 lg:mb-0"
+                        >
+                            <div className="absolute inset-0 bg-teal/5 rounded-3xl blur-[80px] scale-90 pointer-events-none" />
+                            <div
+                                className="relative w-full max-w-[240px] lg:max-w-none"
+                                style={{
+                                    maskImage: "linear-gradient(to right, transparent 0%, black 15%, black 75%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)",
+                                    maskComposite: "intersect",
+                                    WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 15%, black 75%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)",
+                                    WebkitMaskComposite: "destination-in",
+                                }}
+                            >
+                                <Image
+                                    src="/Doktor 1.png"
+                                    alt="Mediconect – odborník na zdravotnícky marketing"
+                                    width={400}
+                                    height={520}
+                                    className="w-full h-auto object-cover"
+                                    priority
+                                />
+                            </div>
+                        </motion.div>
+
+                        {/* RIGHT: Text content — 70% */}
+                        <div className="flex flex-col">
+                            {/* Label */}
+                            <motion.div variants={fadeUp} custom={0} className="mb-4">
+                                <span className="text-teal text-sm font-semibold uppercase tracking-widest">
+                                    Naša filozofia
+                                </span>
+                            </motion.div>
+
+                            {/* Headline */}
+                            <motion.h2
+                                variants={fadeUp}
+                                custom={1}
+                                className="text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight mb-8"
+                            >
+                                Marketing, ktorý nie je o lajkoch. Je o{" "}
+                                <span className="text-gradient">dôvere a konverzii.</span>
+                            </motion.h2>
+
+                            {/* Bullet points */}
+                            <motion.ul variants={fadeUp} custom={2} className="space-y-4 mb-8">
+                                {[
+                                    "Preberáme plnú zodpovednosť za váš digitálny obraz — pomáhame vyrozprávať váš príbeh moderne a profesionálne.",
+                                    "Chápeme, že lekár nie je marketér. Vaším poslaním je zdravie pacientov, naším je vaša prosperita a dobré meno.",
+                                    "Každý krok konzultujeme s ohľadom na vašu vyťaženosť — minimálny čas, maximálne výsledky.",
+                                    "Nestavíme na lajkoch. Staviame na dátach, dôvere a kontinuite kontaktu, ktorá vedie k liečbe.",
+                                    "Diskrétna komunikácia, ktorá pacienta edukuje, vedie k prevencii a zvyšuje adherenciu.",
+                                ].map((point, i) => (
+                                    <li key={i} className="flex items-start gap-3">
+                                        <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-teal/15 flex items-center justify-center">
+                                            <Check size={11} className="text-teal" />
+                                        </span>
+                                        <span className="text-base text-white/60 leading-relaxed">{point}</span>
+                                    </li>
+                                ))}
+                            </motion.ul>
+
+                            {/* Bottom accent */}
+                            <motion.div
+                                variants={fadeUp}
+                                custom={3}
+                                className="h-px bg-gradient-to-r from-teal/50 via-teal/20 to-transparent"
+                            />
+                        </div>
                     </div>
                 </div>
             </Section>
