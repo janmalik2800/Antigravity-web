@@ -394,6 +394,22 @@ export default function Home() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Hash-based scroll fix: framer-motion's initial hidden state prevents
+    // the browser's native anchor scroll from working on first load.
+    useEffect(() => {
+        const hash = window.location.hash;
+        if (!hash) return;
+        const id = hash.replace("#", "");
+        // Wait for framer-motion to render elements before scrolling
+        const timer = setTimeout(() => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }, 400);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="min-h-screen bg-grid relative overflow-hidden">
 
@@ -1336,7 +1352,7 @@ export default function Home() {
             </Section>
 
             {/* ═══════════════ NEWSLETTER (The Insider Footer) ═══════════════ */}
-            <Section className="relative z-10 pb-16 lg:pb-24">
+            <Section className="relative z-10 pb-16 lg:pb-24" id="newsletter">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <motion.div
                         variants={fadeUp}
@@ -1360,6 +1376,7 @@ export default function Home() {
                         <div className="relative z-10 w-full lg:w-auto flex-shrink-0 flex items-center justify-center lg:justify-end min-h-[80px]">
                             <NewsletterForm />
                         </div>
+
                     </motion.div>
                 </div>
             </Section>
