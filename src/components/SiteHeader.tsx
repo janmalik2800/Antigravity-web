@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 const navLinks = [
     ['Služby', '/#sluzby'],
     ['Prípadová štúdia', '/#case-study'],
+    ['Referencie', '/#referencie'],
     ['Proces', '/#proces'],
     ['FAQ', '/#faq'],
 ] as const;
@@ -66,6 +67,12 @@ export default function SiteHeader() {
                             className="px-6 py-2.5 bg-teal text-navy-dark font-semibold text-sm rounded-xl hover:bg-teal/90 transition-all duration-300 hover:shadow-lg hover:shadow-teal/25"
                         >
                             Bezplatná konzultácia
+                        </Link>
+                        <Link
+                            href="/#dopyt"
+                            className="px-6 py-2.5 border border-teal/50 text-teal font-semibold text-sm rounded-xl hover:bg-teal/10 transition-all duration-300"
+                        >
+                            Nezáväzný dopyt
                         </Link>
                     </div>
 

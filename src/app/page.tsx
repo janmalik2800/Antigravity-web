@@ -38,6 +38,7 @@ import ServicesNebula from "../components/ServicesNebula";
 import ServicesCarousel from "../components/ServicesCarousel";
 
 import MediconectForm from "@/components/MediconectForm";
+import ReferencesShowcase from "../components/ReferencesShowcase";
 
 /* ─── Animation Variants ─── */
 const fadeUp = {
@@ -262,8 +263,10 @@ function NewsletterForm() {
 const mobileLinks = [
     { href: "#sluzby", icon: Layers, label: "Služby" },
     { href: "#case-study", icon: BarChart3, label: "Výsledky" },
+    { href: "#referencie", icon: Globe, label: "Referencie" },
     { href: "#proces", icon: Target, label: "Proces" },
     { href: "#kontakt", icon: Mail, label: "Kontakt" },
+    { href: "#dopyt", icon: Send, label: "Dopyt" },
 ];
 
 function FloatingMobileMenu() {
@@ -293,7 +296,6 @@ function FloatingMobileMenu() {
         <div className="fixed inset-0 z-[100] pointer-events-none md:hidden">
             <div className={`absolute inset-0 w-full h-full flex transition-all duration-500 ${isScrolled ? 'items-end justify-center pb-6' : 'items-start justify-end pt-[10px] pr-6'}`}>
                 <motion.div
-                    layout
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     className="flex items-center gap-1 bg-[#060f18]/85 backdrop-blur-xl border border-white/10 shadow-2xl p-1.5 pointer-events-auto"
                     style={{ borderRadius: 32 }}
@@ -324,13 +326,12 @@ function FloatingMobileMenu() {
                         )}
                     </AnimatePresence>
 
-                    <motion.button
-                        layout="position"
+                    <button
                         onClick={() => setIsOpen(!isOpen)}
                         className={`flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 ${isOpen ? 'bg-white/10 text-white' : 'bg-teal text-navy-dark shadow-[0_0_15px_rgba(78,205,196,0.4)]'}`}
                     >
                         {isOpen ? <X size={20} /> : <Menu size={20} />}
-                    </motion.button>
+                    </button>
                 </motion.div>
             </div>
         </div>
@@ -426,6 +427,7 @@ export default function Home() {
                             {[
                                 ["Služby", "#sluzby"],
                                 ["Prípadová štúdia", "#case-study"],
+                                ["Referencie", "#referencie"],
                                 ["Proces", "#proces"],
                                 ["FAQ", "#faq"],
                             ].map(([label, href]) => (
@@ -442,6 +444,12 @@ export default function Home() {
                                 className="px-6 py-2.5 bg-teal text-navy-dark font-semibold text-sm rounded-xl hover:bg-teal/90 transition-all duration-300 hover:shadow-lg hover:shadow-teal/25 cursor-pointer"
                             >
                                 Bezplatná konzultácia
+                            </a>
+                            <a
+                                href="#dopyt"
+                                className="px-6 py-2.5 border border-teal/50 text-teal font-semibold text-sm rounded-xl hover:bg-teal/10 transition-all duration-300 cursor-pointer"
+                            >
+                                Nezáväzný dopyt
                             </a>
                         </div>
 
@@ -873,6 +881,13 @@ export default function Home() {
             <Section className="py-24 lg:py-32 relative z-10" id="case-study">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <CaseStudyDashboard />
+                </div>
+            </Section>
+
+            {/* ═══════════════ REFERENCES ═══════════════ */}
+            <Section className="py-24 lg:py-32 relative z-10" id="referencie">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <ReferencesShowcase />
                 </div>
             </Section>
 
@@ -1333,7 +1348,7 @@ export default function Home() {
             </Section>
 
             {/* ═══════════════ KONTAKT (Nová sekcia) ═══════════════ */}
-            <Section className="relative z-10 py-16 lg:py-24" id="kontakt">
+            <Section className="relative z-10 py-16 lg:py-24" id="dopyt">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <MediconectForm endpoint="/api/dopyt" />
                 </div>

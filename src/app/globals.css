@@ -123,6 +123,15 @@ html {
   border: 1px solid var(--color-glass-border);
 }
 
+/* Hide scrollbar utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .glass-strong {
   background: rgba(13, 27, 42, 0.95);
   backdrop-filter: blur(30px);
