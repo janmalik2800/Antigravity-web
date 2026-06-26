@@ -298,19 +298,32 @@ function FloatingMobileMenu() {
 
     return (
         <div className="fixed inset-0 z-[100] pointer-events-none md:hidden">
+            {/* Backdrop overlay when menu is open */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 bg-black/40 pointer-events-auto"
+                        onClick={() => setIsOpen(false)}
+                    />
+                )}
+            </AnimatePresence>
+
+            {/* Menu container */}
             <div className={`absolute inset-0 w-full h-full flex transition-all duration-500 ${isScrolled ? 'items-end justify-center pb-6' : 'items-start justify-end pt-[10px] pr-6'}`}>
-                <motion.div
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    className="flex items-center gap-1 bg-[#060f18]/85 backdrop-blur-xl border border-white/10 shadow-2xl p-1.5 pointer-events-auto"
-                    style={{ borderRadius: 32 }}
-                >
+                <div className="relative">
+                    {/* Expanded links panel - absolutely positioned so button doesn't shift */}
                     <AnimatePresence>
                         {isOpen && (
                             <motion.div
-                                initial={{ width: 0, opacity: 0 }}
-                                animate={{ width: "auto", opacity: 1 }}
-                                exit={{ width: 0, opacity: 0 }}
-                                className="flex items-center gap-1 overflow-hidden"
+                                initial={{ opacity: 0, scale: 0.85 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.85 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                className={`absolute ${isScrolled ? 'bottom-full mb-2 left-1/2 -translate-x-1/2' : 'top-full mt-2 right-0'} flex flex-col items-center gap-1 bg-[#060f18]/90 backdrop-blur-xl border border-white/10 shadow-2xl p-2 pointer-events-auto`}
+                                style={{ borderRadius: 24 }}
                             >
                                 {mobileLinks.map((link, idx) => {
                                     const Icon = link.icon;
@@ -319,7 +332,7 @@ function FloatingMobileMenu() {
                                             key={idx}
                                             href={link.href}
                                             onClick={() => setIsOpen(false)}
-                                            className="relative flex flex-col items-center justify-center w-12 h-12 rounded-full text-white/70 hover:text-teal hover:bg-white/5 transition-colors group whitespace-nowrap"
+                                            className="flex flex-col items-center justify-center w-14 h-14 rounded-2xl text-white/70 hover:text-teal hover:bg-white/5 active:bg-white/10 transition-colors whitespace-nowrap"
                                         >
                                             <Icon size={20} className="mb-0.5" />
                                             <span className="text-[9px] font-medium font-kanit tracking-wide">{link.label}</span>
@@ -330,13 +343,14 @@ function FloatingMobileMenu() {
                         )}
                     </AnimatePresence>
 
+                    {/* Hamburger button - always visible, never shifts */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className={`flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 ${isOpen ? 'bg-white/10 text-white' : 'bg-teal text-navy-dark shadow-[0_0_15px_rgba(78,205,196,0.4)]'}`}
+                        className={`flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 pointer-events-auto ${isOpen ? 'bg-[#060f18]/90 backdrop-blur-xl border border-white/10 text-white' : 'bg-teal text-navy-dark shadow-[0_0_15px_rgba(78,205,196,0.4)]'}`}
                     >
                         {isOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
-                </motion.div>
+                </div>
             </div>
         </div>
     );
@@ -352,6 +366,8 @@ export default function Home() {
     const lastScrollY = useRef(0);
     const [faqCategory, setFaqCategory] = useState<"spolupráca" | "výsledky" | "bezpečnosť">("spolupráca");
     const [modalOpen, setModalOpen] = useState(false);
+    const [isDopytOpen, setIsDopytOpen] = useState(false);
+    const [formResetKey, setFormResetKey] = useState(0);
 
     // Otvorenie modalu, ak je v URL adrese parameter ?kontakt=true
     useEffect(() => {
@@ -360,6 +376,19 @@ export default function Home() {
             if (params.get("kontakt") === "true") {
                 setModalOpen(true);
             }
+        }
+    }, []);
+
+    // Automatické rozbalenie dopytového formulára pri prekliku na #dopyt
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const handleHashChange = () => {
+                if (window.location.hash === "#dopyt") {
+                    setIsDopytOpen(true);
+                }
+            };
+            window.addEventListener("hashchange", handleHashChange);
+            return () => window.removeEventListener("hashchange", handleHashChange);
         }
     }, []);
 
@@ -1355,7 +1384,77 @@ export default function Home() {
             {/* ═══════════════ KONTAKT (Nová sekcia) ═══════════════ */}
             <Section className="relative z-10 py-16 lg:py-24" id="dopyt">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <MediconectForm endpoint="/api/dopyt" />
+                    {/* Toggle card — always visible */}
+                    <div
+                        onClick={() => setIsDopytOpen(!isDopytOpen)}
+                        className="glass-strong rounded-3xl p-8 lg:p-10 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 border border-white/10 hover:border-teal/40 hover:shadow-[0_0_30px_rgba(78,205,196,0.1)] transition-all duration-500 cursor-pointer group"
+                    >
+                        {/* Background glow */}
+                        <div className="absolute top-0 right-0 w-48 h-48 bg-teal/10 rounded-full blur-[60px] pointer-events-none transition-all duration-500 group-hover:bg-teal/20" />
+                        
+                        {/* Left Side: Text and Icon */}
+                        <div className="relative z-10 flex items-start gap-5 text-center lg:text-left flex-col lg:flex-row">
+                            <div className="mx-auto lg:mx-0 p-4 bg-teal/10 rounded-2xl text-teal group-hover:scale-110 transition-transform duration-300">
+                                <Send size={28} />
+                            </div>
+                            <div>
+                                <h3 className="text-xl lg:text-2xl font-bold font-kanit text-white mb-2 group-hover:text-teal transition-colors duration-300">
+                                    Máte konkrétnu predstavu? Vyplňte nezáväzný dopyt
+                                </h3>
+                                <p className="text-white/60 text-sm md:text-base font-stolzl max-w-xl leading-relaxed">
+                                    Pripravíme vám férový návrh marketingu na mieru vašej ambulancie či kliniky. Zaberie to len 3 minúty.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Right Side: CTA with rotating chevron */}
+                        <div className="relative z-10 flex-shrink-0 w-full lg:w-auto">
+                            <div className="w-full lg:w-auto px-6 py-4 bg-teal text-navy-dark font-semibold text-sm rounded-xl flex items-center justify-center gap-2 hover:bg-teal/90 transition-all duration-300 hover:shadow-lg hover:shadow-teal/25">
+                                <span>{isDopytOpen ? 'Zbaliť dopyt' : 'Vyplniť podrobný dopyt'}</span>
+                                <motion.div animate={{ rotate: isDopytOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                                    <ChevronDown size={18} />
+                                </motion.div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Form container — stays mounted to preserve form data */}
+                    <motion.div
+                        initial={false}
+                        animate={{
+                            height: isDopytOpen ? "auto" : 0,
+                            opacity: isDopytOpen ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.45, ease: "easeInOut" }}
+                        style={{ overflow: "hidden" }}
+                    >
+                        <div className="pt-8">
+                            <MediconectForm key={formResetKey} endpoint="/api/dopyt" />
+
+                            {/* Bottom controls */}
+                            <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/5">
+                                <button
+                                    onClick={() => setFormResetKey(k => k + 1)}
+                                    className="text-white/30 hover:text-white/60 transition-colors duration-300 text-xs flex items-center gap-1.5"
+                                >
+                                    <X size={12} />
+                                    <span>Zresetovať formulár</span>
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        document.getElementById('dopyt')?.scrollIntoView({ behavior: 'instant', block: 'start' });
+                                        setIsDopytOpen(false);
+                                    }}
+                                    className="flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 px-4 py-2 border border-white/10 hover:border-white/20 rounded-xl text-sm"
+                                >
+                                    <span>Zbaliť formulár</span>
+                                    <motion.div animate={{ rotate: 180 }}>
+                                        <ChevronDown size={16} />
+                                    </motion.div>
+                                </button>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </Section>
 
