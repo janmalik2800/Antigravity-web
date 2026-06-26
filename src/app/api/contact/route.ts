@@ -2,6 +2,28 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 
+// Basic rate limiting configuration
+const rateLimitMap = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const MAX_REQUESTS = 5;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  if (!rateLimitMap.has(ip)) {
+    rateLimitMap.set(ip, [now]);
+    return false;
+  }
+  
+  const timestamps = rateLimitMap.get(ip)!.filter(t => now - t < RATE_LIMIT_WINDOW);
+  if (timestamps.length >= MAX_REQUESTS) {
+    return true;
+  }
+  
+  timestamps.push(now);
+  rateLimitMap.set(ip, timestamps);
+  return false;
+}
+
 // Validation schema
 const formSchema = z.object({
   name: z.string().min(2, "Meno je príliš krátke"),
@@ -15,6 +37,15 @@ const formSchema = z.object({
 
 export async function POST(request: Request) {
   try {
+    // Basic rate limit check
+    const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "anonymous";
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: "Príliš veľa požiadaviek. Skúste to prosím neskôr." },
+        { status: 429 }
+      );
+    }
+
     const resendApiKey = process.env.RESEND_API_KEY;
 
     if (!resendApiKey) {
@@ -175,6 +206,10 @@ export async function POST(request: Request) {
       });
     } catch (emailError) {
       console.error("Resend Error:", emailError);
+      return NextResponse.json(
+        { error: "Nepodarilo sa odoslať emailovú notifikáciu." },
+        { status: 500 }
+      );
     }
 
     // 3. Add contact to Smartemailing

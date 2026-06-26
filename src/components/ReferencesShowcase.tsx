@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Globe, ArrowUpRight } from "lucide-react";
 import GlowCard from "./GlowCard";
@@ -21,7 +20,6 @@ interface ReferenceProject {
     description: string;
     url: string;
     displayUrl: string;
-    image: string;
     tags: string[];
 }
 
@@ -31,7 +29,6 @@ const projects: ReferenceProject[] = [
         description: "Moderná klinika zdravia a krásy. Vytvorili sme elegantný web s dôrazom na estetickú medicínu, dermatológiu a stomatológiu. Web slúži ako reprezentatívna vizitka s prehľadným cenníkom a informáciami o zákrokoch.",
         url: "https://www.aurelclinic.sk",
         displayUrl: "www.aurelclinic.sk",
-        image: "/images/aurel_clinic.png",
         tags: ["Prémiový Web", "SEO Optimalizácia", "Medicínsky Branding"],
     },
     {
@@ -39,7 +36,6 @@ const projects: ReferenceProject[] = [
         description: "Ambulancia všeobecného lekára pre dospelých v Liptovskom Hrádku. Prehľadný a prístupný web pre pacientov všetkých vekových kategórií, ktorý uľahčuje komunikáciu, poskytuje ordinačné hodiny a dôležité tlačivá.",
         url: "https://www.drcajka.sk",
         displayUrl: "www.drcajka.sk",
-        image: "/images/dr_cajka.png",
         tags: ["Lokálne SEO", "Dostupný Web", "Pacientsky Servis"],
     },
 ];
@@ -118,21 +114,6 @@ export default function ReferencesShowcase() {
                     >
                         <GlowCard className="h-full">
                             <div className="glass rounded-2xl overflow-hidden h-full flex flex-col transition-all duration-500 border border-white/5 group-hover:border-white/10">
-                                {/* Screenshot mockup wrapper */}
-                                <div className="relative aspect-[16/10] w-full overflow-hidden bg-navy/50 border-b border-white/5">
-                                    {/* Subtle gradient overlay to make screenshot pop */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/40 to-transparent z-10 pointer-events-none" />
-                                    
-                                    <Image
-                                        src={project.image}
-                                        alt={`Webstránka pre ${project.name}`}
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03] group-hover:translate-y-[-1%]"
-                                        priority={idx === 0}
-                                    />
-                                </div>
-
                                 {/* Content wrapper */}
                                 <div className="p-6 lg:p-8 flex flex-col flex-grow">
                                     {/* Tags */}

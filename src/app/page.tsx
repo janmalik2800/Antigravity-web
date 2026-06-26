@@ -40,6 +40,10 @@ import ServicesCarousel from "../components/ServicesCarousel";
 import MediconectForm from "@/components/MediconectForm";
 import ReferencesShowcase from "../components/ReferencesShowcase";
 
+const ContactModal = dynamic(() => import("../components/ContactModal"), {
+    ssr: false,
+});
+
 /* ─── Animation Variants ─── */
 const fadeUp = {
     hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
@@ -347,13 +351,14 @@ export default function Home() {
     const [isHidden, setIsHidden] = useState(false);
     const lastScrollY = useRef(0);
     const [faqCategory, setFaqCategory] = useState<"spolupráca" | "výsledky" | "bezpečnosť">("spolupráca");
+    const [modalOpen, setModalOpen] = useState(false);
 
-    // Scrollovanie na kontakt, ak je v URL adrese parameter ?kontakt=true
+    // Otvorenie modalu, ak je v URL adrese parameter ?kontakt=true
     useEffect(() => {
         if (typeof window !== "undefined") {
             const params = new URLSearchParams(window.location.search);
             if (params.get("kontakt") === "true") {
-                document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' });
+                setModalOpen(true);
             }
         }
     }, []);
@@ -461,7 +466,7 @@ export default function Home() {
             </motion.nav>
 
             {/* ═══════════════ HERO ═══════════════ */}
-            <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+            <section id="hero" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
                 {/* Hero-specific background effects */}
                 <div className="absolute inset-0 pointer-events-none">
                     {/* Animated gradient mesh */}
@@ -740,7 +745,7 @@ export default function Home() {
             </section>
 
             {/* ═══════════════ STATS ═══════════════ */}
-            <Section className="py-20 relative z-10">
+            <Section id="statistiky" className="py-20 relative z-10">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
@@ -962,7 +967,7 @@ export default function Home() {
             </Section>
 
             {/* ═══════════════ VALUES (5I Stacking Cards) ═══════════════ */}
-            <Section className="py-24 lg:py-32 relative z-10 overflow-visible">
+            <Section id="hodnoty" className="py-24 lg:py-32 relative z-10 overflow-visible">
 
                 {/* Parallax floating particles - background effects */}
                 <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -1106,7 +1111,7 @@ export default function Home() {
                                 Spájame medicínsku etiku s dátovou inteligenciou. Rezervujte si 30-minútovú online konzultáciu, kde spoločne identifikujeme bariéry rastu vašej ambulancie a navrhneme riešenia, ktoré fungujú v praxi.
                             </motion.p>
                             <motion.div variants={fadeUp} custom={2} className="flex flex-col items-center gap-8">
-                                <MagicalButton onClick={() => { document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' }); }}>
+                                <MagicalButton onClick={() => setModalOpen(true)}>
                                     Rezervovať termín stretnutia
                                 </MagicalButton>
 
@@ -1462,6 +1467,12 @@ export default function Home() {
                 </div>
             </footer>
 
+
+            {/* ═══════════════ CONTACT MODAL ═══════════════ */}
+            <ContactModal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+            />
 
             {/* Mobile Bottom Menu */}
             <FloatingMobileMenu />

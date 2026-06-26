@@ -291,6 +291,81 @@ export async function POST(request: Request) {
       );
     }
 
+    // 3. Add contact to Smartemailing
+    try {
+      const seUsername = process.env.SMARTEMAILING_USERNAME;
+      const seApiKey = process.env.SMARTEMAILING_API_KEY;
+      const seListId = process.env.SMARTEMAILING_CONTACT_LIST_ID;
+
+      if (seUsername && seApiKey && seListId) {
+        const nameParts = data.contactName.trim().split(" ");
+        const firstName = nameParts[0] || "";
+        const lastName = nameParts.slice(1).join(" ") || "";
+
+        const response = await fetch("https://app.smartemailing.cz/api/v3/import", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization:
+              "Basic " +
+              Buffer.from(`${seUsername}:${seApiKey}`).toString("base64"),
+          },
+          body: JSON.stringify({
+            settings: {
+              update: true,
+              add_namedays: true,
+              add_genders: true,
+              add_salutations: true,
+              preserve_unsubscribed: true,
+              skip_invalid_emails: true,
+              create_update_custom_fields: false,
+            },
+            data: [
+              {
+                emailaddress: data.email,
+                name: firstName,
+                surname: lastName,
+                cellphone: data.phone || "",
+                notes: data.orgName,
+                contactlists: [
+                  { id: parseInt(seListId), status: "confirmed" },
+                ],
+              },
+            ],
+          }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error(`Smartemailing API HTTP Error (${response.status}):`, errorText);
+        }
+      } else {
+        console.error("Smartemailing missing env vars:", { seUsername, seApiKey, seListId });
+      }
+    } catch (seError) {
+      console.error("Smartemailing Catch Error:", seError);
+    }
+
+    // 4. Send to Google Sheets (Webhook via Apps Script)
+    try {
+      const sheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+
+      if (sheetsWebhookUrl) {
+        await fetch(sheetsWebhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+      } else {
+        console.warn("GOOGLE_SHEETS_WEBHOOK_URL is not defined in .env");
+      }
+    } catch (sheetsError) {
+      console.error("Google Sheets Error:", sheetsError);
+    }
+
     return NextResponse.json({ success: true, message: "Dopyt bol úspešne odoslaný." });
   } catch (error) {
     console.error("Server Error:", error);
